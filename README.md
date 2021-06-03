@@ -1,4 +1,4 @@
-# juntos-frontend
+# Juntos Frontend
 
 ### How to use Project.
 
