@@ -1,9 +1,3 @@
-# Juntos Frontend
-
-### How to use Project.
-
-- run `yarn install` or `npm install` to install all required project dependencies.
-- run `yarn start` or `npm start` to run project.
 
 ### Coding guidelines
 
@@ -20,6 +14,11 @@ Developers are always welcome to contribute to this guidelines with clear exampl
 
   - If a utility method is specific only to the component, has logic specific to the component and cannot be used anywhere else, add it to `<component_name>.utils.ts` in the same folder as the component.
   - Otherwise, add it to one of the files inside `src/common/utils.ts` folder.
+
+- Styles file
+
+  - If a styles is specific only to the component and cannot be used anywhere else, add it to `<component_name>.style.ts` in the same folder as the component.
+  - Otherwise, add styled component to `components` folder.
 
 - Interfaces file
 
