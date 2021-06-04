@@ -1,3 +1,9 @@
+# Juntos Frontend
+
+### How to use Project.
+
+- run `yarn install` or `npm install` to install all required project dependencies.
+- run `yarn start` or `npm start` to run project.
 
 ### Coding guidelines
 
@@ -88,4 +94,3 @@ Developers are always welcome to contribute to this guidelines with clear exampl
   - Create constant variables.
   - If constants are to be shared by multiple files, create a separate constants file.
   - No magic numbers [what are magic numbers](<https://en.wikipedia.org/wiki/Magic_number_(programming)>).
-
