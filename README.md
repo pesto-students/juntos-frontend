@@ -1,11 +1,14 @@
 # Juntos Frontend
 
-### How to use Project.
+The project was set up with the help of the **[create-react-app](https://www.npmjs.com/package/create-react-app)** library.
+command used for creating typescript template `create-react-app my-app --template typescript`
 
-- run `yarn install` or `npm install` to install all required project dependencies.
-- run `yarn start` or `npm start` to run project.
+## How to use Project.
 
-### Coding guidelines
+- run `yarn install` to install all required project dependencies.
+- run `yarn start` to run project.
+
+## Coding guidelines
 
 Developers are always welcome to contribute to this guidelines with clear examples.
 
