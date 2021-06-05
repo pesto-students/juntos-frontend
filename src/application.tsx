@@ -1,15 +1,13 @@
 import React, { Suspense } from "react";
 import {
-  BrowserRouter,
   Route,
   Switch,
   RouteComponentProps,
 } from "react-router-dom";
-import routes from "./common/routes";
+import routes from "common/routes";
 
 const Application: React.FunctionComponent<{}> = (props) => {
   return (
-    <BrowserRouter>
       <Suspense fallback={<h1>Loading...</h1>}>
         <Switch>
           {routes.map((route, index) => {
@@ -30,7 +28,6 @@ const Application: React.FunctionComponent<{}> = (props) => {
           })}
         </Switch>
       </Suspense>
-    </BrowserRouter>
   );
 };
 

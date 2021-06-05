@@ -1,12 +1,11 @@
 import React from "react";
 
-import IRoute from "./interface";
-import * as pageRoutes from "./pageRoutes";
+import IRoute from "common/interface";
+import * as pageRoutes from "common/pageRoutes";
 //Lazy routes
-const HomePage = React.lazy(() => import("../Home/Home"));
-const AboutPage = React.lazy(() => import("../About/About"));
-const Auth = React.lazy(() => import("../Auth/Auth"));
-const NoPagefound = React.lazy(() => import("../Error/NoPageFound"));
+const HomePage = React.lazy(() => import("Home/Home"));
+const AboutPage = React.lazy(() => import("About/About"));
+const NoPagefound = React.lazy(() => import("Error/NoPageFound"));
 
 const routes: IRoute[] = [
   {
@@ -18,11 +17,6 @@ const routes: IRoute[] = [
   {
     path: pageRoutes.ABOUT,
     component: AboutPage,
-    exact: true,
-  },
-  {
-    path: pageRoutes.AUTH,
-    component: Auth,
     exact: true,
   },
   {
