@@ -32,19 +32,25 @@ const Login: React.FunctionComponent<RouteComponentProps<any>> = ({
         <h1>Sign in</h1>
         <span>or use your account</span>
         <Input
+          data-testid="emailInput"
           type="email"
           placeholder="Email"
           name="email"
           onChange={handleInputChange}
         />
         <Input
+          data-testid="passwordInput"
           type="password"
           placeholder="Password"
           name="password"
           onChange={handleInputChange}
         />
         <Link to={routes.FORGET_PASSWORD}>Forgot your password?</Link>
-        <Button type="submit" onClick={handleSubmit}>
+        <Button
+          data-testid="signInBtn"
+          type="submit"
+          onClick={handleSubmit}
+        >
           Sign In
         </Button>
       </form>
