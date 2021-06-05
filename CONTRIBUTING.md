@@ -26,8 +26,6 @@ Developers are always welcome to contribute to this guidelines with clear exampl
 
 - Prefer hooks over class components whenever possible
 
-  - Never break the rules of hooks - https://reactjs.org/docs/hooks-rules.html.
-
 - Constants
 
   - If an constant is specific only to the component, and cannot be used anywhere else
@@ -63,13 +61,13 @@ Developers are always welcome to contribute to this guidelines with clear exampl
        |   ├── Login.tsx
        |   ├── Logout.tsx
        |   ├── Auth.interface.ts
-       |   └── Auth.style.ts
+       |   └── *.style.ts
        |
        ├──Room
        |   ├── Viewer.tsx
        |   ├── WatchParty.tsx
        |   ├── Room.interface.ts
-       |   └── Room.style.ts
+       |   └── *.style.ts
        ├──Common
        |   ├── utils.ts
        |   ├── hooks.ts
