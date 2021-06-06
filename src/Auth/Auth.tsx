@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 
-import Button from "../components/Button";
-import Login from "./Login";
-import SignUp from "./SignUp";
-import { AuthenticationWrapper } from "./Auth.styles";
-import "./Authentication.css";
+import Button from "src/components/Button";
+import Login from "src/Auth/Login";
+import SignUp from "src/Auth/SignUp";
+import { AuthenticationWrapper } from "src/Auth/Auth.styles";
+import "src/Auth/Authentication.css";
 
 const Authentication: React.FunctionComponent<RouteComponentProps<any>> =
   () => {

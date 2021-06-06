@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 
-import { AuthForm } from "./Auth.interface";
-import Input from "../components/Input";
-import * as routes from "../common/pageRoutes";
-import Button from "../components/Button";
+import { AuthForm } from "src/Auth/Auth.interface";
+import Input from "src/components/Input";
+import * as routes from "src/common/pageRoutes";
+import Button from "src/components/Button";
 
 const Login: React.FunctionComponent<RouteComponentProps<any>> = ({
   history,
@@ -23,7 +23,6 @@ const Login: React.FunctionComponent<RouteComponentProps<any>> = ({
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     history.push(routes.HOME);
-    // login(formData.email, formData.password);
   };
 
   return (
