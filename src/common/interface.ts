@@ -5,3 +5,7 @@ export default interface IRoute {
   name?: string;
   props?: any;
 }
+
+export interface IParams {
+  id?: string | undefined;
+}

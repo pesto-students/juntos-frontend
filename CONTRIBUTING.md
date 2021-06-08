@@ -1,4 +1,4 @@
-# Contirbution guidelines
+# Contribution guidelines
 
 Developers are always welcome to contribute to this guidelines with clear examples
 
@@ -6,7 +6,7 @@ Developers are always welcome to contribute to this guidelines with clear exampl
 
 - Avoid hard-coding values instead create constant variables
 - If constants are to be shared by multiple files, create a separate constants file
-- Avoid [magic numbers](https://en.wikipedia.org/wiki/Magic_number_(programming))
+- Avoid [magic numbers](<https://en.wikipedia.org/wiki/Magic_number_(programming)>)
 - Use absolute paths for `import` statements
 - Avoid using nested ternary, instead use `if`-`else` blocks
 
@@ -14,7 +14,7 @@ Developers are always welcome to contribute to this guidelines with clear exampl
 
 - All code is written in TypeScript unless there's a good reason not to do so
 - Avoid using `Any`
-- Create interfaces for objects - [Typescript Interfaces](https://www.typescriptlang.org/docs/handbook/interfaces.html)
+- Create interfaces for objects - [Typescript Interfaces](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 - Some resources to get started on TypeScript:-
   - [Typescript Crash Course](https://www.youtube.com/watch?v=rAy_3SIqT-E&t=773s)
   - [Typescript for JS programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
@@ -31,6 +31,7 @@ Developers are always welcome to contribute to this guidelines with clear exampl
 ### Commit messages
 
 Commit messages should adhere to the following guidelines:
+
 - Should in active case
 - Should be divided into a subject line and a body
 - The subject summarizes the code changes in commit
@@ -44,7 +45,6 @@ Commit messages should adhere to the following guidelines:
 
 Reference: [how to write good commits](https://chris.beams.io/posts/git-commit)
 
-
 ## Directory structure
 
 Structure the directory based on features
@@ -54,12 +54,14 @@ Structure the directory based on features
        ├──auth
        |   ├── Login.tsx
        |   ├── Logout.tsx
-       |   └── auth.interface.ts
+       |   ├── Auth.styles.ts
+       |   └── Auth.interface.ts
        |
        ├──room
        |   ├── Viewer.tsx
        |   ├── WatchParty.tsx
-       |   └── room.interface.ts
+       |   ├── Room.styles.ts
+       |   └── Room.interface.ts
        |
        └──common
            ├── utils
@@ -72,7 +74,7 @@ Structure the directory based on features
 
 ### Naming
 
-Lowercase is preffered for file and folder names, one exception to this is Files which represent the React components, for which PascalCase is prefferred.
+Lowercase is preferred for file and folder names, one exception to this is Files which represent the React components, for which PascalCase is preferred.
 
 ### Constants
 
@@ -88,3 +90,9 @@ Lowercase is preffered for file and folder names, one exception to this is Files
 
 - If an interface is specific only to the component, then the interface can be defined inside the component
 - If an interface can be used by multiple components, methods etc (eg: module specific interface, api related interfaces), define them inside `src/common/interface` folder
+
+### Styles
+
+- `src/components` will contain reusable UI component for eg. `Button`, `Input` etc.
+- If a style is specific only to the component, and cannot be used anywhere else, add it to `<ComponentName>.styles.ts` in the same folder as the component.
+- All css properties that require number as input should be in multiple of 4 and should be used from `src/common/constants/cssScale.ts`.
