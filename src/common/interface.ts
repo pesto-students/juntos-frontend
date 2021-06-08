@@ -5,3 +5,8 @@ export default interface IRoute {
   name?: string;
   props?: any;
 }
+
+export interface AuthFormData {
+  email: string;
+  password: string;
+}

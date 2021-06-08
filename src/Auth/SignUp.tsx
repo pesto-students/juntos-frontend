@@ -10,7 +10,6 @@ const SignUp: React.FunctionComponent<RouteComponentProps<any>> = ({
   history,
 }) => {
   const [formData, setFormData] = useState<AuthForm>({
-    name: "",
     email: "",
     password: "",
   });
@@ -32,13 +31,7 @@ const SignUp: React.FunctionComponent<RouteComponentProps<any>> = ({
     <div className="form-container sign-up-container">
       <form action="#">
         <h1>Create Account</h1>
-        <span>or use your email for registration</span>
-        <Input
-          type="text"
-          placeholder="Name"
-          onChange={handleInputChange}
-          name="name"
-        />
+        <span>use your email for registration</span>
         <Input
           type="email"
           placeholder="Email"

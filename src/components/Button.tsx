@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { colors } from "../common/colors";
+import { colors } from "src/common/colors";
 
 interface ButtonProps {
   ghost?: boolean;
