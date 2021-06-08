@@ -3,8 +3,8 @@ import { render, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
-import Application from "./application";
-import * as routes from "./common/pageRoutes";
+import Application from "src/Application";
+import * as routes from "src/common/pageRoutes";
 
 test("Application : Successful Login flow", async () => {
   const history = createMemoryHistory();

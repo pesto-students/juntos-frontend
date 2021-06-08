@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { Route, Switch, RouteComponentProps } from "react-router-dom";
-import routes from "./common/routes";
+import routes from "src/common/routes";
 
 const Application: React.FunctionComponent<{}> = (props) => {
   return (

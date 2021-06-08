@@ -1,4 +1,4 @@
-import Login from "./Login";
+import Login from "src/Auth/Login";
 import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { createMemoryHistory } from "history";
