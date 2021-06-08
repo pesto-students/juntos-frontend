@@ -1,20 +1,18 @@
+import { cssScale } from "src/common/constants/cssScale";
 import styled, { css } from "styled-components";
-import { colors } from "../common/colors";
-
+import { colors } from "../common/constants/colors";
 interface ButtonProps {
   ghost?: boolean;
 }
 
 export default styled.button<ButtonProps>`
-  border-radius: 20px;
+  border-radius: ${cssScale.c5};
   border: 1px solid ${colors.primaryOne};
   background-color: ${colors.primaryOne};
   color: ${colors.white};
-  font-size: 12px;
+  font-size: ${cssScale.c3};
   font-weight: bold;
-  padding: 12px 46px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  padding: ${cssScale.c3} ${cssScale.c11};
   transition: transform 80ms ease-in;
   cursor: pointer;
   &:active {

@@ -95,3 +95,4 @@ Lowercase is preferred for file and folder names, one exception to this is Files
 
 - `src/components` will contain reusable UI component for eg. `Button`, `Input` etc.
 - If a style is specific only to the component, and cannot be used anywhere else, add it to `<ComponentName>.styles.ts` in the same folder as the component.
+- All css properties that require number as input should be in multiple of 4 and should be used from `src/common/constants/cssScale.ts`.

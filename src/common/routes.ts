@@ -1,7 +1,7 @@
 import React from "react";
 
 import IRoute from "src/common/interface";
-import * as pageRoutes from "src/common/pageRoutes";
+import * as pageRoutes from "src/common/constants/pageRoutes";
 //Lazy routes
 const HomePage = React.lazy(() => import("src/Home/Home"));
 const AboutPage = React.lazy(() => import("src/About/About"));
