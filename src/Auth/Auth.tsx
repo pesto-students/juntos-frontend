@@ -7,7 +7,9 @@ import SignUp from "src/Auth/SignUp";
 import { AuthenticationWrapper } from "src/Auth/Auth.styles";
 import "src/Auth/Auth.styles.css";
 
-const Authentication: React.FunctionComponent<RouteComponentProps<any>> =
+import { IParams } from "src/common/interface";
+
+const Authentication: React.FunctionComponent<RouteComponentProps<IParams>> =
   () => {
     const [panel, setActivePanel] = useState<string>("");
 

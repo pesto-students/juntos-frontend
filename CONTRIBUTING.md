@@ -14,7 +14,7 @@ Developers are always welcome to contribute to this guidelines with clear exampl
 
 - All code is written in TypeScript unless there's a good reason not to do so
 - Avoid using `Any`
-- Create interfaces for objects - [Typescript Interfaces](https://www.typescriptlang.org/docs/handbook/interfaces.html)
+- Create interfaces for objects - [Typescript Interfaces](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 - Some resources to get started on TypeScript:-
   - [Typescript Crash Course](https://www.youtube.com/watch?v=rAy_3SIqT-E&t=773s)
   - [Typescript for JS programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
@@ -54,13 +54,13 @@ Structure the directory based on features
        ├──auth
        |   ├── Login.tsx
        |   ├── Logout.tsx
-       |   ├── *.styles.ts
+       |   ├── Auth.styles.ts
        |   └── Auth.interface.ts
        |
        ├──room
        |   ├── Viewer.tsx
        |   ├── WatchParty.tsx
-       |   ├── *.styles.ts
+       |   ├── Room.styles.ts
        |   └── Room.interface.ts
        |
        └──common
