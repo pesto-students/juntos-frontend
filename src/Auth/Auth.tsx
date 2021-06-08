@@ -5,7 +5,7 @@ import Button from "src/components/Button";
 import Login from "src/Auth/Login";
 import SignUp from "src/Auth/SignUp";
 import { AuthenticationWrapper } from "src/Auth/Auth.styles";
-import "src/Auth/Authentication.css";
+import "src/Auth/Auth.styles.css";
 
 const Authentication: React.FunctionComponent<RouteComponentProps<any>> =
   () => {
