@@ -1,0 +1,42 @@
+name: Integration
+
+on:
+  pull_request:
+    branches: [master]
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  # This job will:
+  #   * Test our code for proper linting and also will check if all test-cases pass or not.
+  #   * And it will run every time there is a pull request created or synchronized that is not on master branch.
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      # Checkout to our latest code on current branch
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Install NodeJS
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Test linting
+        run: yarn lint  
+
+      - name: Run test cases and coverage
+        run: yarn test:coverage 
+        
+      - name: Create build
+        run: yarn run build
