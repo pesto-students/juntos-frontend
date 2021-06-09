@@ -29,7 +29,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint && yarn ci:test"
+      "pre-commit": "yarn lint && yarn test --watchAll=false"
     }
   },
   "eslintConfig": {
