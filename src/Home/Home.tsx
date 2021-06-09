@@ -4,7 +4,7 @@ import { Link, RouteComponentProps } from "react-router-dom";
 import { IParams } from "src/common/interface";
 
 interface IPage {
-  name: string
+  name: string;
 }
 
 const HomePage: React.FunctionComponent<IPage & RouteComponentProps<IParams>> =
