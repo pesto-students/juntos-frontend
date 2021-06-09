@@ -103,4 +103,5 @@ Lowercase is preferred for file and folder names, one exception to this is Files
 
 - Write test cases for each component in their directory for e.g. `src/Home/Home.test.tsx` you can also refer to directory structure.
 - Make sure you cover at least 70% test-case scenario.
-- You can check coverage of your test cases with `yarn test:coverage` command.
+- You can check coverage of your un commited test cases with `yarn test:coverage` command.
+- if you want to test cases for any particular file you can add path along with command for e.g.`yarn test src/Home/Home.test.tsx`
