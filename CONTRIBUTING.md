@@ -55,13 +55,15 @@ Structure the directory based on features
        |   ├── Login.tsx
        |   ├── Logout.tsx
        |   ├── Auth.styles.ts
-       |   └── Auth.interface.ts
+       |   ├── Auth.interface.ts
+       |   └── Auth.test.tsx
        |
        ├──room
        |   ├── Viewer.tsx
        |   ├── WatchParty.tsx
        |   ├── Room.styles.ts
        |   └── Room.interface.ts
+       |   └── Room.test.tsx
        |
        └──common
            ├── utils
@@ -96,3 +98,9 @@ Lowercase is preferred for file and folder names, one exception to this is Files
 - `src/components` will contain reusable UI component for eg. `Button`, `Input` etc.
 - If a style is specific only to the component, and cannot be used anywhere else, add it to `<ComponentName>.styles.ts` in the same folder as the component.
 - All css properties that require number as input should be in multiple of 4 and should be used from `src/common/constants/cssScale.ts`.
+
+### Testing
+
+- Write test cases for each component in their directory for e.g. `src/Home/Home.test.tsx` you can also refer to directory structure.
+- Make sure you cover at least 70% test-case scenario.
+- You can check coverage of your test cases with `yarn test:coverage` command.
