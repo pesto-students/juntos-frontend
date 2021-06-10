@@ -108,6 +108,7 @@ Lowercase is preferred for file and folder names, one exception to this is Files
 
 ### Environment Variables
 
-- To get`.env` file contact Admin/contributor of this repo.
+- You can create your own firebase project and add required `.env` variables.
+- Check `.env-example` to see which firebase keys are needed.
 - REACT_APP prefix is mandatory in `CRA` to declare environment variable.
 - More details on adding custom environment variable in `CRA` can be found at [Adding custom environment variables(creat-react-app)](https://create-react-app.dev/docs/adding-custom-environment-variables/)
