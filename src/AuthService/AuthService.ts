@@ -30,7 +30,10 @@ export function signUp({ email, password }: AuthFormData): Promise<User> {
     .createUserWithEmailAndPassword(email, password)
     .then((UserCredential) => {
       const { user } = UserCredential;
-      return new User(user);
+      if (user) {
+        return new User(user);
+      }
+      throw new Error("User not found");
     });
 }
 
@@ -39,7 +42,10 @@ export function signIn({ email, password }: AuthFormData): Promise<User> {
     .signInWithEmailAndPassword(email, password)
     .then((UserCredential) => {
       const { user } = UserCredential;
-      return new User(user);
+      if (user) {
+        return new User(user);
+      }
+      throw new Error("User not found");
     });
 }
 
