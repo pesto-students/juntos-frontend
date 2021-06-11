@@ -2,7 +2,7 @@ import firebase from "firebase";
 
 type getToken = Promise<string> | undefined;
 
-type IUSER = firebase.User | null;
+type IUSER = firebase.User;
 interface Profile {
   email: string | undefined | null;
 }
