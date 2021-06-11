@@ -1,5 +1,5 @@
-import * as AuthService from "src/AuthService/AuthService";
-import { User } from "src/User/User";
+import * as AuthService from "src/modules/AuthService";
+import { User } from "src/modules/User";
 
 jest.mock("firebase", () => ({
   initializeApp: jest.fn(() => {

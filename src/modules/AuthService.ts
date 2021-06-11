@@ -1,6 +1,6 @@
 import firebase from "firebase";
 import { AuthFormData } from "src/common/interface";
-import { User } from "src/User/User";
+import { User } from "src/modules/User";
 
 const {
   REACT_APP_API_KEY,
