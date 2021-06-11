@@ -1,10 +1,10 @@
 import firebase from "firebase";
 
-type getToken = Promise<string> | undefined;
+type getToken = Promise<string>;
 
 type IUSER = firebase.User;
 interface Profile {
-  email: string | undefined | null;
+  email: string;
 }
 
 export class User {
@@ -16,12 +16,18 @@ export class User {
 
   // getProfile will return email as of now
   getProfile(): Profile {
+    if (this.user?.email === null) {
+      throw new Error("email not found");
+    }
     return { email: this.user?.email };
   }
   /**
    * Returns a JSON Web Token (JWT) used to identify the user to a Firebase service.
    */
   getToken(): getToken {
-    return this.user?.getIdToken();
+    if (this.user?.getIdToken() === undefined) {
+      throw new Error("token not found");
+    }
+    return this.user.getIdToken();
   }
 }

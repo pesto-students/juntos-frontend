@@ -28,25 +28,21 @@ const auth = firebaseApp.auth();
 export function signUp({ email, password }: AuthFormData): Promise<User> {
   return auth
     .createUserWithEmailAndPassword(email, password)
-    .then((UserCredential) => {
-      const { user } = UserCredential;
-      if (user) {
-        return new User(user);
+    .then(({ user }) => {
+      if (user === null) {
+        throw new Error("sign-up failure");
       }
-      throw new Error("User not found");
+      return new User(user);
     });
 }
 
 export function signIn({ email, password }: AuthFormData): Promise<User> {
-  return auth
-    .signInWithEmailAndPassword(email, password)
-    .then((UserCredential) => {
-      const { user } = UserCredential;
-      if (user) {
-        return new User(user);
-      }
-      throw new Error("User not found");
-    });
+  return auth.signInWithEmailAndPassword(email, password).then(({ user }) => {
+    if (user === null) {
+      throw new Error("sign-in failure");
+    }
+    return new User(user);
+  });
 }
 
 export function requestPasswordReset(email: string): Promise<void> {
