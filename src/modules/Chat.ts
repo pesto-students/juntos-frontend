@@ -5,9 +5,6 @@ interface messageData {
   message: string;
   user: User;
 }
-
-type ChatDetails = messageData & { roomId: string };
-
 export class Chat {
   private user: User;
   private roomId: string;
@@ -20,22 +17,28 @@ export class Chat {
   }
 
   sendMessage(message: string) {
-    const chatDataToSend: ChatDetails = {
+    this.channel.emit("sendMessage", {
       message,
       roomId: this.roomId,
       user: this.user,
-    };
-    this.channel.emit("sendMessage", chatDataToSend);
+    });
   }
 
-  // updateMessages will update our react chat components messsages
-  async fetchMessages(updateMessages: any) {
+  async fetchMessages(): Promise<messageData> {
     this.channel.emit("requestAllMessages", {
       roomId: this.roomId,
       user: this.user,
     });
-    this.channel.on("fetchAllMessages", (messages: messageData) => {
-      updateMessages(messages);
+    return new Promise<messageData>((resolve, reject) => {
+      this.channel.on(
+        "fetchAllMessages",
+        (messages: messageData, errorMessage: string) => {
+          if (errorMessage) {
+            reject(errorMessage);
+          }
+          return resolve(messages);
+        }
+      );
     });
   }
 }
