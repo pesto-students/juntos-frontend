@@ -21,10 +21,12 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () =>
   }, [])
 
   const [searchKeyword, setSearchKeyword] = useState(''); 
+  const [searchResults, setSearchResults] = useState([]); 
   
   const handleKeyDown = async (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
-      const result = await GoogleApiClient.searchYoutube(searchKeyword);
+      const results = await GoogleApiClient.searchYoutube(searchKeyword);
+      setSearchResults(results.result.items);
     }
   }
   
@@ -43,6 +45,10 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () =>
           onKeyDown={handleKeyDown}
           onChange={event => setSearchKeyword(event.target.value)}
         />
+        {searchResults.map((videoData: any) => {
+          const thumbnail = videoData.snippet.thumbnails.default.url;
+          return <img key={videoData.eTag} src={thumbnail} alt={videoData.snippet.description}/>;
+        })}
       </HighlightContainer>
     </ViewportSection>
   );
