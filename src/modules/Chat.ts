@@ -1,9 +1,10 @@
 import { User } from "src/modules/User";
 import { Socket } from "socket.io-client";
 
-interface messageData {
+interface chatMessage {
+  timestamp: number;
+  sender: string;
   message: string;
-  user: User;
 }
 export class Chat {
   private user: User;
@@ -17,22 +18,22 @@ export class Chat {
   }
 
   sendMessage(message: string) {
-    this.channel.emit("sendMessage", {
+    this.channel.emit("postChatMessage", {
       message,
       roomId: this.roomId,
-      user: this.user,
+      user: this.user?.getToken(),
     });
   }
 
-  async fetchMessages(): Promise<messageData> {
-    this.channel.emit("requestAllMessages", {
+  fetchMessages(): Promise<chatMessage[]> {
+    this.channel.emit("requestAllChatMessages", {
       roomId: this.roomId,
       user: this.user,
     });
-    return new Promise<messageData>((resolve, reject) => {
+    return new Promise<chatMessage[]>((resolve, reject) => {
       this.channel.on(
         "fetchAllMessages",
-        (messages: messageData, errorMessage: string) => {
+        (messages: chatMessage[], errorMessage: string) => {
           if (errorMessage) {
             reject(errorMessage);
           }
