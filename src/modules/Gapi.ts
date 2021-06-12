@@ -4,6 +4,13 @@ declare global {
   }
 }
 
+const {
+    REACT_APP_GOOGLE_OAUTH_CLIENT_ID,
+    REACT_APP_GOOGLE_YOUTUBE_API_KEY,
+    REACT_APP_GOOGLE_AUTH_SCOPE_URL,
+    REACT_APP_GOOGLE_YOUTUBE_API_URL
+} = process.env;
+
 class GoogleApi {
     
     gapi: any;
@@ -26,7 +33,7 @@ class GoogleApi {
 
     gapiAuth2Init = async () => {
         try {
-            await this.gapi.auth2.init({client_id: "882519420698-tlftoq7ljpu4r6uqr8329870jtbd71um.apps.googleusercontent.com"});
+            await this.gapi.auth2.init({client_id: REACT_APP_GOOGLE_OAUTH_CLIENT_ID});
         } catch(err){
             console.log(`gapiAuth2Init Error: ${err}`);
         }
@@ -35,7 +42,7 @@ class GoogleApi {
     authenticate = async () => {
         try {
             await this.gapi.auth2.getAuthInstance()
-            .signIn({scope: "https://www.googleapis.com/auth/youtube.force-ssl"})
+            .signIn({scope: REACT_APP_GOOGLE_AUTH_SCOPE_URL})
         } catch(err){
             console.log(`authenticate Error: ${err}`);
         }
@@ -43,8 +50,8 @@ class GoogleApi {
 
     loadYoutubeClient = async () => {
         try {
-            this.gapi.client.setApiKey("AIzaSyDdXApkq6CN0lvPLR5k0kWwCpKOggYG_po");
-            await this.gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest");
+            this.gapi.client.setApiKey(REACT_APP_GOOGLE_YOUTUBE_API_KEY);
+            await this.gapi.client.load(REACT_APP_GOOGLE_YOUTUBE_API_URL);
         } catch(err) {
             console.log(`loadYoutubeClient Error: ${err}`)
         }
