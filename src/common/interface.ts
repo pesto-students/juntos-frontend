@@ -9,3 +9,12 @@ export default interface IRoute {
 export interface IParams {
   id?: string | undefined;
 }
+
+export interface CustomStyleProps {
+  width?: number;
+  height?: number;
+  flexDirection?: string;
+  placeholder?: string;
+  justifyContent?: string;
+  alignItems?: string;
+};
