@@ -1,16 +1,13 @@
 import firebase from "firebase";
 
-type getToken = Promise<string>;
-
-type IUSER = firebase.User;
 interface Profile {
   email: string;
 }
 
 export class User {
-  private user: IUSER;
+  private user: firebase.User;
 
-  constructor(user: IUSER) {
+  constructor(user: firebase.User) {
     this.user = user;
   }
 
@@ -24,7 +21,7 @@ export class User {
   /**
    * Returns a JSON Web Token (JWT) used to identify the user to a Firebase service.
    */
-  getToken(): getToken {
+  getToken(): Promise<string> {
     if (this.user?.getIdToken() === undefined) {
       throw new Error("token not found");
     }
