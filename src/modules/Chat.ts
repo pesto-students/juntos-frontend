@@ -28,7 +28,6 @@ export class Chat {
   fetchMessages(): Promise<chatMessage[]> {
     this.channel.emit("requestAllChatMessages", {
       roomId: this.roomId,
-      user: this.user,
     });
     return new Promise<chatMessage[]>((resolve, reject) => {
       this.channel.on(
