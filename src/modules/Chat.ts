@@ -21,7 +21,7 @@ export class Chat {
     this.channel.emit("postChatMessage", {
       message,
       roomId: this.roomId,
-      user: this.user?.getToken(),
+      user: this.user.getToken(),
     });
   }
 
@@ -31,12 +31,12 @@ export class Chat {
     });
     return new Promise<chatMessage[]>((resolve, reject) => {
       this.channel.on(
-        "fetchAllMessages",
+        "fetchAllChatMessages",
         (messages: chatMessage[], errorMessage: string) => {
           if (errorMessage) {
             reject(errorMessage);
           }
-          return resolve(messages);
+          resolve(messages);
         }
       );
     });
