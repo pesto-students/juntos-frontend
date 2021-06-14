@@ -16,10 +16,10 @@ class GoogleApi {
     gapi: any;
 
     constructor() {
-        const { gapi } = window;
-        this.gapi = gapi;
+        this.gapi = window.gapi;
     }
 
+    // loadGapiClientAuth2 = async () => {
     loadGapiClientAuth2 = async () => {
         try {
             await new Promise((resolve,reject) => {
@@ -57,7 +57,7 @@ class GoogleApi {
         }
     }
 
-    searchYoutube = async (searchTerm: string) => {
+    searchYoutubeList = async (searchTerm: string) => {
         try {
             const response = await this.gapi.client.youtube.search.list({
                 "part": [
@@ -65,11 +65,66 @@ class GoogleApi {
                 ],
                 "q": searchTerm
             })
+            let videoIds: string[] = [];
+
+            response.result.items.forEach((item: any) => {
+                videoIds.push(item.id.videoId)
+            });
+            return videoIds;  
+        } catch(err) {
+            console.log('searchYoutubeList: ERROR ', err)
+        }
+    }
+    
+    // searchYoutubeVideos = async (videoIds: string[]) => {
+    async searchYoutubeVideos(videoIds: string[]) {
+        try {
+            const response = await this.gapi.client.youtube.videos.list({
+                "part": [
+                    "snippet",
+                    "statistics",
+                    "status",
+                    "contentDetails"
+                ],
+                "id": videoIds
+            })
+            response.result.items.forEach((item: any) => {
+                const humanReadableTime: string = GoogleApi.ISO8601toHumanReadable(item.contentDetails.duration);
+                item.contentDetails["durationHR"] = humanReadableTime;
+            });
             return response;  
         } catch(err) {
-            console.log('searchYoutube: ERROR ', err)
+            console.log('searchYoutubeVideos: ERROR ', err)
         }
-    }    
+    }
+    
+    static getDUrationByUnit(input: string, unit: string){
+        var index = input.indexOf(unit);
+        var output = "00"
+       if(index < 0){
+         return output;
+       }
+   
+       if(isNaN(parseInt(input.charAt(index-2)))){
+         return '0' + input.charAt(index-1);
+       }else{
+         return input.charAt(index-2) + input.charAt(index-1);
+       }
+    }
+
+    static ISO8601toHumanReadable(input:string){
+        var H = this.getDUrationByUnit(input, 'H');
+        var M = this.getDUrationByUnit(input, 'M');
+        var S = this.getDUrationByUnit(input, 'S');
+   
+       if(H === "00"){
+         H = "";
+       }else{
+         H += ":"
+       }
+   
+       return H  + M + ':' + S ;
+     }
 }
 
 export default GoogleApi;

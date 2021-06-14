@@ -7,6 +7,11 @@ import ViewportSection from "src/components/ViewportSection";
 import HighlightContainer from "src/components/HighlightContainer";
 import CarouselContainer from "src/components/CarouselContainer";
 import TranslucentInput from "src/components/TranslucentInput";
+import MediaServiceProviderBox from "src/components/MediaServiceProviderBox";
+import VideoResultContainer from "src/components/VideoResultContainer";
+import VideoResultItem from "src/components/VideoResultItem";
+
+import YoutubeLogo from 'src/assets/serviceProviderLogos/youtube_white.svg';
 
 import GoogleApi from "src/modules/Gapi";
 
@@ -25,8 +30,10 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () =>
   
   const handleKeyDown = async (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
-      const results = await GoogleApiClient.searchYoutube(searchKeyword);
-      setSearchResults(results.result.items);
+      const videoIds = await GoogleApiClient.searchYoutubeList(searchKeyword);
+      const results = await GoogleApiClient.searchYoutubeVideos(videoIds!);
+      // setSearchResults(results.result.items);
+      console.log(results)
     }
   }
   
@@ -38,17 +45,24 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () =>
         alignItems={`center`}
       >
         <CarouselContainer>
-          Youtube-Box  
+          <MediaServiceProviderBox>
+            <img width="122" src={YoutubeLogo} alt={'youtube'}/>
+          </MediaServiceProviderBox>
         </CarouselContainer>
         <TranslucentInput 
           placeholder="Search Video"
           onKeyDown={handleKeyDown}
           onChange={event => setSearchKeyword(event.target.value)}
         />
-        {searchResults.map((videoData: any) => {
-          const thumbnail = videoData.snippet.thumbnails.default.url;
-          return <img key={videoData.eTag} src={thumbnail} alt={videoData.snippet.description}/>;
-        })}
+        <VideoResultContainer>
+          {searchResults.map((videoData: any) => {
+            const thumbnail = videoData.snippet.thumbnails.medium.url;
+            return <VideoResultItem>
+              <img key={videoData.eTag} src={thumbnail} alt={videoData.snippet.description}/>;
+              <p>{videoData.snippet.title.replace(/&quot;/g, '\"')}</p>
+            </VideoResultItem>
+          })}
+        </VideoResultContainer>
       </HighlightContainer>
     </ViewportSection>
   );

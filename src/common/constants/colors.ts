@@ -7,5 +7,5 @@ export const colors = {
   inputBackground: 'rgba(13,13,13,19%)',
   inputPlaceholder: 'rgba(255,255,255,27%)',
   inputText: 'rgba(255,255,255,50%)',
-  inputCaretColor: 'rgba(255,255,255,60%)'
+  inputCaretColor: 'rgba(255,255,255,60%)',
 };
