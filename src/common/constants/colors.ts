@@ -4,4 +4,5 @@ export const colors = {
   primaryOne: "#004A93",
   primaryTwo: "#3677C7",
   lightGrey: "#eee",
+  background: "#f6f5f7",
 };

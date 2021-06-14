@@ -10,7 +10,7 @@ export default styled.button<ButtonProps>`
   border: 1px solid ${colors.primaryOne};
   background-color: ${colors.primaryOne};
   color: ${colors.white};
-  font-size: ${cssScale.c3};
+  font-size: ${cssScale.c4};
   font-weight: bold;
   padding: ${cssScale.c3} ${cssScale.c11};
   transition: transform 80ms ease-in;

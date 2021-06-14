@@ -12,3 +12,5 @@ export const cssScale = {
   c10: "40px",
   c11: "44px",
 };
+
+export const defaultFontSize = "14px";
