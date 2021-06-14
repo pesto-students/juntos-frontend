@@ -105,3 +105,10 @@ Lowercase is preferred for file and folder names, one exception to this is Files
 - Make sure you cover at least 70% test-case scenario.
 - You can generate "test coverage" for modified files using `yarn test:coverage` command.
 - if you want to test cases for any particular file you can add path along with command for e.g.`yarn test src/Home/Home.test.tsx`
+
+### Environment Variables
+
+- You can create your own firebase project and add required `.env` variables.
+- Check `.env-example` to see which firebase keys are needed.
+- REACT_APP prefix is mandatory in `CRA` to declare environment variable.
+- More details on adding custom environment variable in `CRA` can be found at [Adding custom environment variables(creat-react-app)](https://create-react-app.dev/docs/adding-custom-environment-variables/)
