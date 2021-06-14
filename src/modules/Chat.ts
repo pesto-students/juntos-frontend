@@ -17,11 +17,12 @@ export class Chat {
     this.channel = channel;
   }
 
-  sendMessage(message: string) {
+  async sendMessage(message: string) {
+    const userToken: string = await this.user.getToken();
     this.channel.emit("postChatMessage", {
       message,
       roomId: this.roomId,
-      user: this.user.getToken(),
+      user: userToken,
     });
   }
 
