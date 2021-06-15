@@ -6,10 +6,6 @@ export default interface IRoute {
   props?: any;
 }
 
-export interface IParams {
-  id?: string | undefined;
-}
-
 export interface AuthFormData {
   email: string;
   password: string;

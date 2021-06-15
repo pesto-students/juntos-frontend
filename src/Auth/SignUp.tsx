@@ -2,20 +2,18 @@ import React, { useState } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import Input from "src/components/Input";
-import * as routes from "src/common/constants/pageRoutes";
 import Button from "src/components/Button";
 import { SignUpContainer } from "./Auth.styles";
-import { IParams } from "src/common/interface";
+import { useAuth } from "src/context/GlobalContext";
 
-const SignUp: React.FunctionComponent<RouteComponentProps<IParams>> = ({
-  history,
-}) => {
+const SignUp: React.FunctionComponent<RouteComponentProps<{}>> = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const { actions } = useAuth();
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    history.push(routes.HOME);
+    actions?.signUp({ email, password });
   };
 
   return (

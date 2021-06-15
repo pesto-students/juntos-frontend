@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
 
-import { IParams } from "src/common/interface";
 
-const AboutPage: React.FunctionComponent<RouteComponentProps<IParams>> = () => {
+
+const AboutPage: React.FunctionComponent<RouteComponentProps<{}>> = () => {
   return (
     <div>
       <p>About Page</p>

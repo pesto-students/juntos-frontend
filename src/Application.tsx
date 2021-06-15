@@ -1,35 +1,46 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import {
   Route,
-  Switch,
   RouteComponentProps,
+  Switch,
+  withRouter,
 } from "react-router-dom";
-import routes from "src/common/routes";
 
-const Application: React.FunctionComponent<{}> = (props) => {
+import { guestRoutes, userRoutes } from "src/common/routes";
+import { routes } from "./common/constants/pageRoutes";
+import { useAuth } from "./context/GlobalContext";
+
+const Application: React.FC<RouteComponentProps<{}>> = ({ history }) => {
+  const { state } = useAuth();
+
+  useEffect(() => {
+    state.user ? history.push(routes.HOME) : history.push(routes.AUTH);
+  }, [state.user, history]);
+
+  if (state.loading) return <h1>Loading...</h1>;
+
   return (
-      <Suspense fallback={<h1>Loading...</h1>}>
-        <Switch>
-          {routes.map((route, index) => {
-            return (
-              <Route
-                key={index}
-                path={route.path}
-                exact={route.exact}
-                render={(props: RouteComponentProps<any>) => (
-                  <route.component
-                    name={route.name}
-                    {...props}
-                    {...route.props}
-                  />
-                )}
-              />
-            );
-          })}
-        </Switch>
-      </Suspense>
+    <Suspense fallback={<h1>Loading...</h1>}>
+      <Switch>
+        {(state.user ? userRoutes : guestRoutes).map((route, index) => {
+          return (
+            <Route
+              key={index}
+              path={route.path}
+              exact={route.exact}
+              render={(props: RouteComponentProps<any>) => (
+                <route.component
+                  name={route.name}
+                  {...props}
+                  {...route.props}
+                />
+              )}
+            />
+          );
+        })}
+      </Switch>
+    </Suspense>
   );
 };
 
-export default Application;
-
+export default withRouter(Application);

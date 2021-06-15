@@ -12,9 +12,8 @@ import {
   AuthOverlayLeft,
   AuthOverlayRight,
 } from "src/Auth/Auth.styles";
-import { IParams } from "src/common/interface";
 
-const Authentication: React.FunctionComponent<RouteComponentProps<IParams>> =
+const Authentication: React.FunctionComponent<RouteComponentProps<{}>> =
   () => {
     const [signUpPanelActive, setActivePanel] = useState<boolean>(false);
 

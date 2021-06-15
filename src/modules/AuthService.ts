@@ -23,7 +23,7 @@ const firebaseConfig = {
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
-const auth = firebaseApp.auth();
+export const auth = firebaseApp.auth();
 
 export function signUp({ email, password }: AuthFormData): Promise<User> {
   return auth
