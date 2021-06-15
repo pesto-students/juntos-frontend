@@ -7,8 +7,8 @@ interface ButtonProps {
 
 export default styled.button<ButtonProps>`
   border-radius: ${cssScale.c5};
-  border: 1px solid ${colors.primaryOne};
-  background-color: ${colors.primaryOne};
+  border: 1px solid ${colors.blue1};
+  background-color: ${colors.blue1};
   color: ${colors.white};
   font-size: ${cssScale.c4};
   font-weight: bold;
@@ -19,7 +19,7 @@ export default styled.button<ButtonProps>`
     transform: scale(0.9);
   }
   &:hover {
-    background-color: ${colors.primaryTwo};
+    background-color: ${colors.blue2};
   }
   &:focus {
     outline: none;

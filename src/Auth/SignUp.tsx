@@ -13,18 +13,6 @@ const SignUp: React.FunctionComponent<RouteComponentProps<IParams>> = ({
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleInputChange = ({
-    target: { name, value },
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    switch (name) {
-      case "email":
-        setEmail(value);
-        break;
-      default:
-        setPassword(value);
-    }
-  };
-
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     history.push(routes.HOME);
@@ -39,14 +27,14 @@ const SignUp: React.FunctionComponent<RouteComponentProps<IParams>> = ({
           value={email}
           type="email"
           placeholder="Email"
-          onChange={handleInputChange}
+          onChange={(e) => setEmail(e.target.value)}
           name="email"
         />
         <Input
           value={password}
           type="password"
           placeholder="Password"
-          onChange={handleInputChange}
+          onChange={(e) => setPassword(e.target.value)}
           name="password"
         />
         <Button type="submit" onClick={handleSubmit}>

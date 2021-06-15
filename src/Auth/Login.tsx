@@ -14,18 +14,6 @@ const Login: React.FunctionComponent<RouteComponentProps<IParams>> = ({
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleInputChange = ({
-    target: { name, value },
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    switch (name) {
-      case "email":
-        setEmail(value);
-        break;
-      default:
-        setPassword(value);
-    }
-  };
-
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     history.push(routes.HOME);
@@ -42,7 +30,7 @@ const Login: React.FunctionComponent<RouteComponentProps<IParams>> = ({
           type="email"
           placeholder="Email"
           name="email"
-          onChange={handleInputChange}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <Input
           value={password}
@@ -50,7 +38,7 @@ const Login: React.FunctionComponent<RouteComponentProps<IParams>> = ({
           type="password"
           placeholder="Password"
           name="password"
-          onChange={handleInputChange}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <Link to={routes.FORGET_PASSWORD}>Forgot your password?</Link>
         <Button data-testid="signInBtn" type="submit" onClick={handleSubmit}>

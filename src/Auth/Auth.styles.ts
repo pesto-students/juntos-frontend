@@ -12,7 +12,7 @@ const { c0, c3, c4, c5, c7, c10, c11 } = cssScale;
 export const AuthenticationWrapper = styled.div`
   display: flex;
   justify-content: center;
-  background-color: ${colors.background};
+  background-color: ${colors.grey1};
   height: 100vh;
   align-items: center;
   margin-top: -${c5};
