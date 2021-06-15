@@ -7,10 +7,10 @@ import SignUp from "src/Auth/SignUp";
 import {
   AuthContainer,
   AuthenticationWrapper,
-  OverlayContainer,
-  Overlay,
-  OverlayLeft,
-  OverlayRight,
+  AuthOverlayContainer,
+  AuthOverlay,
+  AuthOverlayLeft,
+  AuthOverlayRight,
 } from "src/Auth/Auth.styles";
 import { IParams } from "src/common/interface";
 
@@ -27,24 +27,24 @@ const Authentication: React.FunctionComponent<RouteComponentProps<IParams>> =
         <AuthContainer signUpPanelActive={signUpPanelActive}>
           <SignUp />
           <Login />
-          <OverlayContainer className="overlay-container">
-            <Overlay className="overlay">
-              <OverlayLeft className="overlay-left">
+          <AuthOverlayContainer className="overlay-container">
+            <AuthOverlay className="overlay">
+              <AuthOverlayLeft className="overlay-left">
                 <h1>Welcome Back!</h1>
-                <p>To keep connected with us please login with your info</p>
+                <p className="text">To keep connected with us please login with your info</p>
                 <Button ghost onClick={handlePanelSwitch}>
                   Sign In
                 </Button>
-              </OverlayLeft>
-              <OverlayRight className="overlay-right">
+              </AuthOverlayLeft>
+              <AuthOverlayRight className="overlay-right">
                 <h1>Hello, Friend!</h1>
-                <p>Enter your personal details and start journey with us</p>
+                <p className="text">Enter your personal details and start journey with us</p>
                 <Button ghost onClick={handlePanelSwitch}>
                   Sign Up
                 </Button>
-              </OverlayRight>
-            </Overlay>
-          </OverlayContainer>
+              </AuthOverlayRight>
+            </AuthOverlay>
+          </AuthOverlayContainer>
         </AuthContainer>
       </AuthenticationWrapper>
     );

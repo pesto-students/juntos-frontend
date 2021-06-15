@@ -17,21 +17,15 @@ export const AuthenticationWrapper = styled.div`
   align-items: center;
   margin-top: -${c5};
 
-  p {
+  .text {
     font-size: ${defaultFontSize};
     line-height: ${c5};
     letter-spacing: 0.5px;
     margin: ${c5} ${c0} ${c7};
   }
 
-  span {
+  .small-text {
     font-size: ${c3};
-  }
-
-  a {
-    color: ${colors.primaryTwo};
-    text-decoration: none;
-    margin: ${c4} ${c0};
   }
 
   @media (max-width: 768px) {
@@ -168,7 +162,7 @@ export const SignUpContainer = styled(AuthFormContainer)`
   }
 `;
 
-export const Overlay = styled.div`
+export const AuthOverlay = styled.div`
   background: #004a93;
   background: linear-gradient(to right, #004a93, #3677c7);
   color: #fff;
@@ -186,7 +180,7 @@ export const Overlay = styled.div`
   }
 `;
 
-export const OverlayContainer = styled.div`
+export const AuthOverlayContainer = styled.div`
   position: absolute;
   top: ${c0};
   left: 50%;
@@ -204,7 +198,7 @@ export const OverlayContainer = styled.div`
   }
 `;
 
-export const OverlayPanel = styled.div`
+export const AuthOverlayPanel = styled.div`
   position: absolute;
   top: ${c0};
   display: flex;
@@ -223,7 +217,7 @@ export const OverlayPanel = styled.div`
   }
 `;
 
-export const OverlayLeft = styled(OverlayPanel)`
+export const AuthOverlayLeft = styled(AuthOverlayPanel)`
   transform: translateX(-30%);
 
   @media (max-width: 768px) {
@@ -231,7 +225,7 @@ export const OverlayLeft = styled(OverlayPanel)`
   }
 `;
 
-export const OverlayRight = styled(OverlayPanel)`
+export const AuthOverlayRight = styled(AuthOverlayPanel)`
   right: ${c0};
   transform: translateX(0);
 

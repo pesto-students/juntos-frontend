@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import Input from "src/components/Input";
 import * as routes from "src/common/constants/pageRoutes";
 import Button from "src/components/Button";
+import Link from "src/components/Link";
 import { SignInContainer } from "./Auth.styles";
 import { IParams } from "src/common/interface";
 
@@ -34,7 +35,7 @@ const Login: React.FunctionComponent<RouteComponentProps<IParams>> = ({
     <SignInContainer className="sign-in-container">
       <form action="#">
         <h1>Sign in</h1>
-        <span>or use your account</span>
+        <span className="small-text">or use your account</span>
         <Input
           value={email}
           data-testid="emailInput"

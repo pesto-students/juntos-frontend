@@ -34,7 +34,7 @@ const SignUp: React.FunctionComponent<RouteComponentProps<IParams>> = ({
     <SignUpContainer className="sign-up-container">
       <form action="#">
         <h1>Create Account</h1>
-        <span>use your email for registration</span>
+        <span className="small-text">use your email for registration</span>
         <Input
           value={email}
           type="email"
