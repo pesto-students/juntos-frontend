@@ -13,7 +13,7 @@ import {
   AuthOverlayRight,
 } from "src/Auth/Auth.styles";
 
-const Authentication: React.FunctionComponent<RouteComponentProps<{}>> =
+const Authentication: React.FunctionComponent<RouteComponentProps> =
   () => {
     const [signUpPanelActive, setActivePanel] = useState<boolean>(false);
 

@@ -10,7 +10,7 @@ import { guestRoutes, userRoutes } from "src/common/routes";
 import { routes } from "./common/constants/pageRoutes";
 import { useAuth } from "./context/GlobalContext";
 
-const Application: React.FC<RouteComponentProps<{}>> = ({ history }) => {
+const Application: React.FC<RouteComponentProps> = ({ history }) => {
   const { state } = useAuth();
 
   useEffect(() => {

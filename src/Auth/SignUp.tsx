@@ -6,7 +6,7 @@ import Button from "src/components/Button";
 import { SignUpContainer } from "./Auth.styles";
 import { useAuth } from "src/context/GlobalContext";
 
-const SignUp: React.FunctionComponent<RouteComponentProps<{}>> = () => {
+const SignUp: React.FunctionComponent<RouteComponentProps> = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const { actions } = useAuth();

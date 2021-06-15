@@ -7,7 +7,7 @@ interface IPage {
   name: string;
 }
 
-const HomePage: React.FunctionComponent<IPage & RouteComponentProps<{}>> = ({
+const HomePage: React.FunctionComponent<IPage & RouteComponentProps> = ({
   name,
 }) => {
   const { state, actions } = useAuth();

@@ -8,7 +8,7 @@ import Link from "src/components/Link";
 import { SignInContainer } from "./Auth.styles";
 import { useAuth } from "src/context/GlobalContext";
 
-const Login: React.FunctionComponent<RouteComponentProps<{}>> = () => {
+const Login: React.FunctionComponent<RouteComponentProps> = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const { actions } = useAuth();

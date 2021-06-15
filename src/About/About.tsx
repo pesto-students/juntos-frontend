@@ -1,9 +1,7 @@
 import React from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
 
-
-
-const AboutPage: React.FunctionComponent<RouteComponentProps<{}>> = () => {
+const AboutPage: React.FunctionComponent<RouteComponentProps> = () => {
   return (
     <div>
       <p>About Page</p>
