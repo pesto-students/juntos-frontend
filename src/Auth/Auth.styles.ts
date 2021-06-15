@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { cssScale, defaultFontSize } from "src/common/constants/cssScale";
+import { cssScale, defaultFontSize, boxShadow } from "src/common/constants/cssScale";
 import { colors } from "src/common/constants/colors";
 
 interface AuthContainerProp {
@@ -43,8 +43,7 @@ export const AuthenticationWrapper = styled.div`
 export const AuthContainer = styled.div<AuthContainerProp>`
   background-color: #fff;
   border-radius: ${c3};
-  box-shadow: ${c0} ${c3} ${c7} rgba(0, 0, 0, 0.25),
-    0 ${c3} ${c3} rgba(0, 0, 0, 0.22);
+  box-shadow: ${boxShadow};
   position: relative;
   overflow: hidden;
   width: 768px;

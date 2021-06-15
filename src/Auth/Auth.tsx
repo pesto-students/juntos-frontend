@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { RouteComponentProps } from "react-router-dom";
 
 import Button from "src/components/Button";
@@ -12,14 +12,15 @@ import {
   OverlayLeft,
   OverlayRight,
 } from "src/Auth/Auth.styles";
+import { IParams } from "src/common/interface";
 
-const Authentication: React.FunctionComponent<RouteComponentProps<any>> =
+const Authentication: React.FunctionComponent<RouteComponentProps<IParams>> =
   () => {
     const [signUpPanelActive, setActivePanel] = useState<boolean>(false);
 
-    const handlePanelSwitch = () => {
+    const handlePanelSwitch = useCallback(() => {
       setActivePanel((signUpPanelActive) => !signUpPanelActive);
-    };
+    }, [setActivePanel]);
 
     return (
       <AuthenticationWrapper>
