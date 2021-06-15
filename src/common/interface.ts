@@ -18,3 +18,13 @@ export interface CustomStyleProps {
   justifyContent?: string;
   alignItems?: string;
 };
+
+export interface ISearchResultData {
+  thumbnail: string,
+  title: string,
+  duration: string,
+  channelName: string,
+  views: string,
+  postDate: string,
+  imgAlt: string
+}

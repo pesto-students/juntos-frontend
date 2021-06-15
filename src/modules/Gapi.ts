@@ -11,6 +11,16 @@ const {
     REACT_APP_GOOGLE_YOUTUBE_API_URL
 } = process.env;
 
+interface ISearchResultData {
+    thumbnail: string,
+    title: string,
+    duration: string,
+    channelName: string,
+    views: string,
+    postDate: string,
+    imgAlt: string
+}
+
 class GoogleApi {
     
     gapi: any;
@@ -70,14 +80,14 @@ class GoogleApi {
             response.result.items.forEach((item: any) => {
                 videoIds.push(item.id.videoId)
             });
+
             return videoIds;  
         } catch(err) {
             console.log('searchYoutubeList: ERROR ', err)
         }
     }
     
-    // searchYoutubeVideos = async (videoIds: string[]) => {
-    async searchYoutubeVideos(videoIds: string[]) {
+    async searchYoutubeVideos(videoIds: string[]): Promise<ISearchResultData[]> {
         try {
             const response = await this.gapi.client.youtube.videos.list({
                 "part": [
@@ -88,43 +98,70 @@ class GoogleApi {
                 ],
                 "id": videoIds
             })
+            let data: ISearchResultData[] = [];
+
             response.result.items.forEach((item: any) => {
                 const humanReadableTime: string = GoogleApi.ISO8601toHumanReadable(item.contentDetails.duration);
+                data.push({
+                    thumbnail: item.snippet.thumbnails.medium.url,
+                    title: item.snippet.title,
+                    duration: humanReadableTime,
+                    channelName: item.snippet.channelTitle,
+                    views: this.viewsFormatter(item.statistics.viewCount),
+                    postDate: item.snippet.publishedAt,
+                    imgAlt: item.snippet.title
+                })
                 item.contentDetails["durationHR"] = humanReadableTime;
             });
-            return response;  
+            return data;  
+            // return response;  
         } catch(err) {
             console.log('searchYoutubeVideos: ERROR ', err)
+            return [];
         }
     }
     
-    static getDUrationByUnit(input: string, unit: string){
-        var index = input.indexOf(unit);
-        var output = "00"
-       if(index < 0){
-         return output;
-       }
+    static getDUrationByUnit(input: string, unit: string): string{
+        let index = input.indexOf(unit);
+        let output = "00";
+        
+        if(index < 0){
+            return output;
+        }
    
-       if(isNaN(parseInt(input.charAt(index-2)))){
-         return '0' + input.charAt(index-1);
-       }else{
-         return input.charAt(index-2) + input.charAt(index-1);
-       }
+        if(isNaN(parseInt(input.charAt(index-2)))) {
+            return '0' + input.charAt(index-1);
+        } else {
+            return input.charAt(index-2) + input.charAt(index-1);
+        }
     }
 
-    static ISO8601toHumanReadable(input:string){
-        var H = this.getDUrationByUnit(input, 'H');
-        var M = this.getDUrationByUnit(input, 'M');
-        var S = this.getDUrationByUnit(input, 'S');
+    static ISO8601toHumanReadable(input:string): string {
+        let H = this.getDUrationByUnit(input, 'H');
+        let M = this.getDUrationByUnit(input, 'M');
+        let S = this.getDUrationByUnit(input, 'S');
    
-       if(H === "00"){
+       if (H === "00") {
          H = "";
-       }else{
+       } else {
          H += ":"
        }
    
        return H  + M + ':' + S ;
      }
+
+    viewsFormatter(num: number): string {
+        if (num >= 1000000000) {
+           return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+        }
+        if (num >= 1000000) {
+           return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        }
+        if (num >= 1000) {
+           return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        }
+        return num.toString();
+   }
 }
 
 export default GoogleApi;

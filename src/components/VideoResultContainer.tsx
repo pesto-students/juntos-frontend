@@ -10,7 +10,6 @@ const VideoResultContainer = styled.div<CustomStyleProps>`
     flex-direction: row;
     flex-wrap: wrap;
     width: ${props => (props.width || 792) + `px`};
-    border: 1px solid yellow;
     margin: ${cssScale.c2};
     overflow-y: scroll;
   `;

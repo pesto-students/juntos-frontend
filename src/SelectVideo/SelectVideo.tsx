@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { RouteComponentProps } from "react-router-dom";
 
-import { IParams } from "src/common/interface";
+import { IParams, ISearchResultData } from "src/common/interface";
 
 import ViewportSection from "src/components/ViewportSection";
 import HighlightContainer from "src/components/HighlightContainer";
@@ -31,8 +31,8 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () =>
   const handleKeyDown = async (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
       const videoIds = await GoogleApiClient.searchYoutubeList(searchKeyword);
-      const results = await GoogleApiClient.searchYoutubeVideos(videoIds!);
-      // setSearchResults(results.result.items);
+      const results: any = await GoogleApiClient.searchYoutubeVideos(videoIds!);
+      setSearchResults(results);
       console.log(results)
     }
   }
@@ -56,11 +56,7 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () =>
         />
         <VideoResultContainer>
           {searchResults.map((videoData: any) => {
-            const thumbnail = videoData.snippet.thumbnails.medium.url;
-            return <VideoResultItem>
-              <img key={videoData.eTag} src={thumbnail} alt={videoData.snippet.description}/>;
-              <p>{videoData.snippet.title.replace(/&quot;/g, '\"')}</p>
-            </VideoResultItem>
+            return <VideoResultItem data={videoData}/>
           })}
         </VideoResultContainer>
       </HighlightContainer>
