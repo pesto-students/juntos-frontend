@@ -3,19 +3,34 @@
     <head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap">
         <link rel="stylesheet" href="landing-page.css">
+        <script>
+            function joinParty(){
+                window.location = '/join-party';
+            };
+            function watchParty(){
+                window.location = '/watch-party';
+            };
+            function learnMore(){
+                window.location = '/learn-more';
+            };
+        </script>
     </head>
     <body class="body-gradient">
         <nav class="landing-header drop-shadow">
             <div class="logo-container"></div>
             <div class="nav-container">
                 <ol class="nav-list">
-                    <li>About</li>
-                    <li>Log In</li>
                     <li>
-                        <button class="drop-shadow primary-button-sleek font-white" onclick="alert('Join Party!')">Join Party</button>
+                        <a href="/about">About</a>
                     </li>
                     <li>
-                        <button class="drop-shadow primary-button-sleek font-white" onclick="alert('Watch Party!')">Host Party</button>
+                        <a href="/sign-in">Log In</a>
+                    </li>
+                    <li>
+                        <button class="drop-shadow primary-button-sleek font-white" onclick="joinParty()">Join Party</button>
+                    </li>
+                    <li>
+                        <button class="drop-shadow primary-button-sleek font-white" onclick="watchParty()">Host Party</button>
                     </li>
                     <li>
                         <img class="profile-avatar" src="../src/assets/profile_pic.svg" alt="Avatar" >
@@ -36,10 +51,10 @@
                 </div>
                 <div class="landing-sec-1-button-container">
                     <div style="flex:1">
-                        <button class="drop-shadow watch-party-button font-white" onclick="alert('Watch Party!')">Watch Party</button>
+                        <button class="drop-shadow watch-party-button font-white" onclick="watchParty()">Watch Party</button>
                     </div>
                     <div style="flex:1">
-                        <button class="drop-shadow learn-more-button font-white" onclick="alert('Learn More!')">Learn More</button>
+                        <button class="drop-shadow learn-more-button font-white" onclick="learnMore()">Learn More</button>
                     </div>
                 </div>
             </section>
@@ -56,7 +71,7 @@
                     Host a video party for up to a thirty guests, or have a virtual movie night with friends. Hop on the website and take charge while your show is synced for everyone.
                 </div>
                 <div class="landing-sec-1-button-container">
-                    <div class="drop-shadow learn-more-button font-white" onclick="alert('Learn More!')">Learn More</div>
+                    <div class="drop-shadow learn-more-button font-white" onclick="learnMore()">Learn More</div>
                 </div>
             </section>
             <section class="section section-one">
@@ -72,7 +87,7 @@
                     From Youtube to Dailymotion, Juntos supports video parties across the most streaming services globally. All you need is a sign up, watch everything free* - Juntos handles the rest.
                 </div>
                 <div class="landing-sec-1-button-container">
-                    <button class="drop-shadow watch-party-button font-white" onclick="alert('Watch Party!')">Watch Party</button>
+                    <button class="drop-shadow watch-party-button font-white" onclick="watchParty()">Watch Party</button>
                 </div>
             </section>
 
