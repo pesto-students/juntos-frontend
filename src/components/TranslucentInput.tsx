@@ -6,9 +6,12 @@ interface ITranslucentInput{
   height?: string
 }
 
+const defaultWidth = 500;
+const defaultHeight = 45;
+
 const TranslucentInput = styled.input<ITranslucentInput>`
-    width: ${props => (props.width || 500) + `px`};
-    height: ${props => (props.height || 45) + `px`};
+    width: ${props => (props.width || defaultWidth) + `px`};
+    height: ${props => (props.height || defaultHeight) + `px`};
     margin: ${cssScale.c2};
     border-width: ${cssScale.c0};
     outline: ${cssScale.c0};

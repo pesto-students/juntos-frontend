@@ -23,12 +23,15 @@ function truncate(str: string, n: number) {
     }
 };
 
+const defaultWidth = 379;
+const defaultHeight = 103;
+
 const Container = styled.div<IContainer>`
     display: flex;
     flex-direction: row;
     background-color: ${colors.codGrey};
-    width: ${props => (props.width || 379) + `px`};
-    height: ${props => (props.height || 103) + `px`};
+    width: ${props => (props.width || defaultWidth) + `px`};
+    height: ${props => (props.height || defaultHeight) + `px`};
     margin: ${cssScale.c2};
     box-shadow: ${dropShadow.primary};
     > .result-thumbnail{

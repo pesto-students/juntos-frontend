@@ -8,14 +8,18 @@ interface IHighlightContainer {
   alignItems?: string
 }
 
+const defaultWidth = '900px';
+const defaultHeight = '525px';
+const marginLeft = '10%';
+
 const HighlightContainer = styled.div<IHighlightContainer>`
     display: flex;
     flex-direction: ${props => props.flexDirection || 'row'};
     justify-content: ${props => props.justifyContent || 'center'};
     align-items: ${props => props.alignItems || 'center'};
-    width: 900px;
-    height: 525px;
-    margin-left: 10%;
+    width: ${defaultWidth};
+    height: ${defaultHeight};
+    margin-left: ${marginLeft};
     background-image: linear-gradient(to right, ${colors.primaryOne}, ${colors.primaryTwo});
     box-shadow: ${dropShadow.primary};
   `;

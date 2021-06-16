@@ -20,12 +20,16 @@ interface ICarouselContainer {
   height?: string
 }
 
+const serviceProviderLogoWidth = 122;
+const carouselContainerDefaultWidth = 500;
+const carouselContainerDefaultHeight = 130;
+
 const CarouselContainer = styled.div<ICarouselContainer>`
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: ${props => (props.width || 500) + `px`};
-    height: ${props => (props.height || 130) + `px`};
+    width: ${props => (props.width || carouselContainerDefaultWidth) + `px`};
+    height: ${props => (props.height || carouselContainerDefaultHeight) + `px`};
     margin: ${cssScale.c2};
   `;
 
@@ -78,7 +82,7 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () =>
       >
         <CarouselContainer>
           <MediaServiceProviderBox>
-            <img width="122" src={YoutubeLogo} alt={'youtube'}/>
+            <img width={serviceProviderLogoWidth} src={YoutubeLogo} alt={'youtube'}/>
           </MediaServiceProviderBox>
         </CarouselContainer>
         <TranslucentInput 
