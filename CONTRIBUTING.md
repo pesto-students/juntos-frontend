@@ -55,13 +55,15 @@ Structure the directory based on features
        |   ├── Login.tsx
        |   ├── Logout.tsx
        |   ├── Auth.styles.ts
-       |   └── Auth.interface.ts
+       |   ├── Auth.interface.ts
+       |   └── Auth.test.tsx
        |
        ├──room
        |   ├── Viewer.tsx
        |   ├── WatchParty.tsx
        |   ├── Room.styles.ts
        |   └── Room.interface.ts
+       |   └── Room.test.tsx
        |
        └──common
            ├── utils
@@ -96,3 +98,17 @@ Lowercase is preferred for file and folder names, one exception to this is Files
 - `src/components` will contain reusable UI component for eg. `Button`, `Input` etc.
 - If a style is specific only to the component, and cannot be used anywhere else, add it to `<ComponentName>.styles.ts` in the same folder as the component.
 - All css properties that require number as input should be in multiple of 4 and should be used from `src/common/constants/cssScale.ts`.
+
+### Testing
+
+- Write test cases for each component in their directory for e.g. `src/Home/Home.test.tsx` you can also refer to directory structure.
+- Make sure you cover at least 70% test-case scenario.
+- You can generate "test coverage" for modified files using `yarn test:coverage` command.
+- if you want to test cases for any particular file you can add path along with command for e.g.`yarn test src/Home/Home.test.tsx`
+
+### Environment Variables
+
+- You can create your own firebase project and add required `.env` variables.
+- Check `.env-example` to see which firebase keys are needed.
+- REACT_APP prefix is mandatory in `CRA` to declare environment variable.
+- More details on adding custom environment variable in `CRA` can be found at [Adding custom environment variables(creat-react-app)](https://create-react-app.dev/docs/adding-custom-environment-variables/)

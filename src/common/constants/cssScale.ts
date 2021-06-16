@@ -13,3 +13,8 @@ export const cssScale = {
   c11: "44px",
   c12: "48px",
 };
+
+export const defaultFontSize = "14px";
+
+export const boxShadow = `0 6px 14px rgba(0, 0, 0, 0.25),
+0 6px 6px rgba(0, 0, 0, 0.22)`

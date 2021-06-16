@@ -20,3 +20,7 @@ export interface ISearchResultData {
   imgAlt: string,
   videoId: string
 }
+export interface AuthFormData {
+  email: string;
+  password: string;
+}

@@ -106,5 +106,10 @@ dist
 # .DS_Store
 .DS_Store
 
+<<<<<<< HEAD
 # .src/assets/salvage/
 src/assets/salvage/
+=======
+# build
+build
+>>>>>>> main

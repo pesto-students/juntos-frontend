@@ -10,5 +10,9 @@ export const colors = {
   white50: 'rgba(255,255,255,50%)',
   white60: 'rgba(255,255,255,60%)',
   black50: 'rgba(0,0,0,50%)',
-  silverChalice: '#a6a6a6'
+  silverChalice: '#a6a6a6',
+  blue1: "#004A93",
+  blue2: "#3677C7",
+  grey1: "#f6f5f7",
+  grey2: "#eee",
 };

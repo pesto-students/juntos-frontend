@@ -7,6 +7,7 @@ const HomePage = React.lazy(() => import("src/Home/Home"));
 const AboutPage = React.lazy(() => import("src/About/About"));
 const NoPagefound = React.lazy(() => import("src/Error/NoPageFound"));
 const SelectVideoPage = React.lazy(() => import("src/SelectVideo/SelectVideo"));
+const Auth = React.lazy(() => import("src/Auth/Auth"));
 
 const routes: IRoute[] = [
   {
@@ -24,6 +25,11 @@ const routes: IRoute[] = [
     path: pageRoutes.SELECT_VIDEO,
     component: SelectVideoPage,
     exact: true
+  },
+  {
+    path: pageRoutes.AUTH,
+    component: Auth,
+    exact: true,
   },
   {
     component: NoPagefound,
