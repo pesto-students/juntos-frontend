@@ -1,3 +1,5 @@
+import { ISearchResultData } from "src/common/interface";
+
 declare global {
   interface Window {
     gapi: any; 
@@ -10,17 +12,6 @@ const {
     REACT_APP_GOOGLE_AUTH_SCOPE_URL,
     REACT_APP_GOOGLE_YOUTUBE_API_URL
 } = process.env;
-
-interface ISearchResultData {
-    thumbnail: string,
-    title: string,
-    duration: string,
-    channelName: string,
-    views: string,
-    postDate: string,
-    imgAlt: string,
-    videoId: string
-}
 
 class GoogleApi {
     

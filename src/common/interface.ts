@@ -26,5 +26,6 @@ export interface ISearchResultData {
   channelName: string,
   views: string,
   postDate: string,
-  imgAlt: string
+  imgAlt: string,
+  videoId: string
 }

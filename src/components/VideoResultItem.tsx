@@ -4,22 +4,12 @@ import Moment from 'react-moment';
 import { dropShadow } from "src/common/constants/dropShadow";
 import { colors } from "src/common/constants/colors";
 import { cssScale } from "src/common/constants/cssScale";
+import { ISearchResultData } from "src/common/interface";
 
 import MusicNote from 'src/assets/serviceProviderLogos/youtube-music-note.svg';
 
-interface IVideoResultItemData {
-    thumbnail: string,
-    title: string,
-    duration: string,
-    channelName: string,
-    views: string,
-    postDate: string,
-    imgAlt: string,
-    videoId: string
-}
-
 interface IVideoResultItem {
-    data: IVideoResultItemData;
+    data: ISearchResultData;
 }
 
 interface IContainer{
