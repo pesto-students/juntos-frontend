@@ -10,11 +10,22 @@ import { guestRoutes, userRoutes } from "src/common/routes";
 import { routes } from "./common/constants/pageRoutes";
 import { useAuth } from "./context/GlobalContext";
 
-const Application: React.FC<RouteComponentProps> = ({ history }) => {
+const Application: React.FC<
+  RouteComponentProps<{}, {}, { from: { pathname: string } }>
+> = ({ history }) => {
   const { state } = useAuth();
 
   useEffect(() => {
-    state.user ? history.push(routes.HOME) : history.push(routes.AUTH);
+    // Store previous route in history state to return user back to that route
+    // from which it came from after user verified from auth listener.
+    if (state.user) {
+      const { state } = history.location;
+      history.replace(state?.from?.pathname ?? routes.HOME);
+    } else {
+      history.replace(routes.AUTH, {
+        from: { pathname: history.location.pathname },
+      });
+    }
   }, [state.user, history]);
 
   if (state.loading) return <h1>Loading...</h1>;
