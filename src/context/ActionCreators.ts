@@ -1,12 +1,15 @@
 import { AuthFormData } from "src/common/interface";
 import { Dispatch, Types } from "src/context/context.interface";
 import { signUp, signIn, signOut } from "src/modules/AuthService";
+import { toast } from "react-toastify";
 
 export const register = async (dispatch: Dispatch, payload: AuthFormData) => {
   try {
     dispatch({ type: Types.REQUEST });
-    await signUp(payload);
+    const user = await signUp(payload);
+    dispatch({ type: Types.SET_USER, payload: user });
   } catch (error) {
+    toast.error(error);
   } finally {
     dispatch({ type: Types.LOADER_OFF });
   }
@@ -15,8 +18,10 @@ export const register = async (dispatch: Dispatch, payload: AuthFormData) => {
 export const login = async (dispatch: Dispatch, payload: AuthFormData) => {
   try {
     dispatch({ type: Types.REQUEST });
-    await signIn(payload);
+    const user = await signIn(payload);
+    dispatch({ type: Types.SET_USER, payload: user });
   } catch (error) {
+    toast.error(error.message);
   } finally {
     dispatch({ type: Types.LOADER_OFF });
   }
@@ -27,6 +32,7 @@ export const logout = async (dispatch: Dispatch) => {
     dispatch({ type: Types.REQUEST });
     await signOut();
   } catch (error) {
+    toast.error(error.message);
   } finally {
     dispatch({ type: Types.LOADER_OFF });
   }

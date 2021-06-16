@@ -19,10 +19,12 @@ const Application: React.FC<RouteComponentProps> = ({ history }) => {
 
   if (state.loading) return <h1>Loading...</h1>;
 
+  const currentRoutes = state.user ? userRoutes : guestRoutes;
+
   return (
     <Suspense fallback={<h1>Loading...</h1>}>
       <Switch>
-        {(state.user ? userRoutes : guestRoutes).map((route, index) => {
+        {currentRoutes.map((route, index) => {
           return (
             <Route
               key={index}
