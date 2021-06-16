@@ -99,10 +99,11 @@ html *
     border: 0px;
 }
 
-.landing-sec-1-sub-heading{
+.section-sub-heading{
     font-size: 17px;
     margin-top: 10px;
     text-align: center;
+    width: 50%;
 }
 
 .landing-sec-1-button-container{
