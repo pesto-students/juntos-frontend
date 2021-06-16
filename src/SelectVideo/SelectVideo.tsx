@@ -50,8 +50,8 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () =>
     
     return (
       <VideoResultContainer>
-        {searchResults.map((videoData: any) => {
-          return <VideoResultItem key={videoData.id} data={videoData}/>
+        {searchResults.map((videoData: ISearchResultData) => {
+          return <VideoResultItem key={videoData.videoId} data={videoData}/>
         })}
       </VideoResultContainer>
     )
