@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap">
         <link rel="stylesheet" href="landing-page.css">
     </head>
     <body class="body-gradient">
-        <div class="landing-header drop-shadow">
+        <nav class="landing-header drop-shadow">
             <div class="logo-container"></div>
             <div class="nav-container">
                 <div class="nav-item-link">
@@ -28,10 +28,10 @@
                     <img class="drop-shadow profile-avatar" src="./assets/img_avatar.png" alt="Avatar" >
                 </div>
             </div>
-        </div>
-        <div class="landing-body">
-            <div class="section section-one">
-                <img class="drop-shadow landing-sec-1-img" src = "./assets/landing_1.svg" alt="landing_demo"/>
+        </nav>
+        <main class="landing-body">
+            <section class="section section-one">
+                <img class=" landing-sec-1-img" src = "../../assets/sample_party_screen.svg" alt="sample_party_screen"/>
                 <div class="landing-sec-1-heading font-white">
                     Welcome to <br>the NextGen theater
                 </div>
@@ -42,20 +42,20 @@
                 </div>
                 <div class="landing-sec-1-button-container">
                     <div style="flex:1">
-                        <div class="drop-shadow watch-party-button font-white" onclick="alert('Watch Party!')">Watch Party</div>
+                        <button class="button drop-shadow watch-party-button font-white" onclick="alert('Watch Party!')">Watch Party</button>
                     </div>
                     <div style="flex:1">
-                        <div class="drop-shadow learn-more-button font-white" onclick="alert('Learn More!')">Learn More</div>
+                        <button class="button drop-shadow learn-more-button font-white" onclick="alert('Learn More!')">Learn More</button>
                     </div>
                 </div>
-            </div>
-            <div class="section section-one">
+            </section>
+            <section class="section section-one">
                 <div class="landing-multi-image-container">
-                    <img class="drop-shadow landing-sec-2-img" src = "./assets/landing_2.svg" alt="landing_demo"/>
-                    <img class="drop-shadow landing-sec-3-img" src = "./assets/landing_3.svg" alt="landing_demo"/>
+                    <img class=" landing-sec-2-img" src = "../../assets/video_files.svg" alt="video_files"/>
+                    <img class=" landing-sec-3-img" src = "../../assets/online_media.svg" alt="online_media"/>
                 </div>
                 <div class="landing-sec-2-heading font-white">
-                    CREATE YOUR THEATER, OWN IT
+                    <span style="text-transform: uppercase">Create your theater, own it</span>
                 </div>
                 <div class="landing-sec-1-heading-divider"></div>
                 <div class="landing-sec-1-sub-heading font-white">
@@ -64,25 +64,25 @@
                 <div class="landing-sec-1-button-container">
                     <div class="drop-shadow learn-more-button font-white" onclick="alert('Learn More!')">Learn More</div>
                 </div>
-            </div>
-            <div class="section section-one">
+            </section>
+            <section class="section section-one">
                 <div class="landing-multi-image-container">
-                    <img class="drop-shadow landing-sec-4-img" src = "./assets/landing_4.svg" alt="landing_demo"/>
-                    <img class="drop-shadow landing-sec-5-img" src = "./assets/landing_5.svg" alt="landing_demo"/>
+                    <img class=" landing-sec-4-img" src = "../../assets/home_cinema.svg" alt="home_cinema"/>
+                    <img class=" landing-sec-5-img" src = "../../assets/video_streaming.svg" alt="video_streaming"/>
                 </div>
                 <div class="landing-sec-2-heading font-white">
-                    ENJOY TOGETHER, WHEREVER
+                    <span style="text-transform: uppercase">Enjoy together, wherever</span>
                 </div>
                 <div class="landing-sec-1-heading-divider"></div>
                 <div class="landing-sec-1-sub-heading font-white">
                     From Youtube to Dailymotion, Juntos supports video parties across the most streaming services <br> globally. All you need is a sign up, watch everything free* - Juntos handles the rest.
                 </div>
                 <div class="landing-sec-1-button-container">
-                    <div class="drop-shadow watch-party-button font-white" onclick="alert('Watch Party!')">Watch Party</div>
+                    <button class="button drop-shadow watch-party-button font-white" onclick="alert('Watch Party!')">Watch Party</button>
                 </div>
-            </div>
+            </section>
 
             <div class="footer-divider"></div>
-        </div>
+        </main>
     </body>
 </html>

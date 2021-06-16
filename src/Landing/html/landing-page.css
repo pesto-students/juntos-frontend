@@ -181,3 +181,8 @@ html *
     margin-bottom: 50px;
     background-color: white;
 }
+
+.button{
+    border: 0px;
+    outline: 0px;
+}
