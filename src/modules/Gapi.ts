@@ -19,46 +19,53 @@ class GoogleApi {
 
     constructor() {
         this.gapi = window.gapi;
+        this.init()
     }
 
-    loadGapiClientAuth2 = async () => {
+    async init(): Promise<void> {
+        this.loadGapiClientAuth2()
+        .then(() => this.authenticate())
+        .then(() => this.loadYoutubeClient());
+    }
+
+    async loadGapiClientAuth2(): Promise<void> {
         try {
             await new Promise((resolve,reject) => {
                 this.gapi.load('client:auth2', resolve);
             });
             await this.gapiAuth2Init()
         } catch(err){
-            console.log(`loadGapiClientAuth2 Error: ${err}`);
+            Promise.reject(err);
         }
     }
 
-    gapiAuth2Init = async () => {
+    async gapiAuth2Init(): Promise<void> {
         try {
             await this.gapi.auth2.init({client_id: REACT_APP_GOOGLE_OAUTH_CLIENT_ID});
         } catch(err){
-            console.log(`gapiAuth2Init Error: ${err}`);
+            Promise.reject(err);
         }
     }
 
-    authenticate = async () => {
+    async authenticate(): Promise<void> {
         try {
             await this.gapi.auth2.getAuthInstance()
             .signIn({scope: REACT_APP_GOOGLE_AUTH_SCOPE_URL})
         } catch(err){
-            console.log(`authenticate Error: ${err}`);
+            Promise.reject(err);
         }
     }
 
-    loadYoutubeClient = async () => {
+    async loadYoutubeClient(): Promise<void> {
         try {
             this.gapi.client.setApiKey(REACT_APP_GOOGLE_YOUTUBE_API_KEY);
             await this.gapi.client.load(REACT_APP_GOOGLE_YOUTUBE_API_URL);
         } catch(err) {
-            console.log(`loadYoutubeClient Error: ${err}`)
+            Promise.reject(err);
         }
     }
 
-    searchYoutubeList = async (searchTerm: string) => {
+    async searchYoutubeList(searchTerm: string): Promise<string[]> {
         try {
             const response = await this.gapi.client.youtube.search.list({
                 "part": [
@@ -74,7 +81,6 @@ class GoogleApi {
 
             return videoIds;  
         } catch(err) {
-            console.log('searchYoutubeList: ERROR ', err)
             return [];
         }
     }
@@ -98,7 +104,7 @@ class GoogleApi {
                     title: item.snippet.title,
                     duration: humanReadableTime,
                     channelName: item.snippet.channelTitle,
-                    views: this.viewsFormatter(item.statistics.viewCount),
+                    views: GoogleApi.viewsFormatter(item.statistics.viewCount),
                     postDate: item.snippet.publishedAt,
                     imgAlt: item.snippet.title,
                     videoId: item.id
@@ -107,7 +113,6 @@ class GoogleApi {
             });
             return data;  
         } catch(err) {
-            console.log('searchYoutubeVideos: ERROR ', err)
             return [];
         }
     }
@@ -141,7 +146,7 @@ class GoogleApi {
        return H  + M + ':' + S ;
      }
 
-    viewsFormatter(num: number): string {
+    static viewsFormatter(num: number): string {
         if (num >= 1000000000) {
            return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
         }

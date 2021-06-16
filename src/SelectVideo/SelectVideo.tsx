@@ -15,9 +15,6 @@ import YoutubeLogo from 'src/assets/serviceProviderLogos/youtube_white.svg';
 import GoogleApi from "src/modules/Gapi";
 
 const GoogleApiClient = new GoogleApi();
-GoogleApiClient.loadGapiClientAuth2()
-    .then(GoogleApiClient.authenticate)
-    .then(GoogleApiClient.loadYoutubeClient);
 
 const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () => {
 
