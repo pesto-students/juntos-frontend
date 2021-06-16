@@ -1,10 +1,11 @@
 import React, {useState} from "react";
+import styled from "styled-components";
 import { RouteComponentProps } from "react-router-dom";
 import { IParams, ISearchResultData } from "src/common/interface";
+import { cssScale } from "src/common/constants";
 import {
   ViewportSection,
   HighlightContainer,
-  CarouselContainer,
   TranslucentInput,
   MediaServiceProviderBox,
   VideoResultContainer,
@@ -13,6 +14,20 @@ import {
 } from "src/components";
 import YoutubeLogo from 'src/assets/serviceProviderLogos/youtube_white.svg';
 import GoogleApi from "src/modules/Gapi";
+
+interface ICarouselContainer {
+  width?: string,
+  height?: string
+}
+
+const CarouselContainer = styled.div<ICarouselContainer>`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: ${props => (props.width || 500) + `px`};
+    height: ${props => (props.height || 130) + `px`};
+    margin: ${cssScale.c2};
+  `;
 
 const GoogleApiClient = new GoogleApi();
 

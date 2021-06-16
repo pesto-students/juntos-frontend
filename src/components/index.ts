@@ -1,5 +1,4 @@
 import Button from "./Button";
-import CarouselContainer from "./CarouselContainer";
 import HighlightContainer from "./HighlightContainer";
 import Input from "./Input";
 import MediaServiceProviderBox from "./MediaServiceProviderBox";
@@ -10,7 +9,6 @@ import ViewportSection from "./ViewportSection";
 
 export {
     Button,
-    CarouselContainer,
     HighlightContainer,
     Input,
     MediaServiceProviderBox,
