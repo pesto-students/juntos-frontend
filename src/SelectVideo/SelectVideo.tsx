@@ -10,6 +10,7 @@ import TranslucentInput from "src/components/TranslucentInput";
 import MediaServiceProviderBox from "src/components/MediaServiceProviderBox";
 import VideoResultContainer from "src/components/VideoResultContainer";
 import VideoResultItem from "src/components/VideoResultItem";
+import Button from "src/components/Button";
 
 import YoutubeLogo from 'src/assets/serviceProviderLogos/youtube_white.svg';
 
@@ -25,16 +26,41 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () =>
     .then(GoogleApiClient.loadYoutubeClient);
   }, [])
 
-  const [searchKeyword, setSearchKeyword] = useState(''); 
-  const [searchResults, setSearchResults] = useState([]); 
+  const [searchKeyword, setSearchKeyword] = useState<string>('');
+  const [searchResults, setSearchResults] = useState<ISearchResultData[]>([]); 
   
   const handleKeyDown = async (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
+      getSearchResults(searchKeyword);
+    }
+  }
+
+  const getSearchResults = async (searchKeyword: string) => {
       const videoIds = await GoogleApiClient.searchYoutubeList(searchKeyword);
-      const results: any = await GoogleApiClient.searchYoutubeVideos(videoIds!);
+      if(!videoIds) {
+        return; 
+      }
+      const results: ISearchResultData[] = await GoogleApiClient.searchYoutubeVideos(videoIds);
+      if(!results) {
+        return; 
+      }
       setSearchResults(results);
       console.log(results)
+  }
+
+  const renderSearchResults = () => {
+
+    if (searchResults.length === 0){
+      return <p>No Results</p>
     }
+    
+    return (
+      <VideoResultContainer>
+        {searchResults.map((videoData: any) => {
+          return <VideoResultItem data={videoData}/>
+        })}
+      </VideoResultContainer>
+    )
   }
   
   return (
@@ -54,11 +80,8 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () =>
           onKeyDown={handleKeyDown}
           onChange={event => setSearchKeyword(event.target.value)}
         />
-        <VideoResultContainer>
-          {searchResults.map((videoData: any) => {
-            return <VideoResultItem data={videoData}/>
-          })}
-        </VideoResultContainer>
+        <Button onClick={() => getSearchResults(searchKeyword)}>Search</Button>
+        {renderSearchResults()}
       </HighlightContainer>
     </ViewportSection>
   );

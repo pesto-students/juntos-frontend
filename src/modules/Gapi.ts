@@ -84,6 +84,7 @@ class GoogleApi {
             return videoIds;  
         } catch(err) {
             console.log('searchYoutubeList: ERROR ', err)
+            return [];
         }
     }
     
@@ -114,7 +115,6 @@ class GoogleApi {
                 item.contentDetails["durationHR"] = humanReadableTime;
             });
             return data;  
-            // return response;  
         } catch(err) {
             console.log('searchYoutubeVideos: ERROR ', err)
             return [];
