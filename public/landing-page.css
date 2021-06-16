@@ -95,6 +95,8 @@ html *
     width: 70%;
     height: 2px;
     background-color: white;
+    outline: 0px;
+    border: 0px;
 }
 
 .landing-sec-1-sub-heading{
