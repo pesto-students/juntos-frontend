@@ -1,6 +1,6 @@
 html *
 {
-   font-family: Poppins !important;
+   font-family: Poppins;
    --primary: #004A93;
    --secondary: #3677C7;
 }
@@ -29,12 +29,6 @@ html *
     flex: 3;
     display: flex;
     flex-direction: row;
-}
-
-.nav-item-link{
-    flex:1;
-    display: flex;
-    align-items: center;
     justify-content: center;
 }
 
@@ -55,10 +49,6 @@ html *
 .profile-avatar{
     border-radius: 50%;
     width: 60px;
-}
-
-.nav-link{
-
 }
 
 .primary-button-sleek{
@@ -182,7 +172,18 @@ html *
     background-color: white;
 }
 
-.button{
+button{
     border: 0px;
     outline: 0px;
+}
+
+.nav-list{
+    display: flex;
+    align-items: center;
+}
+
+.nav-list li{
+    display: inline;
+    padding-left: 30px;
+    padding-right: 30px;
 }
