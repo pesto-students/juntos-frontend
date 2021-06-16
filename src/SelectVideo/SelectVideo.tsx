@@ -1,19 +1,17 @@
 import React, {useState, useEffect} from "react";
 import { RouteComponentProps } from "react-router-dom";
-
 import { IParams, ISearchResultData } from "src/common/interface";
-
-import ViewportSection from "src/components/ViewportSection";
-import HighlightContainer from "src/components/HighlightContainer";
-import CarouselContainer from "src/components/CarouselContainer";
-import TranslucentInput from "src/components/TranslucentInput";
-import MediaServiceProviderBox from "src/components/MediaServiceProviderBox";
-import VideoResultContainer from "src/components/VideoResultContainer";
-import VideoResultItem from "src/components/VideoResultItem";
-import Button from "src/components/Button";
-
+import {
+  ViewportSection,
+  HighlightContainer,
+  CarouselContainer,
+  TranslucentInput,
+  MediaServiceProviderBox,
+  VideoResultContainer,
+  VideoResultItem,
+  Button,
+} from "src/components";
 import YoutubeLogo from 'src/assets/serviceProviderLogos/youtube_white.svg';
-
 import GoogleApi from "src/modules/Gapi";
 
 const GoogleApiClient = new GoogleApi();
