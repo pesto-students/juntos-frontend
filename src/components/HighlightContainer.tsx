@@ -2,9 +2,14 @@ import styled from "styled-components";
 
 import { colors } from "src/common/constants/colors";
 import { dropShadow } from "src/common/constants/dropShadow";
-import { CustomStyleProps } from "src/common/interface";
 
-const HighlightContainer = styled.div<CustomStyleProps>`
+interface IHighlightContainer {
+  flexDirection?: string,
+  justifyContent?: string,
+  alignItems?: string
+}
+
+const HighlightContainer = styled.div<IHighlightContainer>`
     display: flex;
     flex-direction: ${props => props.flexDirection || 'row'};
     justify-content: ${props => props.justifyContent || 'center'};

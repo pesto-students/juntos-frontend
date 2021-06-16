@@ -1,9 +1,13 @@
 import styled from "styled-components";
 
 import { cssScale } from "src/common/constants/cssScale";
-import { CustomStyleProps } from "src/common/interface";
 
-const CarouselContainer = styled.div<CustomStyleProps>`
+interface ICarouselContainer {
+  width?: string,
+  height?: string
+}
+
+const CarouselContainer = styled.div<ICarouselContainer>`
     display: flex;
     flex-direction: row;
     justify-content: center;

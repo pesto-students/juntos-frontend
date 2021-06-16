@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
-import { dropShadow } from "src/common/constants/dropShadow";
-import { colors } from "src/common/constants/colors";
 import { cssScale } from "src/common/constants/cssScale";
-import { CustomStyleProps } from "src/common/interface";
 
-const VideoResultContainer = styled.div<CustomStyleProps>`
+interface IVideoResultContainer {
+    width?: string
+}
+
+const VideoResultContainer = styled.div<IVideoResultContainer>`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

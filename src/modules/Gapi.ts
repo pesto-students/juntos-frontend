@@ -18,7 +18,8 @@ interface ISearchResultData {
     channelName: string,
     views: string,
     postDate: string,
-    imgAlt: string
+    imgAlt: string,
+    videoId: string
 }
 
 class GoogleApi {
@@ -29,7 +30,6 @@ class GoogleApi {
         this.gapi = window.gapi;
     }
 
-    // loadGapiClientAuth2 = async () => {
     loadGapiClientAuth2 = async () => {
         try {
             await new Promise((resolve,reject) => {
@@ -100,7 +100,6 @@ class GoogleApi {
                 "id": videoIds
             })
             let data: ISearchResultData[] = [];
-
             response.result.items.forEach((item: any) => {
                 const humanReadableTime: string = GoogleApi.ISO8601toHumanReadable(item.contentDetails.duration);
                 data.push({
@@ -110,7 +109,8 @@ class GoogleApi {
                     channelName: item.snippet.channelTitle,
                     views: this.viewsFormatter(item.statistics.viewCount),
                     postDate: item.snippet.publishedAt,
-                    imgAlt: item.snippet.title
+                    imgAlt: item.snippet.title,
+                    videoId: item.id
                 })
                 item.contentDetails["durationHR"] = humanReadableTime;
             });

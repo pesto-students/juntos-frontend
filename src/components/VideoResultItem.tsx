@@ -4,14 +4,28 @@ import Moment from 'react-moment';
 import { dropShadow } from "src/common/constants/dropShadow";
 import { colors } from "src/common/constants/colors";
 import { cssScale } from "src/common/constants/cssScale";
-import { CustomStyleProps } from "src/common/interface";
 
 import MusicNote from 'src/assets/serviceProviderLogos/youtube-music-note.svg';
 
-// interface IVideoResultItem {
-//     thumbnail: string;
-//     data: any;
-//   }
+interface IVideoResultItemData {
+    thumbnail: string,
+    title: string,
+    duration: string,
+    channelName: string,
+    views: string,
+    postDate: string,
+    imgAlt: string,
+    videoId: string
+}
+
+interface IVideoResultItem {
+    data: IVideoResultItemData;
+}
+
+interface IContainer{
+    width?: string,
+    height?: string
+}
 
 function truncate(str: string, n: number) {
     if (str.length > n) {
@@ -21,71 +35,66 @@ function truncate(str: string, n: number) {
     }
 };
 
-const Container = styled.div<CustomStyleProps>`
+const Container = styled.div<IContainer>`
     display: flex;
     flex-direction: row;
-    background-color: #181818;
+    background-color: ${colors.codGrey};
     width: ${props => (props.width || 379) + `px`};
     height: ${props => (props.height || 103) + `px`};
-    margin: ${cssScale.c3};
+    margin: ${cssScale.c2};
     box-shadow: ${dropShadow.primary};
     > .result-thumbnail{
         position: relative;
-        border: 0px solid red;
         > .img-thumbnail{
             max-width: 100%;
             max-height: 100%;
-            padding: 4px;
+            padding: ${cssScale.c1};
         }
         > .duration{
-            width: 35px;
-            height: 18px;
-            background-color: rgba(0,0,0,50%);
-            border-radius: 3px;
-            color: white;
+            height: ${cssScale.c5};
+            background-color: ${colors.black50};
+            border-radius: ${cssScale.c1};
+            color: ${colors.white};
             position: absolute;
-            bottom: 2px;
-            right: 4px;
+            padding: ${cssScale.c1};
+            bottom: ${cssScale.c1};
+            right: ${cssScale.c1};
             justify-content: center;
             align-items: center;
             display: flex;
-            font-size: 10px;
+            font-size: ${cssScale.c3};
             font-weight: bold;
         }
     }
     > .result-data{
         flex: 1;
-        border: 0px solid white;
-        padding: 4px;
+        padding: ${cssScale.c1};
         > .data-title{
             color: ${colors.white};
-            font-size: 16px;
-            line-height: 1.5em;
-            height: 3em;
+            font-size: ${cssScale.c4};
+            line-height: ${cssScale.c4};
+            height: ${cssScale.c12};
         }
         > .data-meta {
-            color: #A6A6A6;
-            font-size: 14px;
+            color: ${colors.silverChalice};
+            font-size: ${cssScale.c3};
             > .music-note {
-                width: 14px;
-                padding-left: 2px;
+                width: ${cssScale.c3};
             }
             > .meta-separator {
                 display: inline-flex;
-                width: 4px;
-                height: 4px;
-                background-color: #a6a6a6;
+                width: ${cssScale.c1};
+                height: ${cssScale.c1};
+                background-color: ${colors.silverChalice};
                 border-radius: 50%;
-                margin-left: 4px;
-                margin-right: 4px;
-                margin-bottom: 2px;
+                margin-left: ${cssScale.c1};
+                margin-right: ${cssScale.c1};
             }
         }
     }
-   
   `;
 
-function VideoResultItem(props: any) {
+function VideoResultItem(props: IVideoResultItem) {
     const {data} = props;
 
     return <Container>
@@ -96,7 +105,7 @@ function VideoResultItem(props: any) {
             </div>
         </div>
         <div className="result-data">
-            <div className="data-title">{truncate(data.title, 45)}</div>
+            <div className="data-title">{truncate(data.title, 44)}</div>
             <p className="data-meta">
                 {data.channelName}
                 <img className="music-note" src={MusicNote} alt="music note"/>
