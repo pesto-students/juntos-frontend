@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-import { colors } from "src/common/constants/colors";
-import { dropShadow } from "src/common/constants/dropShadow";
+import { colors, dropShadow } from "src/common/constants";
 
 interface IHighlightContainer {
   flexDirection?: string,

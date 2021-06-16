@@ -1,6 +1,6 @@
-import { cssScale } from "src/common/constants/cssScale";
 import styled, { css } from "styled-components";
-import { colors } from "../common/constants/colors";
+import { cssScale, colors } from "src/common/constants";
+
 interface ButtonProps {
   ghost?: boolean;
 }

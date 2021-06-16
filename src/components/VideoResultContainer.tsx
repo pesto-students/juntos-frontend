@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { cssScale } from "src/common/constants/cssScale";
+import { cssScale } from "src/common/constants";
 
 interface IVideoResultContainer {
     width?: string

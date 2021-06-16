@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import { dropShadow } from "src/common/constants/dropShadow";
-import { cssScale } from "src/common/constants/cssScale";
-import { colors } from "src/common/constants/colors";
+import { cssScale, colors, dropShadow } from "src/common/constants";
 
 interface ITranslucentInput{
   width?: string,

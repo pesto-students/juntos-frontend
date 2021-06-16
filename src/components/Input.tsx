@@ -1,5 +1,4 @@
-import { colors } from "src/common/constants/colors";
-import { cssScale } from "src/common/constants/cssScale";
+import { colors, cssScale } from "src/common/constants";
 import styled from "styled-components";
 
 export default styled.input`

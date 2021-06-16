@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import Moment from 'react-moment';
 
-import { dropShadow } from "src/common/constants/dropShadow";
-import { colors } from "src/common/constants/colors";
-import { cssScale } from "src/common/constants/cssScale";
+import { cssScale, colors, dropShadow } from "src/common/constants";
 import { ISearchResultData } from "src/common/interface";
 
 import MusicNote from 'src/assets/serviceProviderLogos/youtube-music-note.svg';
