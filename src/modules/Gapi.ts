@@ -15,20 +15,20 @@ const {
 
 class GoogleApi {
     
-    gapi: any;
+    static gapi: any;
 
     constructor() {
-        this.gapi = window.gapi;
+        GoogleApi.gapi = window.gapi;
         this.init()
     }
 
     async init(): Promise<void> {
-        this.loadGapiClientAuth2()
-        .then(() => this.authenticate())
-        .then(() => this.loadYoutubeClient());
+        GoogleApi.loadGapiClientAuth2()
+        .then(() => GoogleApi.authenticate())
+        .then(() => GoogleApi.loadYoutubeClient());
     }
 
-    async loadGapiClientAuth2(): Promise<void> {
+    static async loadGapiClientAuth2(): Promise<void> {
         try {
             await new Promise((resolve,reject) => {
                 this.gapi.load('client:auth2', resolve);
@@ -39,7 +39,7 @@ class GoogleApi {
         }
     }
 
-    async gapiAuth2Init(): Promise<void> {
+    static async gapiAuth2Init(): Promise<void> {
         try {
             await this.gapi.auth2.init({client_id: REACT_APP_GOOGLE_OAUTH_CLIENT_ID});
         } catch(err){
@@ -47,7 +47,7 @@ class GoogleApi {
         }
     }
 
-    async authenticate(): Promise<void> {
+    static async authenticate(): Promise<void> {
         try {
             await this.gapi.auth2.getAuthInstance()
             .signIn({scope: REACT_APP_GOOGLE_AUTH_SCOPE_URL})
@@ -56,7 +56,7 @@ class GoogleApi {
         }
     }
 
-    async loadYoutubeClient(): Promise<void> {
+    static async loadYoutubeClient(): Promise<void> {
         try {
             this.gapi.client.setApiKey(REACT_APP_GOOGLE_YOUTUBE_API_KEY);
             await this.gapi.client.load(REACT_APP_GOOGLE_YOUTUBE_API_URL);
@@ -67,7 +67,7 @@ class GoogleApi {
 
     async searchYoutubeList(searchTerm: string): Promise<string[]> {
         try {
-            const response = await this.gapi.client.youtube.search.list({
+            const response = await GoogleApi.gapi.client.youtube.search.list({
                 "part": [
                     "snippet"
                 ],
@@ -87,7 +87,7 @@ class GoogleApi {
     
     async searchYoutubeVideos(videoIds: string[]): Promise<ISearchResultData[]> {
         try {
-            const response = await this.gapi.client.youtube.videos.list({
+            const response = await GoogleApi.gapi.client.youtube.videos.list({
                 "part": [
                     "snippet",
                     "statistics",
@@ -144,7 +144,7 @@ class GoogleApi {
        }
    
        return H  + M + ':' + S ;
-     }
+    }
 
     static viewsFormatter(num: number): string {
         if (num >= 1000000000) {
