@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { IParams, ISearchResultData } from "src/common/interface";
 import {
@@ -21,10 +21,6 @@ GoogleApiClient.loadGapiClientAuth2()
 
 const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () => {
 
-  useEffect(() => {
-    
-  }, [])
-
   const [searchKeyword, setSearchKeyword] = useState<string>('');
   const [searchResults, setSearchResults] = useState<ISearchResultData[]>([]); 
   
@@ -44,7 +40,6 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () =>
         return; 
       }
       setSearchResults(results);
-      console.log(results)
   }
 
   const renderSearchResults = () => {
