@@ -1,9 +1,4 @@
 /**
- * React and react packages
- */
-import Moment from 'react-moment';
-
-/**
  * Constants
  */
 import { musicNote } from "src/common/constants"
@@ -18,7 +13,7 @@ import {
 /**
  * Utilities
  */
-import { truncate } from "src/SelectVideo/VideoResultItem.utils";
+import { fromNow, truncate } from "src/SelectVideo/VideoResultItem.utils";
 
 /**
  * Interfaces
@@ -52,7 +47,7 @@ function VideoResultItem(props: IVideoResultItem) {
             <p className="data-meta">
                 {data.views} views
                 <span className="meta-separator"></span>
-                <Moment fromNow>{data.postDate}</Moment>
+                {fromNow(data.postDate)}
             </p>
         </div>
     </VideoResultItemContainer>
