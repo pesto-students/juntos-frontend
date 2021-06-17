@@ -75,24 +75,47 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () =>
   }
 
   async function getSearchResults(searchKeyword: string) {
+    setLoadingResults(true);
+    if(searchKeyword.length === 0) {
+      // To be changed to Toast message later
+      alert(errorMessages.EMPTY_INPUT)
+      setLoadingResults(false);
+      return;
+    }
+
+    try {
+      const videoIds = await GoogleApiClient.searchYoutubeList(searchKeyword);
+      const results: ISearchResultData[] | any = await GoogleApiClient.searchYoutubeVideos(videoIds);
+      setSearchResults(results);
+    } catch(err){
+      console.log('Catch here',err)
+    }
+  }
+
+  async function getSearchResultsOld(searchKeyword: string) {
       setLoadingResults(true);
       if(searchKeyword.length === 0) {
         // To be changed to Toast message later
         alert(errorMessages.SOMETHING_WENT_WRONG)
+        setLoadingResults(false);
         return
       }
       const videoIds = await GoogleApiClient.searchYoutubeList(searchKeyword);
-      if(!videoIds) {
+      console.log(videoIds)
+      if(!videoIds || videoIds.length === 0) {
         // To be changed to Toast message later
         alert(errorMessages.SOMETHING_WENT_WRONG)
+        setLoadingResults(false);
         return; 
       }
       const results: ISearchResultData[] | any = await GoogleApiClient.searchYoutubeVideos(videoIds);
-      if(!results) {
+      if(!results || results.length === 0) {
         // To be changed to Toast message later
         alert(errorMessages.SOMETHING_WENT_WRONG)
+        setLoadingResults(false);
         return; 
       }
+
       if (results.status && results.status === 400){
         setNoResults(true);
         setSearchResults([]);

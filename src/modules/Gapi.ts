@@ -36,49 +36,48 @@ class GoogleApi {
     private gapi: any;
 
     constructor() {
+        console.log('GoogleApi.contructor() called')
         this.gapi = window.gapi;
         this.init()
     }
 
-    public async init(): Promise<void | any> {
-        this.loadAndAuthenticateGapiClient()
-        .then(() => this.loadYoutubeClient())
-        .catch((err) => {
+    public async init() {
+        try {
+            await this.loadAndAuthenticateGapiClient()
+            await this.loadYoutubeClient()
+        } catch(err){
+            console.log('Error here: ', err)
             alert(errorMessages.SOMETHING_WENT_WRONG)
             return err;
-        });
+        };
     }
 
-    private async loadAndAuthenticateGapiClient(): Promise<void | any> {
+    private async loadAndAuthenticateGapiClient(): Promise<void> {
         try {
-            const loadClient = await this.gapi.load('client:auth2');
-            const initClient = await this.gapi.auth2.init({client_id: REACT_APP_GOOGLE_OAUTH_CLIENT_ID});
-            const getAuthInstance = await this.gapi.auth2.getAuthInstance().signIn({scope: REACT_APP_GOOGLE_AUTH_SCOPE_URL});
-
-            return Promise.all([
-                loadClient,
-                initClient,
-                getAuthInstance
-            ])
+            await this.gapi.load('client:auth2');
+            await this.gapi.auth2.init({client_id: REACT_APP_GOOGLE_OAUTH_CLIENT_ID});
+            await this.gapi.auth2.getAuthInstance().signIn({scope: REACT_APP_GOOGLE_AUTH_SCOPE_URL});
+            return Promise.resolve()
         } catch(err){
-            return err;
+            return Promise.reject(err);
         }
     }
 
-    private async loadYoutubeClient(): Promise<void | any> {
+    private async loadYoutubeClient(): Promise<void> {
         try {
             this.gapi.client.setApiKey(REACT_APP_GOOGLE_YOUTUBE_API_KEY);
-            return await this.gapi.client.load(REACT_APP_GOOGLE_YOUTUBE_API_URL);
+            await this.gapi.client.load(REACT_APP_GOOGLE_YOUTUBE_API_URL);
+            return Promise.resolve()
         } catch(err) {
-            return err;
+            return Promise.reject(err);
         }
     }
 
-    public async searchYoutubeList(searchTerm: string): Promise<string[] | any> {
+    public async searchYoutubeList(searchTerm: string): Promise<string[]> {
         try {
             const response = await this.gapi.client.youtube.search.list({
                 "part": [
-                    "snippet"
+                    "snippets"
                 ],
                 "q": searchTerm
             })
@@ -87,14 +86,14 @@ class GoogleApi {
             response.result.items.forEach((item: any) => {
                 videoIds.push(item.id.videoId)
             });
-
-            return videoIds;  
+            return Promise.reject('err');
+            // return videoIds;  
         } catch(err) {
-            return [];
+            return Promise.reject(err);
         }
     }
     
-    public async searchYoutubeVideos(videoIds: string[]): Promise<ISearchResultData[] | any> {
+    public async searchYoutubeVideos(videoIds: string[]): Promise<ISearchResultData[]> {
         try {
             const response = await this.gapi.client.youtube.videos.list({
                 "part": [
@@ -122,7 +121,7 @@ class GoogleApi {
             });
             return data;  
         } catch(err) {
-            return err;
+            return Promise.reject(err);
         }
     }
 }
