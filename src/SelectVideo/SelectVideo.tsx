@@ -53,6 +53,7 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () =>
   const [searchKeyword, setSearchKeyword] = useState<string>('');
   const [searchResults, setSearchResults] = useState<ISearchResultData[] | any>([]); 
   const [noResults, setNoResults] = useState<boolean>(false); 
+  const [loadingResults, setLoadingResults] = useState<boolean>(false); 
   
   function handleKeyDown(event: React.KeyboardEvent) {
     if (event.key === 'Enter') {
@@ -73,6 +74,7 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () =>
   }
 
   async function getSearchResults(searchKeyword: string) {
+      setLoadingResults(true);
       if(searchKeyword.length === 0) {
         // To be changed to Toast message later
         alert(errorMessages.SOMETHING_WENT_WRONG)
@@ -93,11 +95,18 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () =>
       if (results.status && results.status === 400){
         setNoResults(true);
         setSearchResults([]);
+        setLoadingResults(false);
       }
       setSearchResults(results);
+      setLoadingResults(false);
   }
 
   const renderSearchResults = () => {
+
+    if(loadingResults) {
+      // show placeholder
+    }
+
     if (noResults){
       return <p>No Results</p>
     }
