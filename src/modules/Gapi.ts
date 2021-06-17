@@ -10,6 +10,7 @@ import {
     ISO8601toHumanReadable,
     viewsFormatter
 } from "src/modules/Gapi.utils"
+import { errorMessages } from "src/common/constants";
 
 /**
  * Referencing global window object
@@ -32,22 +33,23 @@ const {
 
 class GoogleApi {
     
-    gapi: any;
+    private gapi: any;
 
     constructor() {
         this.gapi = window.gapi;
         this.init()
     }
 
-    async init(): Promise<void | any> {
+    public async init(): Promise<void | any> {
         this.loadAndAuthenticateGapiClient()
         .then(() => this.loadYoutubeClient())
         .catch((err) => {
+            alert(errorMessages.SOMETHING_WENT_WRONG)
             return err;
         });
     }
 
-    async loadAndAuthenticateGapiClient(): Promise<void | any> {
+    private async loadAndAuthenticateGapiClient(): Promise<void | any> {
         try {
             const loadClient = await this.gapi.load('client:auth2');
             const initClient = await this.gapi.auth2.init({client_id: REACT_APP_GOOGLE_OAUTH_CLIENT_ID});
@@ -63,7 +65,7 @@ class GoogleApi {
         }
     }
 
-    async loadYoutubeClient(): Promise<void | any> {
+    private async loadYoutubeClient(): Promise<void | any> {
         try {
             this.gapi.client.setApiKey(REACT_APP_GOOGLE_YOUTUBE_API_KEY);
             return await this.gapi.client.load(REACT_APP_GOOGLE_YOUTUBE_API_URL);
@@ -72,7 +74,7 @@ class GoogleApi {
         }
     }
 
-    async searchYoutubeList(searchTerm: string): Promise<string[] | any> {
+    public async searchYoutubeList(searchTerm: string): Promise<string[] | any> {
         try {
             const response = await this.gapi.client.youtube.search.list({
                 "part": [
@@ -92,7 +94,7 @@ class GoogleApi {
         }
     }
     
-    async searchYoutubeVideos(videoIds: string[]): Promise<ISearchResultData[] | any> {
+    public async searchYoutubeVideos(videoIds: string[]): Promise<ISearchResultData[] | any> {
         try {
             const response = await this.gapi.client.youtube.videos.list({
                 "part": [
