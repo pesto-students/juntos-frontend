@@ -1,69 +1,108 @@
+/**
+ * React and packages
+ */
 import React, {useState} from "react";
-import styled from "styled-components";
 import { RouteComponentProps } from "react-router-dom";
-import { IParams, ISearchResultData } from "src/common/interface";
-import { cssScale } from "src/common/constants";
+
+/**
+ * Internal Modules
+ */
+ import GoogleApi from "src/modules/Gapi";
+
+/**
+ * Common components
+ */
 import {
   ViewportSection,
   HighlightContainer,
-  TranslucentInput,
-  MediaServiceProviderBox,
-  VideoResultContainer,
-  VideoResultItem,
   Button,
 } from "src/components";
-import YoutubeLogo from 'src/assets/serviceProviderLogos/youtube_white.svg';
-import GoogleApi from "src/modules/Gapi";
 
-interface ICarouselContainer {
-  width?: string,
-  height?: string
-}
+/**
+ * Feature specific styled components
+ */
+import {
+  CarouselContainer,
+  VideoResultContainer,
+  TranslucentInput
+} from "src/SelectVideo/SelectVideo.styles";
 
-const serviceProviderLogoWidth = 122;
-const carouselContainerDefaultWidth = 500;
-const carouselContainerDefaultHeight = 130;
+/**
+ * Feature specific local components
+ */
+import MediaServiceProviderBox from "src/SelectVideo/MediaServiceProviderBox";
+import VideoResultItem from "src/SelectVideo/VideoResultItem";
 
-const CarouselContainer = styled.div<ICarouselContainer>`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: ${props => (props.width || carouselContainerDefaultWidth) + `px`};
-    height: ${props => (props.height || carouselContainerDefaultHeight) + `px`};
-    margin: ${cssScale.c2};
-  `;
+/**
+ * Interfaces
+ */
+import { IParams, ISearchResultData } from "src/common/interface";
 
+/**
+ * Constants
+ */
+import { errorMessages } from "src/common/constants"
 const GoogleApiClient = new GoogleApi();
 
+/**
+ * SelectVideo Component
+ * @returns <SelectVideo/>
+ */
 const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () => {
 
   const [searchKeyword, setSearchKeyword] = useState<string>('');
-  const [searchResults, setSearchResults] = useState<ISearchResultData[]>([]); 
+  const [searchResults, setSearchResults] = useState<ISearchResultData[] | any>([]); 
+  const [noResults, setNoResults] = useState<boolean>(false); 
   
-  const handleKeyDown = async (event: React.KeyboardEvent) => {
+  function handleKeyDown(event: React.KeyboardEvent) {
     if (event.key === 'Enter') {
-      getSearchResults(searchKeyword);
+      if(searchKeyword.length === 0) {
+        alert(errorMessages.EMPTY_INPUT)
+      } else {
+        getSearchResults(searchKeyword);
+      }
     }
   }
 
-  const getSearchResults = async (searchKeyword: string) => {
+  function handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
+    let value = event.target.value;
+    setSearchKeyword(value);
+    if (value.length === 0) {
+      setNoResults(false);
+    }
+  }
+
+  async function getSearchResults(searchKeyword: string) {
+      if(searchKeyword.length === 0) {
+        // To be changed to Toast message later
+        alert(errorMessages.SOMETHING_WENT_WRONG)
+        return
+      }
       const videoIds = await GoogleApiClient.searchYoutubeList(searchKeyword);
       if(!videoIds) {
+        // To be changed to Toast message later
+        alert(errorMessages.SOMETHING_WENT_WRONG)
         return; 
       }
-      const results: ISearchResultData[] = await GoogleApiClient.searchYoutubeVideos(videoIds);
+      const results: ISearchResultData[] | any = await GoogleApiClient.searchYoutubeVideos(videoIds);
       if(!results) {
+        // To be changed to Toast message later
+        alert(errorMessages.SOMETHING_WENT_WRONG)
         return; 
+      }
+      if (results.status && results.status === 400){
+        setNoResults(true);
+        setSearchResults([]);
       }
       setSearchResults(results);
   }
 
   const renderSearchResults = () => {
-
-    if (searchResults.length === 0){
+    if (noResults){
       return <p>No Results</p>
     }
     
+    if (searchResults.length)
     return (
       <VideoResultContainer>
         {searchResults.map((videoData: ISearchResultData) => {
@@ -81,14 +120,12 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () =>
         alignItems={`center`}
       >
         <CarouselContainer>
-          <MediaServiceProviderBox>
-            <img width={serviceProviderLogoWidth} src={YoutubeLogo} alt={'youtube'}/>
-          </MediaServiceProviderBox>
+          <MediaServiceProviderBox serviceProvider={'youtube'}/>
         </CarouselContainer>
         <TranslucentInput 
           placeholder="Search Video"
           onKeyDown={handleKeyDown}
-          onChange={event => setSearchKeyword(event.target.value)}
+          onChange={event => handleOnChange(event)}
         />
         <Button onClick={() => getSearchResults(searchKeyword)}>Search</Button>
         {renderSearchResults()}

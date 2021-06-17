@@ -1,13 +1,15 @@
 import styled from "styled-components";
 
-const defaultWidth = '100wh';
-const defaultHeight = '100vh';
+import {
+  viewportSectionWidth,
+  viewportSectionHeight
+} from "src/common/constants";
 
 const ViewportSection = styled.section`
     display: flex;
     align-items: center;
-    min-width: ${defaultWidth};
-    min-height: ${defaultHeight};
+    min-width: ${viewportSectionWidth};
+    min-height: ${viewportSectionHeight};
   `;
 
 export default ViewportSection;  

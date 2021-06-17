@@ -1,11 +1,28 @@
+/**
+ * Interfaces
+ */
 import { ISearchResultData } from "src/common/interface";
 
+/**
+ * Utilities
+ */
+import {
+    ISO8601toHumanReadable,
+    viewsFormatter
+} from "src/modules/Gapi.utils"
+
+/**
+ * Referencing global window object
+ */
 declare global {
   interface Window {
     gapi: any; 
   }
 }
 
+/**
+ * Constants
+ */
 const {
     REACT_APP_GOOGLE_OAUTH_CLIENT_ID,
     REACT_APP_GOOGLE_YOUTUBE_API_KEY,
@@ -15,59 +32,49 @@ const {
 
 class GoogleApi {
     
-    static gapi: any;
+    gapi: any;
 
     constructor() {
-        GoogleApi.gapi = window.gapi;
+        this.gapi = window.gapi;
         this.init()
     }
 
-    async init(): Promise<void> {
-        GoogleApi.loadGapiClientAuth2()
-        .then(() => GoogleApi.authenticate())
-        .then(() => GoogleApi.loadYoutubeClient());
+    async init(): Promise<void | any> {
+        this.loadAndAuthenticateGapiClient()
+        .then(() => this.loadYoutubeClient())
+        .catch((err) => {
+            return err;
+        });
     }
 
-    static async loadGapiClientAuth2(): Promise<void> {
+    async loadAndAuthenticateGapiClient(): Promise<void | any> {
         try {
-            await new Promise((resolve,reject) => {
-                this.gapi.load('client:auth2', resolve);
-            });
-            await this.gapiAuth2Init()
+            const loadClient = await this.gapi.load('client:auth2');
+            const initClient = await this.gapi.auth2.init({client_id: REACT_APP_GOOGLE_OAUTH_CLIENT_ID});
+            const getAuthInstance = await this.gapi.auth2.getAuthInstance().signIn({scope: REACT_APP_GOOGLE_AUTH_SCOPE_URL});
+
+            return Promise.all([
+                loadClient,
+                initClient,
+                getAuthInstance
+            ])
         } catch(err){
-            Promise.reject(err);
+            return err;
         }
     }
 
-    static async gapiAuth2Init(): Promise<void> {
-        try {
-            await this.gapi.auth2.init({client_id: REACT_APP_GOOGLE_OAUTH_CLIENT_ID});
-        } catch(err){
-            Promise.reject(err);
-        }
-    }
-
-    static async authenticate(): Promise<void> {
-        try {
-            await this.gapi.auth2.getAuthInstance()
-            .signIn({scope: REACT_APP_GOOGLE_AUTH_SCOPE_URL})
-        } catch(err){
-            Promise.reject(err);
-        }
-    }
-
-    static async loadYoutubeClient(): Promise<void> {
+    async loadYoutubeClient(): Promise<void | any> {
         try {
             this.gapi.client.setApiKey(REACT_APP_GOOGLE_YOUTUBE_API_KEY);
-            await this.gapi.client.load(REACT_APP_GOOGLE_YOUTUBE_API_URL);
+            return await this.gapi.client.load(REACT_APP_GOOGLE_YOUTUBE_API_URL);
         } catch(err) {
-            Promise.reject(err);
+            return err;
         }
     }
 
-    async searchYoutubeList(searchTerm: string): Promise<string[]> {
+    async searchYoutubeList(searchTerm: string): Promise<string[] | any> {
         try {
-            const response = await GoogleApi.gapi.client.youtube.search.list({
+            const response = await this.gapi.client.youtube.search.list({
                 "part": [
                     "snippet"
                 ],
@@ -85,9 +92,9 @@ class GoogleApi {
         }
     }
     
-    async searchYoutubeVideos(videoIds: string[]): Promise<ISearchResultData[]> {
+    async searchYoutubeVideos(videoIds: string[]): Promise<ISearchResultData[] | any> {
         try {
-            const response = await GoogleApi.gapi.client.youtube.videos.list({
+            const response = await this.gapi.client.youtube.videos.list({
                 "part": [
                     "snippet",
                     "statistics",
@@ -98,13 +105,13 @@ class GoogleApi {
             })
             let data: ISearchResultData[] = [];
             response.result.items.forEach((item: any) => {
-                const humanReadableTime: string = GoogleApi.ISO8601toHumanReadable(item.contentDetails.duration);
+                const humanReadableTime: string = ISO8601toHumanReadable(item.contentDetails.duration);
                 data.push({
                     thumbnail: item.snippet.thumbnails.medium.url,
                     title: item.snippet.title,
                     duration: humanReadableTime,
                     channelName: item.snippet.channelTitle,
-                    views: GoogleApi.viewsFormatter(item.statistics.viewCount),
+                    views: viewsFormatter(item.statistics.viewCount),
                     postDate: item.snippet.publishedAt,
                     imgAlt: item.snippet.title,
                     videoId: item.id
@@ -113,51 +120,9 @@ class GoogleApi {
             });
             return data;  
         } catch(err) {
-            return [];
+            return err;
         }
     }
-    
-    static getDUrationByUnit(input: string, unit: string): string{
-        let index = input.indexOf(unit);
-        let output = "00";
-        
-        if(index < 0){
-            return output;
-        }
-   
-        if(isNaN(parseInt(input.charAt(index-2)))) {
-            return '0' + input.charAt(index-1);
-        } else {
-            return input.charAt(index-2) + input.charAt(index-1);
-        }
-    }
-
-    static ISO8601toHumanReadable(input:string): string {
-        let H = this.getDUrationByUnit(input, 'H');
-        let M = this.getDUrationByUnit(input, 'M');
-        let S = this.getDUrationByUnit(input, 'S');
-   
-       if (H === "00") {
-         H = "";
-       } else {
-         H += ":"
-       }
-   
-       return H  + M + ':' + S ;
-    }
-
-    static viewsFormatter(num: number): string {
-        if (num >= 1000000000) {
-           return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
-        }
-        if (num >= 1000000) {
-           return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-        }
-        if (num >= 1000) {
-           return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
-        }
-        return num.toString();
-   }
 }
 
 export default GoogleApi;

@@ -40,7 +40,7 @@ const Login: React.FunctionComponent<RouteComponentProps<IParams>> = ({
           name="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Link to={routes.FORGOT_PASSWORD}>Forgot your password?</Link>
+        <Link to={routes.FORGET_PASSWORD}>Forgot your password?</Link>
         <Button data-testid="signInBtn" type="submit" onClick={handleSubmit}>
           Sign In
         </Button>
