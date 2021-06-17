@@ -88,41 +88,8 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () =>
       const results: ISearchResultData[] | any = await GoogleApiClient.searchYoutubeVideos(videoIds);
       setSearchResults(results);
     } catch(err){
-      console.log('Catch here',err)
+      alert(errorMessages.SOMETHING_WENT_WRONG)
     }
-  }
-
-  async function getSearchResultsOld(searchKeyword: string) {
-      setLoadingResults(true);
-      if(searchKeyword.length === 0) {
-        // To be changed to Toast message later
-        alert(errorMessages.SOMETHING_WENT_WRONG)
-        setLoadingResults(false);
-        return
-      }
-      const videoIds = await GoogleApiClient.searchYoutubeList(searchKeyword);
-      console.log(videoIds)
-      if(!videoIds || videoIds.length === 0) {
-        // To be changed to Toast message later
-        alert(errorMessages.SOMETHING_WENT_WRONG)
-        setLoadingResults(false);
-        return; 
-      }
-      const results: ISearchResultData[] | any = await GoogleApiClient.searchYoutubeVideos(videoIds);
-      if(!results || results.length === 0) {
-        // To be changed to Toast message later
-        alert(errorMessages.SOMETHING_WENT_WRONG)
-        setLoadingResults(false);
-        return; 
-      }
-
-      if (results.status && results.status === 400){
-        setNoResults(true);
-        setSearchResults([]);
-        setLoadingResults(false);
-      }
-      setSearchResults(results);
-      setLoadingResults(false);
   }
 
   const renderSearchResults = () => {
