@@ -16,6 +16,7 @@ import {
   ViewportSection,
   HighlightContainer,
   Button,
+  SimpleSpinner
 } from "src/components";
 
 /**
@@ -41,7 +42,7 @@ import { IParams, ISearchResultData } from "src/common/interface";
 /**
  * Constants
  */
-import { errorMessages } from "src/common/constants"
+import { errorMessages, Spinner } from "src/common/constants"
 const GoogleApiClient = new GoogleApi();
 
 /**
@@ -104,9 +105,9 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps<IParams>> = () =>
   const renderSearchResults = () => {
 
     if(loadingResults) {
-      // show placeholder
+      return <SimpleSpinner/>
     }
-
+    
     if (noResults){
       return <p>No Results</p>
     }
