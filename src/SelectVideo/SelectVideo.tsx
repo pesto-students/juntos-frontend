@@ -42,7 +42,7 @@ import { IParams, ISearchResultData } from "src/common/interface";
 /**
  * Constants
  */
-import { errorMessages, Spinner } from "src/common/constants"
+import { errorMessages } from "src/common/constants"
 const GoogleApiClient = new GoogleApi();
 
 /**
