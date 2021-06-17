@@ -86,8 +86,7 @@ class GoogleApi {
             response.result.items.forEach((item: any) => {
                 videoIds.push(item.id.videoId)
             });
-            return Promise.reject('err');
-            // return videoIds;  
+            return videoIds;  
         } catch(err) {
             return Promise.reject(err);
         }
