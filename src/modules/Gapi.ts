@@ -41,7 +41,7 @@ class GoogleApi {
         this.init()
     }
 
-    public async init() {
+    async init() {
         try {
             await this.loadAndAuthenticateGapiClient()
             await this.loadYoutubeClient()
@@ -73,7 +73,7 @@ class GoogleApi {
         }
     }
 
-    public async searchYoutubeList(searchTerm: string): Promise<string[]> {
+    async searchYoutubeList(searchTerm: string): Promise<string[]> {
         try {
             const response = await this.gapi.client.youtube.search.list({
                 "part": [
@@ -93,7 +93,7 @@ class GoogleApi {
         }
     }
     
-    public async searchYoutubeVideos(videoIds: string[]): Promise<ISearchResultData[]> {
+    async searchYoutubeVideos(videoIds: string[]): Promise<ISearchResultData[]> {
         try {
             const response = await this.gapi.client.youtube.videos.list({
                 "part": [
