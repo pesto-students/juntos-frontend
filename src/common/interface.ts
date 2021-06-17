@@ -9,3 +9,8 @@ export default interface IRoute {
 export interface IParams {
   id?: string | undefined;
 }
+
+export interface AuthFormData {
+  email: string;
+  password: string;
+}
