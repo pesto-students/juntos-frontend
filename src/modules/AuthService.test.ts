@@ -12,9 +12,12 @@ jest.mock("firebase", () => ({
           signInWithEmailAndPassword: () =>
             Promise.resolve({ user: firebaseUser }),
           createUserWithEmailAndPassword: () =>
-            Promise.resolve({ user: firebaseUser }),
+            Promise.resolve({
+              user: { ...firebaseUser, updateProfile: () => Promise.resolve() },
+            }),
           sendPasswordResetEmail: () => Promise.resolve(),
           signOut: () => Promise.resolve(),
+          updateProfile: () => Promise.resolve(),
         };
       },
     };

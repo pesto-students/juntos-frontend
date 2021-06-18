@@ -13,7 +13,7 @@ import {
 import * as ActionCreators from "src/context/ActionCreators";
 import { rootReducer } from "src/context/reducer";
 import { AuthFormData } from "src/common/interface";
-import { auth } from "src/modules/AuthService";
+import { onAuthStateChanged } from "src/modules/AuthService";
 import { User } from "src/modules/User";
 
 const initialState: GlobalState = {
@@ -45,7 +45,9 @@ export const GlobalProvider: React.FC = ({ children }) => {
   );
 
   useEffect(() => {
-    const subscribeAuthChange = auth.onAuthStateChanged((user) => {
+    const subscribeAuthChange = onAuthStateChanged((user) => {
+      // to avoid setting user if no name available
+      if (user && !user?.displayName) return;
       dispatch({
         type: Types.SET_USER,
         payload: user ? new User(user) : undefined,

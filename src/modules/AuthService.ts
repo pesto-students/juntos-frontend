@@ -23,17 +23,23 @@ const firebaseConfig = {
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
-export const auth = firebaseApp.auth();
+const auth = firebaseApp.auth();
 
-export function signUp({ email, password }: AuthFormData): Promise<User> {
-  return auth
-    .createUserWithEmailAndPassword(email, password)
-    .then(({ user }) => {
-      if (user === null) {
-        throw new Error("sign-up failure");
-      }
-      return new User(user);
-    });
+export async function signUp({
+  name,
+  email,
+  password,
+}: AuthFormData): Promise<User> {
+  const UserCredentials = await auth.createUserWithEmailAndPassword(
+    email,
+    password
+  );
+  const { user } = UserCredentials;
+  if (user === null) {
+    throw new Error("sign-up failure");
+  }
+  await user.updateProfile({ displayName: name });
+  return new User(user);
 }
 
 export function signIn({ email, password }: AuthFormData): Promise<User> {
@@ -51,4 +57,10 @@ export function requestPasswordReset(email: string): Promise<void> {
 
 export function signOut(): Promise<void> {
   return auth.signOut();
+}
+
+export function onAuthStateChanged(
+  listener: (a: firebase.User | null) => void
+) {
+  return auth.onAuthStateChanged(listener);
 }
