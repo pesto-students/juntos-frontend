@@ -7,6 +7,7 @@ export default interface IRoute {
 }
 
 export interface AuthFormData {
+  name?: string;
   email: string;
   password: string;
 }
