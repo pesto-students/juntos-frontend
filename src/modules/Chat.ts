@@ -12,17 +12,17 @@ export class Chat {
   private channel: Socket;
 
   constructor(user: User, roomId: string, channel: Socket) {
+    channel.emit("joinRoom", { roomId, user: user.getProfile() });
     this.user = user;
     this.roomId = roomId;
     this.channel = channel;
   }
 
   async sendMessage(message: string) {
-    const userToken: string = await this.user.getToken();
     this.channel.emit("postChatMessage", {
       message,
       roomId: this.roomId,
-      user: userToken,
+      user: this.user.getProfile(),
     });
   }
 
@@ -41,5 +41,9 @@ export class Chat {
         }
       );
     });
+  }
+
+  receiveMessages(listener: (data: { message: string; user: string }) => void) {
+    return this.channel.on("receiveChatMessage", listener);
   }
 }

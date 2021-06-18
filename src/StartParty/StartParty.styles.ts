@@ -1,0 +1,22 @@
+import { colors } from "src/common/constants/colors";
+import { cssScale } from "src/common/constants/cssScale";
+import styled from "styled-components";
+
+export const PartyWrapper = styled.div`
+  width: 100%;
+`;
+
+export const VideoWrapper = styled.div`
+  width: 80%;
+  display: inline-block;
+  text-align: center;
+`;
+
+export const ChatWrapper = styled.div`
+  width: 20%;
+  height: 100vh;
+  display: inline-block;
+  background-color: ${colors.brown1};
+  padding: ${cssScale.c4};
+  padding-bottom: ${cssScale.c1};
+`;

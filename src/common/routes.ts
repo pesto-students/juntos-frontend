@@ -2,6 +2,7 @@ import React from "react";
 
 import IRoute from "src/common/interface";
 import { routes } from "src/common/constants/pageRoutes";
+import StartParty from "src/StartParty/StartParty";
 
 //Lazy routes
 const HomePage = React.lazy(() => import("src/Home/Home"));
@@ -27,6 +28,11 @@ export const userRoutes: IRoute[] = [
   {
     path: routes.ABOUT,
     component: AboutPage,
+    exact: true,
+  },
+  {
+    path: routes.START_PARTY,
+    component: StartParty,
     exact: true,
   },
   {

@@ -1,0 +1,40 @@
+.buttonInside {
+  position: relative;
+}
+.buttonInsideInput {
+  position: absolute;
+  right: 0px;
+  top: 16px;
+  border: none;
+  height: 20px;
+  width: 60px;
+  border-radius: 4px;
+  outline: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.chatContent {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chatBox {
+  /* height: 96vh; */
+  overflow: scroll;
+}
+
+.messageItem {
+  margin-bottom: 8px;
+}
+
+.userText {
+  color: #00d9b1;
+  font-weight: bold;
+}
+
+.chatText {
+  color: white;
+}
