@@ -1,24 +1,28 @@
-.buttonInside {
+.ChatInputWrapper {
   position: relative;
 }
+
 .buttonInsideInput {
+  background: url(../assets/icons/send.png) no-repeat;
+  background-size: contain;
   position: absolute;
   right: 0px;
-  top: 16px;
-  border: none;
+  top: 18px;
   height: 20px;
-  width: 60px;
-  border-radius: 4px;
-  outline: none;
-  font-weight: bold;
+  width: 32px;
   cursor: pointer;
+}
+
+.buttonInsideInput:hover {
+  background-image: url(../assets/icons/sendHighlight.png);
 }
 
 .chatContent {
   display: flex;
-  height: 100%;
+  height: calc(100% - 36px);
   flex-direction: column;
   justify-content: space-between;
+  padding: 8px 16px 0;
 }
 
 .chatBox {
@@ -28,6 +32,7 @@
 
 .messageItem {
   margin-bottom: 8px;
+  word-break: break-word;
 }
 
 .userText {
@@ -37,4 +42,11 @@
 
 .chatText {
   color: white;
+}
+
+.chatInfo {
+  background: #004a93;
+  color: white;
+  padding: 8px;
+  font-weight: bold;
 }

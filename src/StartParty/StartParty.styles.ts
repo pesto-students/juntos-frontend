@@ -17,6 +17,5 @@ export const ChatWrapper = styled.div`
   height: 100vh;
   display: inline-block;
   background-color: ${colors.brown1};
-  padding: ${cssScale.c4};
   padding-bottom: ${cssScale.c1};
 `;
