@@ -9,7 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.render(
-  <React.Fragment>
+  <React.StrictMode>
     <GlobalStyle />
     <BrowserRouter>
       <GlobalProvider>
@@ -27,7 +27,7 @@ ReactDOM.render(
         />
       </GlobalProvider>
     </BrowserRouter>
-  </React.Fragment>,
+  </React.StrictMode>,
   document.getElementById("root")
 );
 
