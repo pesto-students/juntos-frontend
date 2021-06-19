@@ -1,7 +1,6 @@
 import { AuthFormData } from "src/common/interface";
 import { Dispatch, Types } from "src/context/context.interface";
 import { signUp, signIn, signOut } from "src/modules/AuthService";
-import { toast } from "react-toastify";
 
 export const register = async (dispatch: Dispatch, payload: AuthFormData) => {
   try {
