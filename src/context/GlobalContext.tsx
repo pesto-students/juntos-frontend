@@ -20,10 +20,10 @@ const initialState: GlobalState = {
   loading: true,
 };
 const GlobalContext = createContext<{
-  state: GlobalState;
+  globalState: GlobalState;
   actions?: ContextActions;
 }>({
-  state: initialState,
+  globalState: initialState,
 });
 
 export function useAuth() {
@@ -31,7 +31,7 @@ export function useAuth() {
 }
 
 export const GlobalProvider: React.FC = ({ children }) => {
-  const [state, dispatch] = useReducer(rootReducer, initialState);
+  const [globalState, dispatch] = useReducer(rootReducer, initialState);
 
   const actions = useMemo<ContextActions>(
     () => ({
@@ -45,7 +45,7 @@ export const GlobalProvider: React.FC = ({ children }) => {
   );
 
   useEffect(() => {
-    const subscribeAuthChange = onAuthStateChanged((user) => {
+    const unsubscribeAuthChange = onAuthStateChanged((user) => {
       // to avoid setting user if no name available
       if (user && !user?.displayName) return;
       dispatch({
@@ -53,11 +53,11 @@ export const GlobalProvider: React.FC = ({ children }) => {
         payload: user ? new User(user) : undefined,
       });
     });
-    return subscribeAuthChange;
+    return unsubscribeAuthChange;
   }, []);
 
   return (
-    <GlobalContext.Provider value={{ state, actions }}>
+    <GlobalContext.Provider value={{ globalState, actions }}>
       {children}
     </GlobalContext.Provider>
   );

@@ -10,12 +10,12 @@ interface IPage {
 const HomePage: React.FunctionComponent<IPage & RouteComponentProps> = ({
   name,
 }) => {
-  const { state, actions } = useAuth();
+  const { globalState, actions } = useAuth();
 
   return (
     <div>
       <p>{name}</p>
-      <p>Welcome {state.user?.getProfile().email}</p>
+      <p>Welcome {globalState.user?.getProfile().email}</p>
       <Link to="/about">Go to the About page!</Link>
       <Button onClick={actions?.signOut}>Logout</Button>
     </div>

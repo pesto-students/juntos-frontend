@@ -7,33 +7,27 @@ import {
 } from "react-router-dom";
 
 import { guestRoutes, userRoutes } from "src/common/routes";
-import { routes } from "./common/constants/pageRoutes";
-import { useAuth } from "./context/GlobalContext";
+import useAuthRedirect from "src/common/hooks/useAuthRedirect";
+import Loader from "src/components/Loader/Loader";
+import { useAuth } from "src/context/GlobalContext";
+import { toast } from "react-toastify";
 
 const Application: React.FC<
   RouteComponentProps<{}, {}, { from: { pathname: string } }>
-> = ({ history }) => {
-  const { state } = useAuth();
-
+> = () => {
+  useAuthRedirect();
+  const { globalState } = useAuth();
+  const { error } = globalState;
+  const currentRoutes = globalState.user ? userRoutes : guestRoutes;
   useEffect(() => {
-    // Store previous route in history state to return user back to that route
-    // from which it came from after user verified from auth listener.
-    if (state.user) {
-      const { state } = history.location;
-      history.replace(state?.from?.pathname ?? routes.HOME);
-    } else {
-      history.replace(routes.AUTH, {
-        from: { pathname: history.location.pathname },
-      });
+    if (error) {
+      toast(error);
     }
-  }, [state.user, history]);
-
-  if (state.loading) return <h1>Loading...</h1>;
-
-  const currentRoutes = state.user ? userRoutes : guestRoutes;
+  }, [error]);
 
   return (
-    <Suspense fallback={<h1>Loading...</h1>}>
+    <Suspense fallback={<Loader />}>
+      {globalState.loading && <Loader />}
       <Switch>
         {currentRoutes.map((route, index) => {
           return (

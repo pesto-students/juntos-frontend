@@ -4,12 +4,14 @@ import { User } from "src/modules/User";
 export interface GlobalState {
   user?: User;
   loading: boolean;
+  error?: string;
 }
 
 export enum Types {
   REQUEST = "REQUEST",
   SET_USER = "SET_USER",
-  LOADER_OFF = "LOADER_OFF",
+  LOADED = "LOADED",
+  ERROR = "ERROR",
 }
 
 export type Dispatch = React.Dispatch<{
