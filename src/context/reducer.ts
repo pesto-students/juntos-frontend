@@ -7,8 +7,10 @@ export const rootReducer = (
   switch (action.type) {
     case Types.REQUEST:
       return { ...state, loading: true };
-    case Types.LOADER_OFF:
+    case Types.LOADED:
       return { ...state, loading: false };
+    case Types.ERROR:
+      return { ...state, error: action.payload, loading: false };
     case Types.SET_USER:
       return { ...state, user: action.payload, loading: false };
     default:

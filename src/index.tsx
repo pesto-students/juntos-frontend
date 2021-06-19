@@ -14,6 +14,7 @@ ReactDOM.render(
     <BrowserRouter>
       <GlobalProvider>
         <Application />
+        {/* TODO to be replaced with custom component */}
         <ToastContainer
           position="top-right"
           autoClose={3000}

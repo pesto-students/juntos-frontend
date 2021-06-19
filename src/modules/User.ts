@@ -16,7 +16,8 @@ export class User {
   getProfile(): Profile {
     if (this.user.email === null) {
       throw new Error("email not found");
-    } else if (this.user.displayName === null) {
+    }
+    if (this.user.displayName === null) {
       throw new Error("display name not found");
     }
     return { email: this.user.email, name: this.user.displayName };

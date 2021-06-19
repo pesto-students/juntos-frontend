@@ -9,9 +9,9 @@ export const register = async (dispatch: Dispatch, payload: AuthFormData) => {
     const user = await signUp(payload);
     dispatch({ type: Types.SET_USER, payload: user });
   } catch (error) {
-    toast.error(error);
+    dispatch({ type: Types.ERROR, payload: error });
   } finally {
-    dispatch({ type: Types.LOADER_OFF });
+    dispatch({ type: Types.LOADED });
   }
 };
 
@@ -23,7 +23,7 @@ export const login = async (dispatch: Dispatch, payload: AuthFormData) => {
   } catch (error) {
     toast.error(error.message);
   } finally {
-    dispatch({ type: Types.LOADER_OFF });
+    dispatch({ type: Types.LOADED });
   }
 };
 
@@ -34,6 +34,6 @@ export const logout = async (dispatch: Dispatch) => {
   } catch (error) {
     toast.error(error.message);
   } finally {
-    dispatch({ type: Types.LOADER_OFF });
+    dispatch({ type: Types.LOADED });
   }
 };
