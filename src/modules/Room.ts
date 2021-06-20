@@ -1,10 +1,11 @@
 import { User } from "src/modules/User";
 import { Socket } from "socket.io-client";
-
-interface statusChangeParams {
+import { SocketRoomEvents } from "src/common/interface";
+interface StatusChangeParams {
   videoUrl?: string;
   roomId: string;
   playerStatus: Number;
+  timestamp?: Number;
 }
 
 export class Room {
@@ -21,24 +22,11 @@ export class Room {
     this.isHost = isHost;
   }
 
-  sendMessage(message: string) {
-    this.channel.emit("postChatMessage", {
-      message,
-      roomId: this.roomId,
-      user: this.user.getProfile(),
-    });
+  sendMessage(event: SocketRoomEvents, data: StatusChangeParams) {
+    this.channel.emit(event, data);
   }
 
-  startVideo({ videoUrl, roomId, playerStatus }: statusChangeParams) {
-    this.channel.emit("startVideo", { videoUrl, roomId, playerStatus });
-  }
-
-  pauseVideo({ roomId, playerStatus }: statusChangeParams) {
-    this.channel.emit("pauseVideo", { roomId, playerStatus });
-  }
-
-  on(listener: (playerData: statusChangeParams) => void) {
-    this.channel.on("startVideo", listener);
-    this.channel.on("pauseVideo", listener);
+  on(event: SocketRoomEvents, listener: (playerData: StatusChangeParams) => void) {
+    return this.channel.on(event, listener);
   }
 }

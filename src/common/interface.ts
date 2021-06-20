@@ -11,3 +11,9 @@ export interface AuthFormData {
   email: string;
   password: string;
 }
+
+export enum SocketRoomEvents {
+  startVideo = "startVideo",
+  pauseVideo = "pauseVideo",
+  updateTimeStamp = "updateTimeStamp",
+}

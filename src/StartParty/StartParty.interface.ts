@@ -30,6 +30,17 @@ export interface YTEventFunction {
       when the function is called, in which case the player state will not change. */
   pauseVideo: () => void;
 
-  /**  @description Returns the YouTube.com URL for the currently loaded/playing video.*/
+  /** Returns the YouTube.com URL for the currently loaded/playing video.*/
   getVideoUrl: () => string;
+
+  /** seekTo: Seeks to a specified time in the video. If the player is paused when the function is called, it will remain paused. If the function is called from another state (playing, video cued, etc.), the player will play the video.
+      The seconds parameter identifies the time to which the player should advance.
+
+      1. The player will advance to the closest keyframe before that time unless the player
+         has already downloaded the portion of the video to which the user is seeking.
+
+      2. The allowSeekAhead parameter determines whether the player will make a new request 
+         to the server if the seconds parameter specifies a time outside of the currently 
+         buffered video data. */
+  seekTo: (seconds: Number, allowSeekAhead: boolean) => void;
 }
