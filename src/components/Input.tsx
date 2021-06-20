@@ -14,7 +14,7 @@ export default styled.input<InputProps>`
   border: none;
   padding: ${cssScale.c3} ${cssScale.c4};
   margin: ${({ margin }) => margin ?? `${cssScale.c2} ${cssScale.c0}`};
-  width: 100%;
+  width: ${({ width }) => width ?? '100%'};
   border-radius: ${({ borderRadius }) => borderRadius ?? cssScale.c1};
   padding-right: ${({ paddingRight }) => paddingRight};
   outline: ${({ outline }) => outline};

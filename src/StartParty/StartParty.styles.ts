@@ -18,4 +18,5 @@ export const ChatWrapper = styled.div`
   display: inline-block;
   background-color: ${colors.brown1};
   padding-bottom: ${cssScale.c1};
+  vertical-align: top;
 `;

@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useAuth } from "src/context/GlobalContext";
 import { Chat } from "src/modules/Chat";
-import { io } from "socket.io-client";
-import { toast } from "react-toastify";
+import { Socket } from "socket.io-client";
 import Input from "src/components/Input";
 import { ChatWrapper } from "./StartParty.styles";
 import "./StartParty.css";
@@ -12,8 +11,13 @@ import ChatIcon from "src/assets/icons/ChatIcon";
 
 let chat: Chat;
 
-const ChatBar: React.FC<{ roomId?: string }> = ({ roomId }) => {
-  const { state } = useAuth();
+interface ChatBarProps {
+  roomId: string;
+  socket: Socket;
+}
+
+const ChatBar: React.FC<ChatBarProps> = ({ roomId, socket }) => {
+  const { globalState } = useAuth();
 
   const [message, setMessage] = useState("");
   const [chatData, setChatData] = useState<{ user: string; message: string }[]>(
@@ -23,31 +27,24 @@ const ChatBar: React.FC<{ roomId?: string }> = ({ roomId }) => {
   const chatBox = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (roomId) {
-      const socket = io("http://localhost:8080", {
-        transports: ["websocket", "polling", "flashsocket"],
-      });
-      if (state.user) {
-        chat = new Chat(state.user, roomId, socket);
-        const subscribeReceiveChatMessage = chat.receiveMessages(
-          ({ message, user }) => {
-            setChatData((existingChats) => {
-              const newChats = [...existingChats];
-              newChats.push({ message, user });
-              return newChats;
-            });
-            scrollToBottom(chatBox);
-          }
-        );
-        // cleanup receiveChatMessage listener
-        return () => {
-          subscribeReceiveChatMessage.off("receiveChatMessage");
-        };
-      }
-    } else {
-      toast.error("invalid room Id");
+    if (globalState.user) {
+      chat = new Chat(globalState.user, roomId, socket);
+      const subscribeReceiveChatMessage = chat.receiveMessages(
+        ({ message, user }) => {
+          setChatData((existingChats) => {
+            const newChats = [...existingChats];
+            newChats.push({ message, user });
+            return newChats;
+          });
+          scrollToBottom(chatBox);
+        }
+      );
+      // cleanup receiveChatMessage listener
+      return () => {
+        subscribeReceiveChatMessage.off("receiveChatMessage");
+      };
     }
-  }, [state.user, roomId]);
+  }, [globalState.user, roomId ,socket]);
 
   const postChat = () => {
     if (message) {

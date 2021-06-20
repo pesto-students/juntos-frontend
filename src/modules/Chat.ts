@@ -12,7 +12,6 @@ export class Chat {
   private channel: Socket;
 
   constructor(user: User, roomId: string, channel: Socket) {
-    channel.emit("joinRoom", { roomId, user: user.getProfile() });
     this.user = user;
     this.roomId = roomId;
     this.channel = channel;
