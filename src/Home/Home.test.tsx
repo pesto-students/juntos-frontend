@@ -4,10 +4,10 @@ import "@testing-library/jest-dom/extend-expect";
 import { MemoryRouter } from "react-router-dom";
 
 test("Home: load with title", async () => {
-  const { getByText } = render(<Home name="Home Page" />, {
+  const { getByTestId } = render(<Home />, {
     wrapper: MemoryRouter,
   });
   await waitFor(() => {
-    expect(getByText("Home Page")).toBeInTheDocument();
+    expect(getByTestId("header1")).toBeInTheDocument();
   });
 });

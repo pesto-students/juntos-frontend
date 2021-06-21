@@ -11,8 +11,17 @@ const Auth = React.lazy(() => import("src/Auth/Auth"));
 
 export const guestRoutes: IRoute[] = [
   {
+    path: routes.HOME,
+    component: HomePage,
+    exact: true,
+  },
+  {
     path: routes.AUTH,
     component: Auth,
+    exact: false,
+  },
+  {
+    component: NoPagefound,
     exact: false,
   },
 ];
@@ -20,7 +29,6 @@ export const guestRoutes: IRoute[] = [
 export const userRoutes: IRoute[] = [
   {
     path: routes.HOME,
-    name: "Home Page",
     component: HomePage,
     exact: true,
   },
