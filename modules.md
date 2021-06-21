@@ -12,7 +12,7 @@
 - `sendMessage(message)`
 - `fetchMessages()`
 
-## `Room(members:Array<Viewers>, Host, User)`
+## `Room(Host, User)`
 
 ### Dependency
 
