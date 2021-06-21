@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
+import { routes } from "src/common/constants/pageRoutes";
 import Button from "src/components/Button";
 import { useAuth } from "src/context/GlobalContext";
 
@@ -16,7 +17,10 @@ const HomePage: React.FunctionComponent<IPage & RouteComponentProps> = ({
     <div>
       <p>{name}</p>
       <p>Welcome {globalState.user?.getProfile().email}</p>
-      <Link to="/about">Go to the About page!</Link>
+      <Link to={routes.ABOUT}>Go to the About page!</Link>
+      <br />
+      <Link to={routes.START_PARTY}>Go to Start Party!</Link>
+      <br />
       <Button onClick={actions?.signOut}>Logout</Button>
     </div>
   );

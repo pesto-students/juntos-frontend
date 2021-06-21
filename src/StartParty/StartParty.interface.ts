@@ -7,9 +7,6 @@ export interface SyncVideoProps {
 }
 
 export interface YTEventFunction {
-  // getCurrentTime: Returns the elapsed time in seconds since the video started playing.
-  getCurrentTime: () => Number;
-
   // getDuration: Returns the duration in seconds of the currently playing video.
   // Note that getDuration() will return 0 until the video's metadata is loaded,
   // which normally happens just after the video starts playing.
@@ -24,6 +21,9 @@ export interface YTEventFunction {
   // Note: A playback only counts toward a video's official view count
   // if it is initiated via a native play button in the player.
   playVideo: () => void;
+
+  // getCurrentTime: Returns the elapsed time in seconds since the video started playing.
+  getCurrentTime: () => any;
 
   /** Pauses the currently playing video. The final player state after this
       function executes will be paused (2) unless the player is in the ended (0)state

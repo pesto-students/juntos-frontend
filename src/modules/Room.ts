@@ -3,9 +3,8 @@ import { Socket } from "socket.io-client";
 import { SocketRoomEvents } from "src/common/interface";
 interface StatusChangeParams {
   videoUrl?: string;
-  roomId: string;
-  playerStatus: Number;
   timestamp?: Number;
+  playerState?: Number;
 }
 
 export class Room {
@@ -23,10 +22,13 @@ export class Room {
   }
 
   sendMessage(event: SocketRoomEvents, data: StatusChangeParams) {
-    this.channel.emit(event, data);
+    this.channel.emit(event, { ...data, roomId: this.roomId });
   }
 
-  on(event: SocketRoomEvents, listener: (playerData: StatusChangeParams) => void) {
+  on(
+    event: SocketRoomEvents,
+    listener: (playerData: StatusChangeParams) => void
+  ) {
     return this.channel.on(event, listener);
   }
 }
