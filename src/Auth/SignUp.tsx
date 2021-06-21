@@ -2,20 +2,19 @@ import React, { useState } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import Input from "src/components/Input";
-import * as routes from "src/common/constants/pageRoutes";
 import Button from "src/components/Button";
 import { SignUpContainer } from "./Auth.styles";
-import { IParams } from "src/common/interface";
+import { useAuth } from "src/context/GlobalContext";
 
-const SignUp: React.FunctionComponent<RouteComponentProps<IParams>> = ({
-  history,
-}) => {
+const SignUp: React.FunctionComponent<RouteComponentProps> = () => {
+  const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const { actions } = useAuth();
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    history.push(routes.HOME);
+    actions?.signUp({ name, email, password });
   };
 
   return (
@@ -24,18 +23,22 @@ const SignUp: React.FunctionComponent<RouteComponentProps<IParams>> = ({
         <h1>Create Account</h1>
         <span className="small-text">use your email for registration</span>
         <Input
+          value={name}
+          type="text"
+          placeholder="Full Name"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <Input
           value={email}
           type="email"
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
-          name="email"
         />
         <Input
           value={password}
           type="password"
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
-          name="password"
         />
         <Button type="submit" onClick={handleSubmit}>
           Sign Up
