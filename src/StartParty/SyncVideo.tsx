@@ -40,22 +40,19 @@ const SyncVideo: React.FC<SyncVideoProps> = ({ roomId, socket, isHost }) => {
         // update the timeStamp
         room.on(
           SocketRoomEvents.updateTimeStamp,
-          ({ timestamp, playerState }) => {
-            console.log("on.updateTimeStamp", timestamp, playerState);
+          ({ timestamp = 0, playerState }) => {
             const YTPlayer: YTEventFunction =
               playerRef.current?.getInternalPlayer();
-            if (timestamp) {
-              YTPlayer?.getCurrentTime().then((result: Number) => {
-                if (Math.abs(+(result || 0) - +(timestamp || 0)) > 5) {
-                  YTPlayer?.seekTo(timestamp, true);
-                }
-              });
-              if (YTPlayer.getPlayerState() !== playerState) {
-                if (playerState === 1) {
-                  YTPlayer?.playVideo();
-                } else if (playerState === 2) {
-                  YTPlayer?.pauseVideo();
-                }
+            YTPlayer?.getCurrentTime().then((result: Number) => {
+              if (Math.abs(+(result || 0) - +(timestamp || 0)) > 5) {
+                YTPlayer?.seekTo(timestamp, true);
+              }
+            });
+            if (YTPlayer.getPlayerState() !== playerState) {
+              if (playerState === 1) {
+                YTPlayer?.playVideo();
+              } else if (playerState === 2) {
+                YTPlayer?.pauseVideo();
               }
             }
           }
@@ -68,7 +65,6 @@ const SyncVideo: React.FC<SyncVideoProps> = ({ roomId, socket, isHost }) => {
     const YTPlayer: YTEventFunction = playerRef.current?.getInternalPlayer();
     if (isHost) {
       if (updatePlayerTimestamp) {
-        console.log("clearInterval");
         clearInterval(updatePlayerTimestamp);
       }
     }
@@ -94,7 +90,6 @@ const SyncVideo: React.FC<SyncVideoProps> = ({ roomId, socket, isHost }) => {
         });
         if (!updatePlayerTimestamp) {
           updatePlayerTimestamp = setInterval(() => {
-            console.log("send timestam[", playerState)
             room.sendMessage(SocketRoomEvents.updateTimeStamp, {
               timestamp: player.getCurrentTime(),
               playerState: player.getPlayerState(),
