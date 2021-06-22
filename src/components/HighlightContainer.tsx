@@ -4,7 +4,8 @@ import {
   colors, 
   dropShadow, 
   highlightContainerWidth,
-  highlightContainerHeight 
+  highlightContainerHeight, 
+  cssScale
 } from "src/common/constants";
 
 interface IHighlightContainer {
@@ -13,8 +14,6 @@ interface IHighlightContainer {
   alignItems?: string
 }
 
-const highlightContainerHeightMarginLeft = '10%';
-
 const HighlightContainer = styled.div<IHighlightContainer>`
     display: flex;
     flex-direction: ${props => props.flexDirection || 'row'};
@@ -22,9 +21,9 @@ const HighlightContainer = styled.div<IHighlightContainer>`
     align-items: ${props => props.alignItems || 'center'};
     width: ${highlightContainerWidth};
     height: ${highlightContainerHeight};
-    margin-left: ${highlightContainerHeightMarginLeft};
-    background-image: linear-gradient(to right, ${colors.primaryOne}, ${colors.primaryTwo});
+    background-image: linear-gradient(to right, ${colors.blue1}, ${colors.blue2});
     box-shadow: ${dropShadow.primary};
+    border-radius: ${cssScale.c2};
   `;
 
 export default HighlightContainer;  

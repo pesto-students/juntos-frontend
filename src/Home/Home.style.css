@@ -1,0 +1,149 @@
+html * {
+  --primary: #3677C7;
+  --secondary: #009DDE;
+}
+
+.body-gradient {
+  background-image: linear-gradient(to right, var(--primary), var(--secondary));
+}
+
+.max-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.drop-shadow {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.font-white {
+  color: white;
+}
+
+.section {
+  width: 100%;
+  /* height: 100vh; */
+}
+.section-one {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-sec-1-img {
+  height: 550px;
+  width: 750px;
+}
+
+.landing-sec-1-heading {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.landing-sec-2-heading {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.landing-sec-heading-divider {
+  width: 70%;
+  height: 2px;
+  background-color: white;
+  outline: 0px;
+  border: 0px;
+  margin: 4px 0;
+}
+
+.section-sub-heading {
+  font-size: 17px;
+  margin-top: 10px;
+  text-align: center;
+  width: 50%;
+}
+
+.section-button-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 22px;
+  width: 80%;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.create-room-button {
+  background-color: #00bed4;
+  width: 205px;
+  height: 49px;
+  border-radius: 33px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 2.7;
+  border: 0px;
+  outline: 0px;
+}
+
+.learn-more-button {
+  background-color: transparent;
+  border: 1px solid white;
+  width: 205px;
+  height: 49px;
+  border-radius: 33px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 2.7;
+}
+
+.landing-multi-image-container {
+  width: 900px;
+  height: 640px;
+  margin-top: 60px;
+  position: relative;
+}
+
+.landing-sec-2-img {
+  position: absolute;
+  width: 300px;
+  right: 0;
+}
+
+.landing-sec-3-img {
+  position: absolute;
+  width: 640px;
+  top: 100px;
+  border: 1px solid #000;
+}
+
+.landing-sec-4-img {
+  position: absolute;
+  width: 360px;
+}
+
+.landing-sec-5-img {
+  position: absolute;
+  width: 560px;
+  right: 0;
+  top: 100px;
+}
+
+.footer {
+  color: white;
+  padding: 20px 0;
+  background-color: #023c82;
+  margin-top: 16px;
+}
+
+.create-room-button,
+.learn-more-button {
+  text-decoration: none;
+  transition: transform 80ms ease-in-out;
+}
+.create-room-button:active,
+.learn-more-button:active {
+  transform: scale(0.95);
+  box-shadow: none;
+}

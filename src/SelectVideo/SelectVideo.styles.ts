@@ -64,7 +64,7 @@ const MediaServiceProviderBoxContainer = styled.div<IMediaServiceProviderBoxCont
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-color: ${colors.primaryTwo};
+    background-color: ${colors.blue1};
     width: ${props => (props.width || mediaServiceProviderBoxWidth) + `px`};
     height: ${props => (props.height || mediaServiceProviderBoxHeight) + `px`};
     margin: ${cssScale.c2};
@@ -141,7 +141,7 @@ const VideoResultItemContainer = styled.div<IVideoResultItemContainer>`
 
 const TranslucentInput = styled.input<ITranslucentInput>`
     width: ${props => (props.width || translucentInputWidth) + `px`};
-    height: ${props => (props.height || translucentInputHeight) + `px`};
+    min-height: ${props => (props.height || translucentInputHeight) + `px`};
     margin: ${cssScale.c2};
     border-width: ${cssScale.c0};
     outline: ${cssScale.c0};
@@ -149,12 +149,12 @@ const TranslucentInput = styled.input<ITranslucentInput>`
     padding-right: ${cssScale.c3};
     box-shadow: ${dropShadow.primary};
     background: ${colors.codGrey20};
-    caret-color: ${colors.white60};
+    caret-color: ${colors.white};
     text-align: center;
-    color: ${colors.white50}; 
+    font-weight: bold;
+    color: ${colors.white}; 
     ::placeholder { 
     color: ${colors.white30};
-    font-weight: bold;
     }
 `;
 

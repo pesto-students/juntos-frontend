@@ -1,18 +1,18 @@
 /**
  * Widths and Heights of various components
  */
-
+const headerHeight = "60px";
 /**
  * ViewportSection
  */
-const viewportSectionWidth = '100wh';
-const viewportSectionHeight = '100vh';
+const viewportSectionWidth = "100vh";
+const viewportSectionHeight = "100vh";
 
 /**
  * HighlightContainer
  */
-const highlightContainerWidth = '900px';
-const highlightContainerHeight = '525px';
+const highlightContainerWidth = "900px";
+const highlightContainerHeight = "525px";
 
 /**
  * CarouselContainer
@@ -52,18 +52,19 @@ const serviceProviderLogoWidth = 122;
  * Exports
  */
 export {
-    viewportSectionWidth,
-    viewportSectionHeight,
-    highlightContainerWidth,
-    highlightContainerHeight,
-    carouselContainerWidth,
-    carouselContainerHeight,
-    mediaServiceProviderBoxWidth,
-    mediaServiceProviderBoxHeight,
-    videoResultContainerWidth,
-    videoResultItemContainerWidth,
-    videoResultItemContainerHeight,
-    translucentInputWidth,
-    translucentInputHeight,
-    serviceProviderLogoWidth
-}
+  viewportSectionWidth,
+  viewportSectionHeight,
+  highlightContainerWidth,
+  highlightContainerHeight,
+  carouselContainerWidth,
+  carouselContainerHeight,
+  mediaServiceProviderBoxWidth,
+  mediaServiceProviderBoxHeight,
+  videoResultContainerWidth,
+  videoResultItemContainerWidth,
+  videoResultItemContainerHeight,
+  translucentInputWidth,
+  translucentInputHeight,
+  serviceProviderLogoWidth,
+  headerHeight
+};

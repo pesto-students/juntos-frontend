@@ -1,7 +1,8 @@
-export const HOME = "/";
-export const ABOUT = "/about";
-export const NO_PAGE_FOUND = "/no-page";
-export const FORGET_PASSWORD = "/forget-password";
-export const AUTH = "/auth";
-export const SELECT_VIDEO = "/select-video";
-
+export const routes: { [key: string]: string } = {
+  HOME: "/",
+  ABOUT: "/about",
+  NO_PAGE_FOUND: "/no-page",
+  AUTH: "/auth",
+  SELECT_VIDEO: "/select-video",
+  CREATE_ROOM: "/create-room",
+};
