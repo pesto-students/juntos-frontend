@@ -12,6 +12,7 @@ export enum Types {
   SET_USER = "SET_USER",
   LOADED = "LOADED",
   ERROR = "ERROR",
+  CLEAR_ERROR = "CLEAR_ERROR",
 }
 
 export type Dispatch = React.Dispatch<{
@@ -23,4 +24,5 @@ export type ContextActions = {
   signUp: (payload: AuthFormData) => Promise<void>;
   signIn: (payload: AuthFormData) => Promise<void>;
   signOut: () => Promise<void>;
+  clearError: () => void;
 };

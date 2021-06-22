@@ -16,7 +16,7 @@ const useAuthRedirect: () => void = () => {
       const { state } = history.location;
       history.replace(state?.from?.pathname ?? routes.HOME);
     } else {
-      history.replace(routes.AUTH, {
+      history.replace(routes.HOME, {
         from: { pathname: history.location.pathname },
       });
     }
