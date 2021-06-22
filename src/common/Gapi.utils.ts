@@ -1,4 +1,4 @@
-function getDUrationByUnit(input: string, unit: string): string{
+function getDurationByUnit(input: string, unit: string): string{
     let index = input.indexOf(unit);
     let output = "00";
     
@@ -14,9 +14,9 @@ function getDUrationByUnit(input: string, unit: string): string{
 }
 
 function ISO8601toHumanReadable(input:string): string {
-    let H = getDUrationByUnit(input, 'H');
-    let M = getDUrationByUnit(input, 'M');
-    let S = getDUrationByUnit(input, 'S');
+    let H = getDurationByUnit(input, 'H');
+    let M = getDurationByUnit(input, 'M');
+    let S = getDurationByUnit(input, 'S');
 
    if (H === "00") {
      H = "";

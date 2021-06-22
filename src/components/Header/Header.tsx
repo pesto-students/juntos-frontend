@@ -69,14 +69,6 @@ export default function Header({
                   <Link to={AUTH}>Sign In</Link>
                 </li>
               )}
-
-              {/* <li>
-        <img
-          className="profile-avatar"
-          src="https://res.cloudinary.com/uwtcdn/image/upload/v1623896378/profile_pic_aiv8yx.svg"
-          alt="Avatar"
-        />
-      </li> */}
             </ol>
           </div>
         </nav>

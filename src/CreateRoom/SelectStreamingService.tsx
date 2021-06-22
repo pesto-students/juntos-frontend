@@ -14,11 +14,11 @@ import { TranslucentInput } from "src/SelectVideo/SelectVideo.styles";
 import { routes } from "src/common/constants";
 import MediaServiceProviderBox from "src/SelectVideo/MediaServiceProviderBox";
 /**
- * CreateLinkForLater Component
- * @returns <CreateLinkForLater/>
+ * SelectStreamingService Component
+ * @returns <SelectStreamingService/>
  */
 
-const CreateLinkForLater: React.FunctionComponent<RouteComponentProps> = ({
+const SelectStreamingService: React.FunctionComponent<RouteComponentProps> = ({
   history,
 }) => {
   return (
@@ -42,14 +42,9 @@ const CreateLinkForLater: React.FunctionComponent<RouteComponentProps> = ({
           <MediaServiceProviderBox disabled serviceProvider={"vimeo"} />
           <MediaServiceProviderBox disabled serviceProvider={"dailymotion"} />
         </Row>
-        {/* <Row justifyContent="flex-start">
-          <Button margin="28px" onClick={() => history.push(routes.ABOUT)}>
-            Learn More
-          </Button>
-        </Row> */}
       </HighlightContainer>
     </ViewportSection>
   );
 };
 
-export default CreateLinkForLater;
+export default SelectStreamingService;

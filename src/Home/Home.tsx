@@ -3,6 +3,11 @@ import { Link, RouteComponentProps } from "react-router-dom";
 import { routes } from "src/common/constants/pageRoutes";
 import { useAuth } from "src/context/GlobalContext";
 import "src/Home/Home.style.css";
+import VideoInfluencerSVG from "src/assets/images/VideoInfluencerSVG";
+import OnlineMediaSVG from "src/assets/images/OnlineMediaSVG";
+import VideoFileSVG from "src/assets/images/VideoFileSVG";
+import HomeCinemaSVG from "src/assets/images/HomeCinemaSVG";
+import VideoStreamingSVG from "src/assets/images/VideoStreamingSVG";
 
 const HomePage: React.FunctionComponent<RouteComponentProps> = () => {
   const { globalState } = useAuth();
@@ -12,12 +17,11 @@ const HomePage: React.FunctionComponent<RouteComponentProps> = () => {
       <div className="max-container">
         <main className="landing-body">
           <section className="section section-one">
-            <img
-              className="landing-sec-1-img"
-              src="https://res.cloudinary.com/uwtcdn/image/upload/v1623896378/sample_party_screen_p0rkqm.svg"
-              alt="Let's you party with your friends"
-            />
-            <div className="landing-sec-1-heading font-white" data-testid="header1">
+            <VideoInfluencerSVG height="550" width="750" />
+            <div
+              className="landing-sec-1-heading font-white"
+              data-testid="header1"
+            >
               Welcome to the Next-Gen theater
             </div>
             <hr className="landing-sec-heading-divider" />
@@ -42,16 +46,12 @@ const HomePage: React.FunctionComponent<RouteComponentProps> = () => {
           </section>
           <section className="section section-one">
             <div className="landing-multi-image-container">
-              <img
+              <VideoFileSVG
+                width="300"
+                height="181"
                 className="landing-sec-2-img"
-                src="https://res.cloudinary.com/uwtcdn/image/upload/v1623896378/video_files_nhtdwn.svg"
-                alt="Select content from youtube, vimeo, daily-motion"
               />
-              <img
-                className=" landing-sec-3-img"
-                src="https://res.cloudinary.com/uwtcdn/image/upload/v1623896377/online_media_glncpk.svg"
-                alt="Search and find your preferred content to watch"
-              />
+              <OnlineMediaSVG className="landing-sec-3-img" />
             </div>
             <div className="landing-sec-2-heading font-white">
               <span>CREATE YOUR THEATRE, OWN IT</span>
@@ -73,16 +73,8 @@ const HomePage: React.FunctionComponent<RouteComponentProps> = () => {
           </section>
           <section className="section section-one">
             <div className="landing-multi-image-container">
-              <img
-                className=" landing-sec-4-img"
-                src="https://res.cloudinary.com/uwtcdn/image/upload/v1623896377/home_cinema_p7sdkw.svg"
-                alt="Enjoy movie nights from comfort of your sofa"
-              />
-              <img
-                className=" landing-sec-5-img"
-                src="https://res.cloudinary.com/uwtcdn/image/upload/v1623896378/video_streaming_duvmrt.svg"
-                alt="Connect via multiple devices, across different time zones"
-              />
+              <HomeCinemaSVG width="360" className="landing-sec-4-img"/>
+              <VideoStreamingSVG className=" landing-sec-5-img"/>
             </div>
             <div className="landing-sec-2-heading font-white">
               <span>ENJOY TOGETHER, WHEREVER</span>
@@ -112,10 +104,3 @@ const HomePage: React.FunctionComponent<RouteComponentProps> = () => {
 };
 
 export default HomePage;
-
-// {/* // <div>
-// //   <p>{name}</p>
-// //   <p>Welcome {globalState.user?.getProfile().email}</p>
-// //   <Link to="/about">Go to the About page!</Link>
-// //   <Button onClick={actions?.signOut}>Logout</Button>
-// // </div> */}
