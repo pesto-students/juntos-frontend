@@ -34,10 +34,11 @@ export default styled.button<ButtonProps>`
     css`
       background-color: transparent;
       border-color: ${colors.white};
+      box-shadow: none;
     `}
   ${({ small }) =>
     small &&
     css`
-    padding: ${cssScale.c1} ${cssScale.c7};
+      padding: ${cssScale.c1} ${cssScale.c7};
     `}
 `;
