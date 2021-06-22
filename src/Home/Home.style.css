@@ -22,7 +22,6 @@ html * {
 
 .section {
   width: 100%;
-  /* height: 100vh; */
 }
 .section-one {
   display: flex;
@@ -30,11 +29,6 @@ html * {
   justify-content: center;
   align-items: center;
 }
-
-/* .landing-sec-1-img {
-  height: 550px;
-  width: 750px;
-} */
 
 .landing-sec-1-heading {
   font-size: 28px;
