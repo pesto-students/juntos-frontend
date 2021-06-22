@@ -3,6 +3,8 @@ export const routes: { [key: string]: string } = {
   ABOUT: "/about",
   NO_PAGE_FOUND: "/no-page",
   AUTH: "/auth",
-  FORGET_PASSWORD: "/forget-password",
+  SELECT_VIDEO: "/select-video",
   CREATE_ROOM: "/create-room",
+  CREATE_LINK_FOR_LATER: '/create-link-for-later',
+  SELECT_STREAMING_SERVICE: '/select-streaming-service'
 };

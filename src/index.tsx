@@ -7,25 +7,28 @@ import { GlobalStyle } from "src/common/GlobalStyles";
 import { GlobalProvider } from "src/context/GlobalContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ErrorBoundary } from "./Error/ErrorBoundary";
 
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyle />
     <BrowserRouter>
       <GlobalProvider>
-        <Application />
-        {/* TODO to be replaced with custom component */}
-        <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
+        <ErrorBoundary>
+          <Application />
+          {/* TODO to be replaced with custom component */}
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+        </ErrorBoundary>
       </GlobalProvider>
     </BrowserRouter>
   </React.StrictMode>,

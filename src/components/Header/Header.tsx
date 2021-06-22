@@ -10,9 +10,9 @@ import Button from "../Button";
 import LogoutIcon from "src/assets/LogoutIcon";
 import Logo from "src/assets/LogoWhiteBG.png";
 
-const { HOME, ABOUT, FORGET_PASSWORD, CREATE_ROOM, AUTH } = routes;
+const { ABOUT, CREATE_ROOM, AUTH } = routes;
 
-const includedPathName = new Set([HOME, ABOUT, FORGET_PASSWORD, CREATE_ROOM]);
+const excludedPathName: Set<string> = new Set([AUTH]);
 
 export default function Header({
   user,
@@ -24,7 +24,7 @@ export default function Header({
   const { pathname } = useLocation();
   const { push } = useHistory();
 
-  if (!includedPathName.has(pathname)) {
+  if (excludedPathName.has(pathname)) {
     return <></>;
   }
 
@@ -33,52 +33,46 @@ export default function Header({
   };
 
   return (
-    <div className="max-container">
-      <nav className="landing-header ">
-        <div className="logo-container">
-          <img src={Logo} alt="logo" />
-        </div>
-        <div className="nav-container">
-          <ol className="nav-list">
-            <li>
-              <Link to={ABOUT}>About</Link>
-            </li>
-            {user ? (
-              <>
-                <li>
-                  <Button small fontSize="12px" onClick={() => {}}>
-                    Join Party
-                  </Button>
-                </li>
-                <li>
-                  <Button small fontSize="12px" onClick={handleCreateRoom}>
-                    Host Party
-                  </Button>
-                </li>
-                <li
-                  title="logout"
-                  onClick={() => signOut?.()}
-                  className="logout"
-                >
-                  <LogoutIcon />
-                </li>
-              </>
-            ) : (
+    <div className=" drop-shadow">
+      <div className="max-container">
+        <nav className="landing-header ">
+          <div className="logo-container">
+            <img src={Logo} alt="logo" />
+          </div>
+          <div className="nav-container">
+            <ol className="nav-list">
               <li>
-                <Link to={AUTH}>Sign In</Link>
+                <Link to={ABOUT}>About</Link>
               </li>
-            )}
-
-            {/* <li>
-        <img
-          className="profile-avatar"
-          src="https://res.cloudinary.com/uwtcdn/image/upload/v1623896378/profile_pic_aiv8yx.svg"
-          alt="Avatar"
-        />
-      </li> */}
-          </ol>
-        </div>
-      </nav>
+              {user ? (
+                <>
+                  <li>
+                    <Button small fontSize="12px" onClick={() => {}}>
+                      Join Party
+                    </Button>
+                  </li>
+                  <li>
+                    <Button small fontSize="12px" onClick={handleCreateRoom}>
+                      Host Party
+                    </Button>
+                  </li>
+                  <li
+                    title="logout"
+                    onClick={() => signOut?.()}
+                    className="logout"
+                  >
+                    <LogoutIcon />
+                  </li>
+                </>
+              ) : (
+                <li>
+                  <Link to={AUTH}>Sign In</Link>
+                </li>
+              )}
+            </ol>
+          </div>
+        </nav>
+      </div>
     </div>
   );
 }

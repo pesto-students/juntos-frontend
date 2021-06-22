@@ -1,18 +1,20 @@
-import { cssScale } from "src/common/constants/cssScale";
 import styled, { css } from "styled-components";
-import { colors } from "src/common/constants/colors";
+import { colors, cssScale } from "src/common/constants";
+
 interface ButtonProps {
   ghost?: boolean;
   small?: boolean;
   fontSize?: string;
+  margin?: string;
 }
 
 export default styled.button<ButtonProps>`
   border-radius: ${cssScale.c5};
-  border: 1px solid ${colors.blue1};
-  background-color: ${colors.blue1};
+  border: 1px solid ${colors.blue2};
+  background-color: ${colors.blue2};
   color: ${colors.white};
   font-size: ${({ fontSize }) => fontSize ?? cssScale.c4};
+  margin: ${({ margin }) => margin};
   font-weight: bold;
   padding: ${cssScale.c3} ${cssScale.c9};
   transition: transform 80ms ease-in;
@@ -37,6 +39,6 @@ export default styled.button<ButtonProps>`
   ${({ small }) =>
     small &&
     css`
-    padding: ${cssScale.c1} ${cssScale.c7};
+      padding: ${cssScale.c1} ${cssScale.c7};
     `}
 `;

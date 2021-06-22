@@ -51,7 +51,7 @@
 }
 
 .primary-button-sleek {
-  background-color: #004a93;
+  background-color: #004A93;
   width: 138px;
   height: 25px;
   border-radius: 33px;
@@ -86,7 +86,7 @@
 .logoutIcon {
   fill-rule: evenodd;
   clip-rule: evenodd;
-  fill: #004a93;
+  fill: #004A93;
 }
 
 .logout:hover .logoutIcon {

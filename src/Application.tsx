@@ -11,7 +11,7 @@ import useAuthRedirect from "src/common/hooks/useAuthRedirect";
 import Loader from "src/components/Loader/Loader";
 import { useAuth } from "src/context/GlobalContext";
 import { toast } from "react-toastify";
-import Header from "./components/Header/Header";
+import Header from "src/components/Header/Header";
 
 const Application: React.FC = () => {
   useAuthRedirect();
@@ -21,13 +21,14 @@ const Application: React.FC = () => {
 
   useEffect(() => {
     if (error) {
-      toast(error);
+      toast.error(error);
+      actions?.clearError();
     }
-  }, [error]);
+  }, [error, actions]);
 
   return (
     <Suspense fallback={<Loader />}>
-      <Header user={globalState.user} signOut={actions?.signOut}/>
+      <Header user={globalState.user} signOut={actions?.signOut} />
       {globalState.loading && <Loader />}
       <Switch>
         {currentRoutes.map((route, index) => {

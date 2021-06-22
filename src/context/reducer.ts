@@ -9,6 +9,8 @@ export const rootReducer = (
       return { ...state, loading: true };
     case Types.LOADED:
       return { ...state, loading: false };
+    case Types.CLEAR_ERROR:
+      return { ...state, error: null };
     case Types.ERROR:
       return { ...state, error: action.payload, loading: false };
     case Types.SET_USER:
