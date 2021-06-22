@@ -10,8 +10,8 @@ interface ButtonProps {
 
 export default styled.button<ButtonProps>`
   border-radius: ${cssScale.c5};
-  border: 1px solid ${colors.blue1};
-  background-color: ${colors.blue1};
+  border: 1px solid ${colors.blue2};
+  background-color: ${colors.blue2};
   color: ${colors.white};
   font-size: ${({ fontSize }) => fontSize ?? cssScale.c4};
   margin: ${({ margin }) => margin};
@@ -34,7 +34,6 @@ export default styled.button<ButtonProps>`
     css`
       background-color: transparent;
       border-color: ${colors.white};
-      box-shadow: none;
     `}
   ${({ small }) =>
     small &&

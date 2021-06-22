@@ -18,6 +18,8 @@ import { MediaServiceProviderBoxContainer } from "src/SelectVideo/SelectVideo.st
  */
 interface IMediaServiceProviderBox {
   serviceProvider: string;
+  clickable?: boolean;
+  disabled?: boolean;
 }
 
 /**
@@ -26,7 +28,7 @@ interface IMediaServiceProviderBox {
  * @returns <MediaServiceProviderBoxContainer/>
  */
 function MediaServiceProviderBox(props: IMediaServiceProviderBox) {
-  const { serviceProvider } = props;
+  const { serviceProvider, clickable, disabled } = props;
   let src: string = "";
 
   switch (serviceProvider) {
@@ -45,7 +47,7 @@ function MediaServiceProviderBox(props: IMediaServiceProviderBox) {
   }
 
   return (
-    <MediaServiceProviderBoxContainer>
+    <MediaServiceProviderBoxContainer clickable={clickable} disabled={disabled}>
       <img
         width={serviceProviderLogoWidth}
         src={src}

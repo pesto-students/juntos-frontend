@@ -163,8 +163,8 @@ export const SignUpContainer = styled(AuthFormContainer)`
 `;
 
 export const AuthOverlay = styled.div`
-  background: #3677C7;
-  background: linear-gradient(to right, #3677C7, #009DDE);
+  background: #004A93;
+  background: linear-gradient(to right, #004A93, #3677C7);
   color: #fff;
   position: relative;
   left: -100%;

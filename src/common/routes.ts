@@ -8,6 +8,9 @@ const HomePage = React.lazy(() => import("src/Home/Home"));
 const AboutPage = React.lazy(() => import("src/About/About"));
 const NoPagefound = React.lazy(() => import("src/Error/NoPageFound"));
 const SelectVideoPage = React.lazy(() => import("src/SelectVideo/SelectVideo"));
+const CreateRoomPage = React.lazy(() => import("src/CreateRoom/CreateRoom"));
+const CreateLinkForLaterPage = React.lazy(() => import("src/CreateRoom/CreateLinkForLater"));
+const SelectStreamingServicePage = React.lazy(() => import("src/CreateRoom/SelectStreamingService"));
 const Auth = React.lazy(() => import("src/Auth/Auth"));
 
 export const guestRoutes: IRoute[] = [
@@ -36,6 +39,21 @@ export const userRoutes: IRoute[] = [
   {
     path: routes.SELECT_VIDEO,
     component: SelectVideoPage,
+    exact: true,
+  },
+  {
+    path: routes.CREATE_ROOM,
+    component: CreateRoomPage,
+    exact: true,
+  },
+  {
+    path: routes.CREATE_LINK_FOR_LATER,
+    component: CreateLinkForLaterPage,
+    exact: true,
+  },
+  {
+    path: routes.SELECT_STREAMING_SERVICE,
+    component: SelectStreamingServicePage,
     exact: true,
   },
   {

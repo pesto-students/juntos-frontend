@@ -143,7 +143,7 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps> = () => {
           onKeyDown={handleKeyDown}
           onChange={handleOnChange}
         />
-        <Button margin="12px 0 0" onClick={() => getSearchResults(searchKeyword)} >Search</Button>
+        <Button ghost margin="12px 0 0" onClick={() => getSearchResults(searchKeyword)} >Search</Button>
         {renderSearchResults()}
       </HighlightContainer>
     </ViewportSection>

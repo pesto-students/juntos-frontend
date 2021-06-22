@@ -5,4 +5,6 @@ export const routes: { [key: string]: string } = {
   AUTH: "/auth",
   SELECT_VIDEO: "/select-video",
   CREATE_ROOM: "/create-room",
+  CREATE_LINK_FOR_LATER: '/create-link-for-later',
+  SELECT_STREAMING_SERVICE: '/select-streaming-service'
 };

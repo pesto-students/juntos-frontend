@@ -11,7 +11,8 @@ import {
 interface IHighlightContainer {
   flexDirection?: string,
   justifyContent?: string,
-  alignItems?: string
+  alignItems?: string;
+  padding?: string;
 }
 
 const HighlightContainer = styled.div<IHighlightContainer>`
@@ -24,6 +25,7 @@ const HighlightContainer = styled.div<IHighlightContainer>`
     background-image: linear-gradient(to right, ${colors.blue1}, ${colors.blue2});
     box-shadow: ${dropShadow.primary};
     border-radius: ${cssScale.c2};
+    padding: ${({padding}) => padding || 'unset'};
   `;
 
 export default HighlightContainer;  
