@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { io, Socket } from "socket.io-client";
 
@@ -6,55 +6,37 @@ import { PartyWrapper, VideoWrapper } from "src/StartParty/StartParty.styles";
 import "src/StartParty/StartParty.css";
 import ChatBar from "src/StartParty/ChatBar";
 import SyncVideo from "src/StartParty/SyncVideo";
-import Button from "src/components/Button";
-import Input from "src/components/Input";
-import { v4 as uuidv4 } from "uuid";
+import useShareLinkRedirect from "src/common/hooks/useShareLinkRedirect";
 
 const socket: Socket = io("http://localhost:8080", {
   transports: ["websocket", "polling", "flashsocket"],
-})
+});
 
 // cleaup needed just added for development testing
-const StartParty: React.FC<RouteComponentProps> = () => {
-  const [inviteLink, setInviteLink] = useState<string>("");
-  const [roomId, setRoomId] = useState<string>("");
-  const [host, setHost] = useState<boolean>(false);
-  const [joinParty, setJoinParty] = useState<boolean>(false);
+const StartParty: React.FC<
+  RouteComponentProps<
+    {},
+    {},
+    { shareLink: string; videoId?: string; videoUrl?: string; isHost: boolean }
+  >
+> = ({ history }) => {
+  const { isHost, videoId, shareLink, videoUrl } =
+    history.location?.state ?? {};
 
-  const handleHostParty = () => {
-    setRoomId(uuidv4());
-    setHost(true);
-  };
-
-  const handleJoinParty = () => {
-    if (inviteLink) {
-      setJoinParty(true);
-    }
-  };
+  useShareLinkRedirect();
 
   return (
     <PartyWrapper>
-      <div>
-        <div>
-          <Button onClick={handleHostParty}>Host party</Button>
-        </div>
-        <label htmlFor="joinParty">Enter Invite link: </label>
-        <Input
-          name="joinParty"
-          width="300px"
-          value={inviteLink}
-          onChange={(e) => setInviteLink(e.target.value)}
+      <VideoWrapper>
+        <SyncVideo
+          videoId={videoId}
+          videoUrl={videoUrl}
+          socket={socket}
+          roomId={shareLink}
+          isHost={isHost}
         />
-        <Button onClick={handleJoinParty}>Join Party</Button>
-      </div>
-      {(host || joinParty) && (
-        <>
-          <VideoWrapper>
-            <SyncVideo socket={socket} roomId={roomId || inviteLink} isHost={host} />
-          </VideoWrapper>
-          <ChatBar socket={socket} roomId={roomId} />
-        </>
-      )}
+      </VideoWrapper>
+      <ChatBar socket={socket} roomId={shareLink} />
     </PartyWrapper>
   );
 };

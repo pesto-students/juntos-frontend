@@ -39,19 +39,28 @@ import { ISearchResultData } from "src/common/interface";
 /**
  * Constants
  */
-import { errorMessages } from "src/common/constants";
+import { errorMessages, routes } from "src/common/constants";
 import { ISO8601toHumanReadable, viewsFormatter } from "src/common/Gapi.utils";
 import { toast } from "react-toastify";
+import useShareLinkRedirect from "src/common/hooks/useShareLinkRedirect";
 
 /**
  * SelectVideo Component
  * @returns <SelectVideo/>
  */
-const SelectVideo: React.FunctionComponent<RouteComponentProps> = () => {
+const SelectVideo: React.FunctionComponent<
+  RouteComponentProps<
+    {},
+    {},
+    { shareLink: string; videoId: string; isHost: boolean }
+  >
+> = ({ history }) => {
   const [searchKeyword, setSearchKeyword] = useState<string>("");
   const [searchResults, setSearchResults] = useState<ISearchResultData[]>([]);
-  const [noResults, setNoResults] = useState<boolean>(false);
   const [loadingResults, setLoadingResults] = useState<boolean>(false);
+
+  const shareLink = history.location?.state?.shareLink ?? "";
+  useShareLinkRedirect();
 
   function handleKeyDown(event: React.KeyboardEvent) {
     if (event.key === "Enter") {
@@ -64,9 +73,6 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps> = () => {
   function handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { value } = event.target;
     setSearchKeyword(value);
-    if (value.length === 0) {
-      setNoResults(false);
-    }
   }
 
   const getVideoIds = (data: any) => {
@@ -109,23 +115,33 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps> = () => {
     }
   }
 
+  const handleVideoClick = (videoData: ISearchResultData) => {
+    history.push(routes.START_PARTY, {
+      shareLink,
+      videoId: videoData.videoId,
+      isHost: true,
+    });
+  };
+
   const renderSearchResults = () => {
     if (loadingResults) {
       return <SimpleSpinner />;
     }
-
-    if (noResults) {
-      return <p>No Results</p>;
-    }
-
-    if (searchResults.length)
+    if (searchResults.length) {
       return (
         <VideoResultContainer>
           {searchResults.map((videoData: ISearchResultData) => {
-            return <VideoResultItem key={videoData.videoId} data={videoData} />;
+            return (
+              <VideoResultItem
+                onClick={handleVideoClick}
+                key={videoData.videoId}
+                data={videoData}
+              />
+            );
           })}
         </VideoResultContainer>
       );
+    }
   };
 
   return (
@@ -143,7 +159,13 @@ const SelectVideo: React.FunctionComponent<RouteComponentProps> = () => {
           onKeyDown={handleKeyDown}
           onChange={handleOnChange}
         />
-        <Button ghost margin="12px 0 0" onClick={() => getSearchResults(searchKeyword)} >Search</Button>
+        <Button
+          ghost
+          margin="12px 0 0"
+          onClick={() => getSearchResults(searchKeyword)}
+        >
+          Search
+        </Button>
         {renderSearchResults()}
       </HighlightContainer>
     </ViewportSection>

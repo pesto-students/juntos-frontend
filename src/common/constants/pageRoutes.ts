@@ -1,4 +1,4 @@
-export const routes: { [key: string]: string } = {
+export const routes = {
   HOME: "/",
   ABOUT: "/about",
   NO_PAGE_FOUND: "/no-page",

@@ -8,3 +8,7 @@ export const scrollToBottom: (ref: React.RefObject<HTMLDivElement>) => void = (
     });
   }
 };
+
+export const copyToClipboard: (textToCopy: string) => void = (textToCopy) => {
+  navigator.clipboard.writeText(textToCopy);
+};

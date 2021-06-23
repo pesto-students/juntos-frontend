@@ -103,6 +103,7 @@ const VideoResultItemContainer = styled.div<IVideoResultItemContainer>`
   height: ${(props) => (props.height || videoResultItemContainerHeight) + `px`};
   margin: ${cssScale.c2};
   box-shadow: ${dropShadow.primary};
+  cursor: pointer;
   > .result-thumbnail {
     position: relative;
     > .img-thumbnail {
@@ -133,7 +134,7 @@ const VideoResultItemContainer = styled.div<IVideoResultItemContainer>`
       color: ${colors.white};
       font-size: ${cssScale.c4};
       line-height: ${cssScale.c5};
-      height: ${cssScale.c12};
+      height: ${cssScale.c15};
     }
     > .data-meta {
       color: ${colors.silverChalice};

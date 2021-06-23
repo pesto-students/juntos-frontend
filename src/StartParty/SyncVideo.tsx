@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import YouTube, { PlayerVars } from "react-youtube";
 
 import { useAuth } from "src/context/GlobalContext";
-import Input from "src/components/Input";
 import { Room } from "src/modules/Room";
 import {
   SyncVideoProps,
@@ -10,12 +9,24 @@ import {
 } from "src/StartParty/StartParty.interface";
 import "src/StartParty/StartParty.css";
 import { SocketRoomEvents } from "src/common/interface";
+import { HighlightContainer, ViewportSection } from "src/components";
+import { Text } from "src/components/Text";
+import { TranslucentInput } from "src/SelectVideo/SelectVideo.styles";
 let room: Room, updatePlayerTimestamp: ReturnType<typeof setInterval>;
 let videoCode: string | undefined;
 
-const SyncVideo: React.FC<SyncVideoProps> = ({ roomId, socket, isHost }) => {
+const SyncVideo: React.FC<SyncVideoProps> = ({
+  roomId,
+  socket,
+  isHost,
+  videoId = "",
+  videoUrl = "",
+}) => {
   const { globalState } = useAuth();
-  const [currentVideoUrl, setVideoUrl] = useState("");
+
+  const [currentVideoUrl, setVideoUrl] = useState(
+    videoUrl ? videoUrl : `v=${videoId}`
+  );
   if (currentVideoUrl) {
     videoCode = currentVideoUrl.split("v=")[1]?.split("&")[0];
   }
@@ -114,21 +125,22 @@ const SyncVideo: React.FC<SyncVideoProps> = ({ roomId, socket, isHost }) => {
   };
 
   return (
-    <>
-      <div>
-        <h1>Youtube Sync Service</h1>
+    <ViewportSection>
+      <HighlightContainer
+        flexDirection={`column`}
+        justifyContent="flex-start"
+        alignItems="center"
+        padding="36px"
+      >
         <div>{roomId}</div>
-        <div>https://www.youtube.com/watch?v=RHSpjyMHPYg</div>
-      </div>
-      <div>
-        <label htmlFor="videoUrlInput">Enter Video link: </label>
-        <Input
-          name="videoUrlInput"
-          width="300px"
-          value={currentVideoUrl}
-          onChange={(e) => setVideoUrl(e.target.value)}
-        />
         <div>
+          <Text>Enter Youtube Url:</Text>
+          <TranslucentInput
+            name="videoUrlInput"
+            value={currentVideoUrl}
+            onChange={(e) => setVideoUrl(e.target.value)}
+          />
+          <br />
           <YouTube
             ref={playerRef}
             videoId={videoCode}
@@ -136,8 +148,8 @@ const SyncVideo: React.FC<SyncVideoProps> = ({ roomId, socket, isHost }) => {
             opts={opts}
           />
         </div>
-      </div>
-    </>
+      </HighlightContainer>
+    </ViewportSection>
   );
 };
 

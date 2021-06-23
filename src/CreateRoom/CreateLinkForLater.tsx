@@ -11,15 +11,27 @@ import { ViewportSection, HighlightContainer, Button } from "src/components";
 import { Text, TitleText } from "src/components/Text";
 import Row from "src/components/FlexRow";
 import { TranslucentInput } from "src/SelectVideo/SelectVideo.styles";
-import { routes } from "src/common/constants";
+import { routes } from "src/common/constants/pageRoutes";
+import { toast } from "react-toastify";
+import { copyToClipboard } from "src/common/utils";
+import useShareLinkRedirect from "src/common/hooks/useShareLinkRedirect";
 /**
  * CreateLinkForLater Component
  * @returns <CreateLinkForLater/>
  */
 
-const CreateLinkForLater: React.FunctionComponent<RouteComponentProps> = ({
-  history,
-}) => {
+const CreateLinkForLater: React.FunctionComponent<
+  RouteComponentProps<{}, {}, { shareLink: string }>
+> = ({ history }) => {
+  const shareLink = history.location?.state?.shareLink ?? "";
+
+  useShareLinkRedirect();
+
+  const handleCopyLink = () => {
+    copyToClipboard(shareLink ?? "");
+    toast.success("link copied");
+  };
+
   return (
     <ViewportSection>
       <HighlightContainer
@@ -45,11 +57,23 @@ const CreateLinkForLater: React.FunctionComponent<RouteComponentProps> = ({
               Copy this link and share it with your friends.
             </Text>
             {/* Auto share link genereation TBD */}
-            <TranslucentInput width="270" placeholder="Share Link" />
-            <Button ghost margin="16px 0 0">
+            <TranslucentInput
+              disabled
+              width="300"
+              placeholder="Share Link"
+              value={shareLink}
+            />
+            <Button ghost margin="16px 0 0" onClick={handleCopyLink}>
               Copy Link
             </Button>
-            <Button margin="16px 0 0">Host Now</Button>
+            <Button
+              onClick={() =>
+                history.push(routes.SELECT_STREAMING_SERVICE, { shareLink })
+              }
+              margin="16px 0 0"
+            >
+              Host Now
+            </Button>
           </Row>
         </Row>
         <Row justifyContent="flex-start">

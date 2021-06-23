@@ -4,6 +4,8 @@ export interface SyncVideoProps {
   roomId: string;
   socket: Socket;
   isHost: boolean;
+  videoId?: string;
+  videoUrl?: string;
 }
 
 export interface YTEventFunction {

@@ -3,6 +3,7 @@
  */
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 /**
  * Common components
@@ -30,7 +31,7 @@ const CreateRoom: React.FunctionComponent<RouteComponentProps> = ({
       >
         <Row>
           <div>
-            <TitleText margin="28px">Create Room!</TitleText>
+            <TitleText margin="28px 0 28px 28px">Create Room!</TitleText>
             <Text margin="28px">
               Invite upto 8 friends.
               <br />
@@ -44,7 +45,11 @@ const CreateRoom: React.FunctionComponent<RouteComponentProps> = ({
         <Row justifyContent="space-around">
           <div>
             <Button
-              onClick={() => history.push(routes.SELECT_STREAMING_SERVICE)}
+              onClick={() =>
+                history.push(routes.SELECT_STREAMING_SERVICE, {
+                  shareLink: uuidv4(),
+                })
+              }
               ghost
             >
               Host now
@@ -53,7 +58,11 @@ const CreateRoom: React.FunctionComponent<RouteComponentProps> = ({
           <div>
             <Button
               ghost
-              onClick={() => history.push(routes.CREATE_LINK_FOR_LATER)}
+              onClick={() =>
+                history.push(routes.CREATE_LINK_FOR_LATER, {
+                  shareLink: uuidv4(),
+                })
+              }
             >
               Create link for later
             </Button>

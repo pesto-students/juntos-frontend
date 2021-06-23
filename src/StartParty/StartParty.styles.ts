@@ -14,7 +14,8 @@ export const VideoWrapper = styled.div`
 
 export const ChatWrapper = styled.div`
   width: 20%;
-  height: 100vh;
+  position: fixed;
+  height: calc(100vh - 60px);
   display: inline-block;
   background-color: ${colors.brown1};
   padding-bottom: ${cssScale.c1};

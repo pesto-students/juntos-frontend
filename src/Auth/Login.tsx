@@ -39,7 +39,7 @@ const Login: React.FunctionComponent<RouteComponentProps> = () => {
           name="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Link to={routes.FORGET_PASSWORD}>Forgot your password?</Link>
+        <Link to={routes.AUTH}>Forgot your password?</Link>
         <Button data-testid="signInBtn" type="submit" onClick={handleSubmit}>
           Sign In
         </Button>
