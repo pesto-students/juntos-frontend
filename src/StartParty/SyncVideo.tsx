@@ -47,10 +47,14 @@ const SyncVideo: React.FC<SyncVideoProps> = ({
    */
   const YTPlayer: YTEventFunction = playerRef.current?.getInternalPlayer();
 
+  /**
+   * @param playerVars configure youtube player on initialLoad
+   */
   const opts: { playerVars: PlayerVars } = {
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
       autoplay: 0,
+      controls: isHost ? 1 : 0,
     },
   };
 
@@ -105,10 +109,16 @@ const SyncVideo: React.FC<SyncVideoProps> = ({
         );
       }
     }
+  }, [globalState.user, socket, isHost, roomId, currentVideoUrl, YTPlayer]);
+
+  /**
+   * leave room when component unmounts
+   */
+  useEffect(() => {
     return () => {
       room.sendMessage(SocketRoomEvents.leaveRoom, {});
     };
-  }, [globalState.user, socket, isHost, roomId, currentVideoUrl, YTPlayer]);
+  }, []);
 
   useEffect(() => {
     /**
@@ -118,6 +128,11 @@ const SyncVideo: React.FC<SyncVideoProps> = ({
     if (isHost && updatePlayerTimestamp) {
       clearInterval(updatePlayerTimestamp);
       updatePlayerTimestamp = undefined;
+      room.sendMessage(SocketRoomEvents.updateTimeStamp, {
+        timestamp: YTPlayer?.getCurrentTime(),
+        playerState: YTPlayer?.getPlayerState(),
+        videoUrl: currentVideoUrl,
+      });
     }
 
     /**
@@ -164,7 +179,7 @@ const SyncVideo: React.FC<SyncVideoProps> = ({
           room.sendMessage(SocketRoomEvents.updateTimeStamp, {
             timestamp: player.getCurrentTime(),
             playerState: player.getPlayerState(),
-            videoUrl: player.getVideoUrl(),
+            videoUrl: currentVideoUrl,
           });
         }, 2000);
       }
@@ -184,7 +199,6 @@ const SyncVideo: React.FC<SyncVideoProps> = ({
         alignItems="center"
         padding="36px"
       >
-        <div>{roomId}</div>
         {isHost && (
           <>
             <Text>Enter Youtube Url:</Text>
