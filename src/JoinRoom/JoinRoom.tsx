@@ -1,7 +1,7 @@
 /**
  * React and packages
  */
-import React from "react";
+import React, { useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 /**
  * Common components
@@ -20,6 +20,17 @@ import { TranslucentInput } from "src/SelectVideo/SelectVideo.styles";
 const JoinRoom: React.FunctionComponent<RouteComponentProps> = ({
   history,
 }) => {
+  const [shareLink, setShareLink] = useState<string>("");
+
+  const handleJoinParty = () => {
+    if (shareLink) {
+      history.push(routes.START_PARTY, {
+        shareLink,
+        isHost: false,
+      });
+    }
+  };
+
   return (
     <ViewportSection>
       <HighlightContainer
@@ -34,11 +45,15 @@ const JoinRoom: React.FunctionComponent<RouteComponentProps> = ({
             <br />
             Everyone can chat in a group.
           </Text>
-          <TranslucentInput width="300" placeholder="Enter join link" />
+          <TranslucentInput
+            value={shareLink}
+            onChange={(e) => setShareLink(e.target.value)}
+            onKeyPress={(e) => e.key === "Enter" && handleJoinParty()}
+            width="300"
+            placeholder="Enter join link"
+          />
           <br />
-          <Button onClick={() => history.push(routes.START_PARTY)}>
-            Join Now
-          </Button>
+          <Button onClick={handleJoinParty}>Join Now</Button>
         </Row>
         <div>
           <HavingFunSVG width="400" height="260" />

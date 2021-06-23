@@ -10,14 +10,14 @@ export interface IParams {
 }
 
 export interface ISearchResultData {
-  thumbnail: string,
-  title: string,
-  duration: string,
-  channelName: string,
-  views: string,
-  postDate: string,
-  imgAlt: string,
-  videoId: string
+  thumbnail: string;
+  title: string;
+  duration: string;
+  channelName: string;
+  views: string;
+  postDate: string;
+  imgAlt: string;
+  videoId: string;
 }
 export interface AuthFormData {
   name?: string;
@@ -26,6 +26,8 @@ export interface AuthFormData {
 }
 
 export enum SocketRoomEvents {
+  joinRoom = "joinRoom",
+  leaveRoom = "leaveRoom",
   startVideo = "startVideo",
   pauseVideo = "pauseVideo",
   updateTimeStamp = "updateTimeStamp",

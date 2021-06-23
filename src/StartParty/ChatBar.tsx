@@ -29,7 +29,7 @@ const ChatBar: React.FC<ChatBarProps> = ({ roomId, socket }) => {
   useEffect(() => {
     if (globalState.user) {
       chat = new Chat(globalState.user, roomId, socket);
-      const subscribeReceiveChatMessage = chat.receiveMessages(
+      chat.receiveMessages(
         ({ message, user }) => {
           setChatData((existingChats) => {
             const newChats = [...existingChats];
@@ -39,12 +39,8 @@ const ChatBar: React.FC<ChatBarProps> = ({ roomId, socket }) => {
           scrollToBottom(chatBox);
         }
       );
-      // cleanup receiveChatMessage listener
-      return () => {
-        subscribeReceiveChatMessage.off("receiveChatMessage");
-      };
     }
-  }, [globalState.user, roomId ,socket]);
+  }, [globalState.user, roomId, socket]);
 
   const postChat = () => {
     if (message) {

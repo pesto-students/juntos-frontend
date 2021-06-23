@@ -12,7 +12,8 @@ import { SocketRoomEvents } from "src/common/interface";
 import { HighlightContainer, ViewportSection } from "src/components";
 import { Text } from "src/components/Text";
 import { TranslucentInput } from "src/SelectVideo/SelectVideo.styles";
-let room: Room, updatePlayerTimestamp: ReturnType<typeof setInterval>;
+let room: Room,
+  updatePlayerTimestamp: ReturnType<typeof setInterval> | undefined;
 let videoCode: string | undefined;
 
 const SyncVideo: React.FC<SyncVideoProps> = ({
@@ -22,74 +23,117 @@ const SyncVideo: React.FC<SyncVideoProps> = ({
   videoId = "",
   videoUrl = "",
 }) => {
+  // Auth Context Needed for Current user Info
   const { globalState } = useAuth();
+  const playerRef = useRef<YouTube>(null);
 
-  const [currentVideoUrl, setVideoUrl] = useState(
+  const [currentVideoUrl, setCurrentVideoUrl] = useState<string>(
     videoUrl
       ? videoUrl
       : videoId
       ? `https://www.youtube.com/watch?v=${videoId}`
       : ""
   );
+
+  /**
+   * Extract videoId from videoUrl for youtube
+   */
   if (currentVideoUrl) {
     videoCode = currentVideoUrl.split("v=")[1]?.split("&")[0];
   }
-  // this will be needed for non host User if they try to play aur pause video.
-  // It will reset player back to status of host's player.
-  const playerRef = useRef<YouTube>(null);
+
+  /**
+   * Youtube player Ref for getting access to player current stats
+   */
+  const YTPlayer: YTEventFunction = playerRef.current?.getInternalPlayer();
+
+  const opts: { playerVars: PlayerVars } = {
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 0,
+    },
+  };
 
   useEffect(() => {
     if (globalState.user) {
       room = new Room(isHost, globalState.user, socket, roomId);
-      const YTPlayer: YTEventFunction = playerRef.current?.getInternalPlayer();
-      //when host start the video
+      /**
+       * When host start the video Listen for startVideo SocketRoomEvent
+       */
       room.on(SocketRoomEvents.startVideo, ({ videoUrl = "" }) => {
-        setVideoUrl(videoUrl);
+        setCurrentVideoUrl(videoUrl);
       });
 
-      //when host pause the video
+      /**
+       * When host start the video Listen for pauseVideo SocketRoomEvent
+       */
       room.on(SocketRoomEvents.pauseVideo, () => {
         YTPlayer?.pauseVideo();
       });
+
       if (!isHost) {
-        // update the timeStamp
+        /**
+         * Update timeStamp Socket Event.
+         * This will be needed for non host User if they try to play aur pause video.
+         * It will reset player back to status of host's player.
+         */
         room.on(
           SocketRoomEvents.updateTimeStamp,
-          ({ timestamp = 0, playerState }) => {
-            const YTPlayer: YTEventFunction =
-              playerRef.current?.getInternalPlayer();
+          ({ timestamp = 0, playerState, videoUrl }) => {
+            // if difference between host and user exceeds greater than 3 seconds
+            // seek video to updated timeStamp
             YTPlayer?.getCurrentTime().then((result: Number) => {
-              if (Math.abs(+(result || 0) - +(timestamp || 0)) > 5) {
+              if (Math.abs(+(result || 0) - +(timestamp || 0)) > 3) {
                 YTPlayer?.seekTo(timestamp, true);
               }
             });
-            if (YTPlayer.getPlayerState() !== playerState) {
+
+            // change YTPlayer state according to the host playerState
+            if (YTPlayer?.getPlayerState() !== playerState) {
               if (playerState === 1) {
                 YTPlayer?.playVideo();
               } else if (playerState === 2) {
                 YTPlayer?.pauseVideo();
               }
             }
+
+            // If host joins late then set current VideoUrl from the updateTimeStamp Event
+            if (videoUrl && currentVideoUrl !== videoUrl) {
+              setCurrentVideoUrl(videoUrl);
+            }
           }
         );
       }
     }
-  }, [globalState.user, socket, isHost, roomId]);
+    return () => {
+      room.sendMessage(SocketRoomEvents.leaveRoom, {});
+    };
+  }, [globalState.user, socket, isHost, roomId, currentVideoUrl, YTPlayer]);
 
   useEffect(() => {
-    const YTPlayer: YTEventFunction = playerRef.current?.getInternalPlayer();
-    if (isHost) {
-      if (updatePlayerTimestamp) {
+    /**
+     * if videoUrl Change then clear Previus Interval.
+     * Start again after new URL video is played.
+     */
+    if (isHost && updatePlayerTimestamp) {
+      clearInterval(updatePlayerTimestamp);
+      updatePlayerTimestamp = undefined;
+    }
+
+    /**
+     * If valid video code present playVideo
+     */
+    videoCode && YTPlayer?.playVideo();
+
+    /**
+     * Clean Up updatePlayerTimestamp Interval at Unmount
+     */
+    return () => {
+      if (isHost && updatePlayerTimestamp) {
         clearInterval(updatePlayerTimestamp);
       }
-    }
-    if (videoCode) {
-      YTPlayer?.playVideo();
-    }
-    return () => {
-      clearInterval(updatePlayerTimestamp);
     };
-  }, [currentVideoUrl, isHost]);
+  }, [currentVideoUrl, isHost, YTPlayer]);
 
   const onPlayerStateChange = ({
     target: player,
@@ -97,35 +141,39 @@ const SyncVideo: React.FC<SyncVideoProps> = ({
     target: YTEventFunction;
   }) => {
     if (isHost) {
-      // -1 - unStarted, 1 - playing, 2 - pause, 3 - buffering, 0 - Done
+      /**
+       * @description player.getPlayerState()
+       * -1 - unStarted
+       *  1 - playing
+       *  2 - pause
+       *  3 - buffering
+       *  0 - Done
+       */
       const playerState = player.getPlayerState();
-      if ((playerState === -1 || playerState === 1) && videoCode) {
+      if (playerState === 1 && videoCode) {
         room.sendMessage(SocketRoomEvents.startVideo, {
           videoUrl: player.getVideoUrl(),
         });
-        if (!updatePlayerTimestamp) {
-          updatePlayerTimestamp = setInterval(() => {
-            room.sendMessage(SocketRoomEvents.updateTimeStamp, {
-              timestamp: player.getCurrentTime(),
-              playerState: player.getPlayerState(),
-            });
-          }, 2000);
-        }
       }
+
+      /**
+       * Start updateTimeStamp SocketEvent again after Video is loaded.
+       */
+      if (!updatePlayerTimestamp) {
+        updatePlayerTimestamp = setInterval(() => {
+          room.sendMessage(SocketRoomEvents.updateTimeStamp, {
+            timestamp: player.getCurrentTime(),
+            playerState: player.getPlayerState(),
+            videoUrl: player.getVideoUrl(),
+          });
+        }, 2000);
+      }
+
       // Pause all users
       if (playerState === 2) {
         room.sendMessage(SocketRoomEvents.pauseVideo, {});
       }
     }
-  };
-
-  const opts: { playerVars: PlayerVars } = {
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 0,
-      mute: 1,
-      controls: isHost ? 1 : 0,
-    },
   };
 
   return (
@@ -137,21 +185,23 @@ const SyncVideo: React.FC<SyncVideoProps> = ({
         padding="36px"
       >
         <div>{roomId}</div>
-        <div>
-          <Text>Enter Youtube Url:</Text>
-          <TranslucentInput
-            name="videoUrlInput"
-            value={currentVideoUrl}
-            onChange={(e) => setVideoUrl(e.target.value)}
-          />
-          <br />
-          <YouTube
-            ref={playerRef}
-            videoId={videoCode}
-            onStateChange={onPlayerStateChange}
-            opts={opts}
-          />
-        </div>
+        {isHost && (
+          <>
+            <Text>Enter Youtube Url:</Text>
+            <TranslucentInput
+              name="videoUrlInput"
+              value={currentVideoUrl}
+              onChange={(e) => setCurrentVideoUrl(e.target.value)}
+            />
+          </>
+        )}
+        <br />
+        <YouTube
+          ref={playerRef}
+          videoId={videoCode}
+          onStateChange={onPlayerStateChange}
+          opts={opts}
+        />
       </HighlightContainer>
     </ViewportSection>
   );
