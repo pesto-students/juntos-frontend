@@ -10,7 +10,7 @@ import Button from "../Button";
 import LogoutIcon from "src/assets/LogoutIcon";
 import Logo from "src/assets/LogoWhiteBG.png";
 
-const { ABOUT, CREATE_ROOM, AUTH, HOME } = routes;
+const { ABOUT, CREATE_ROOM, AUTH, HOME, JOIN_ROOM } = routes;
 
 const excludedPathName: Set<string> = new Set([AUTH]);
 
@@ -31,11 +31,12 @@ export default function Header({
   const handleCreateRoom = () => {
     pathname !== CREATE_ROOM && push(CREATE_ROOM);
   };
+  const handleJoinRoom = () => {
+    pathname !== JOIN_ROOM && push(JOIN_ROOM);
+  };
 
   return (
-    <div
-      className="drop-shadow header-wrapper"
-    >
+    <div className="drop-shadow header-wrapper">
       <div className="max-container">
         <nav className="landing-header ">
           <div className="logo-container">
@@ -54,7 +55,7 @@ export default function Header({
               {user ? (
                 <>
                   <li>
-                    <Button small fontSize="12px" onClick={() => {}}>
+                    <Button small fontSize="12px" onClick={handleJoinRoom}>
                       Join Party
                     </Button>
                   </li>

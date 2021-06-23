@@ -25,7 +25,11 @@ const SyncVideo: React.FC<SyncVideoProps> = ({
   const { globalState } = useAuth();
 
   const [currentVideoUrl, setVideoUrl] = useState(
-    videoUrl ? videoUrl : `v=${videoId}`
+    videoUrl
+      ? videoUrl
+      : videoId
+      ? `https://www.youtube.com/watch?v=${videoId}`
+      : ""
   );
   if (currentVideoUrl) {
     videoCode = currentVideoUrl.split("v=")[1]?.split("&")[0];

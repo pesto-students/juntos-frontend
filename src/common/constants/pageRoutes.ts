@@ -6,6 +6,7 @@ export const routes = {
   START_PARTY: "/start-party",
   SELECT_VIDEO: "/select-video",
   CREATE_ROOM: "/create-room",
-  CREATE_LINK_FOR_LATER: '/create-link-for-later',
-  SELECT_STREAMING_SERVICE: '/select-streaming-service'
+  CREATE_LINK_FOR_LATER: "/create-link-for-later",
+  SELECT_STREAMING_SERVICE: "/select-streaming-service",
+  JOIN_ROOM: "/join-room",
 };
