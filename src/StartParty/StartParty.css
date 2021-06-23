@@ -1,5 +1,7 @@
 .ChatInputWrapper {
-  position: relative;
+  position: fixed;
+  bottom: 0;
+  width: calc(20% - 24px);
 }
 
 .buttonInsideInput {
@@ -26,8 +28,9 @@
 }
 
 .chatBox {
-  /* height: 96vh; */
+  height: calc(100vh - 160px);
   overflow: scroll;
+  margin-top: 40px;
 }
 
 .messageItem {
@@ -45,8 +48,15 @@
 }
 
 .chatInfo {
+  position: fixed;
+  width: 20%;
   background: #004a93;
   color: white;
   padding: 8px;
   font-weight: bold;
+}
+
+.copyLink {
+  cursor: pointer;
+  float: right;
 }

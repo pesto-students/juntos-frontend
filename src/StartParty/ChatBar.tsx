@@ -6,8 +6,10 @@ import Input from "src/components/Input";
 import { ChatWrapper } from "./StartParty.styles";
 import "./StartParty.css";
 import { cssScale } from "src/common/constants/cssScale";
-import { scrollToBottom } from "src/common/utils";
+import { copyToClipboard, scrollToBottom } from "src/common/utils";
 import ChatIcon from "src/assets/icons/ChatIcon";
+import LinkShareSVG from "src/assets/icons/LinkShareSVG";
+import { toast } from "react-toastify";
 
 let chat: Chat;
 
@@ -29,16 +31,14 @@ const ChatBar: React.FC<ChatBarProps> = ({ roomId, socket }) => {
   useEffect(() => {
     if (globalState.user) {
       chat = new Chat(globalState.user, roomId, socket);
-      chat.receiveMessages(
-        ({ message, user }) => {
-          setChatData((existingChats) => {
-            const newChats = [...existingChats];
-            newChats.push({ message, user });
-            return newChats;
-          });
-          scrollToBottom(chatBox);
-        }
-      );
+      chat.receiveMessages(({ message, user }) => {
+        setChatData((existingChats) => {
+          const newChats = [...existingChats];
+          newChats.push({ message, user });
+          return newChats;
+        });
+        scrollToBottom(chatBox);
+      });
     }
   }, [globalState.user, roomId, socket]);
 
@@ -47,6 +47,11 @@ const ChatBar: React.FC<ChatBarProps> = ({ roomId, socket }) => {
       chat.sendMessage(message);
       setMessage("");
     }
+  };
+
+  const handleCopyRoomId = () => {
+    copyToClipboard(roomId);
+    toast.success("Link copied");
   };
 
   return (
@@ -59,6 +64,10 @@ const ChatBar: React.FC<ChatBarProps> = ({ roomId, socket }) => {
           }}
         />
         <span>Chat</span>
+        <span className="copyLink" onClick={handleCopyRoomId}>
+          Copy Link
+          <LinkShareSVG width="24px" height="16px" />
+        </span>
       </div>
       <div className="chatContent">
         <div className="chatBox" ref={chatBox}>

@@ -197,12 +197,13 @@ const SyncVideo: React.FC<SyncVideoProps> = ({
         flexDirection={`column`}
         justifyContent="flex-start"
         alignItems="center"
-        padding="36px"
+        padding="24px"
       >
         {isHost && (
           <>
-            <Text>Enter Youtube Url:</Text>
+            <Text>Enter Youtube URL</Text>
             <TranslucentInput
+              placeholder="Enter URL"
               name="videoUrlInput"
               value={currentVideoUrl}
               onChange={(e) => setCurrentVideoUrl(e.target.value)}
