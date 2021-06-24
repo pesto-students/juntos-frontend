@@ -5,7 +5,7 @@ import { cssScale } from "src/common/constants/cssScale";
 import { colors } from "src/common/constants/colors";
 
 export default styled(Link)`
-  color: ${colors.black};
+  color: ${({ color }) => color ?? colors.black};
   text-decoration: none;
   margin: ${cssScale.c4} ${cssScale.c0};
   &:hover {

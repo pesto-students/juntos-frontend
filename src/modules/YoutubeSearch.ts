@@ -1,4 +1,4 @@
-import { YOTUBE_DATA_API_V3 } from "src/common/constants/api";
+import { YOUTUBE_DATA_API_V3 } from "src/common/constants/api";
 
 const { REACT_APP_YOUTUBE_API_KEY } = process.env;
 
@@ -10,7 +10,7 @@ const YTParams = {
 
 export const fetchVideoIds = async (params: { [key: string]: string }) => {
   const response = await fetch(
-    `${YOTUBE_DATA_API_V3}/search?` +
+    `${YOUTUBE_DATA_API_V3}/search?` +
       new URLSearchParams({
         ...YTParams,
         ...params,
@@ -21,7 +21,7 @@ export const fetchVideoIds = async (params: { [key: string]: string }) => {
 
 export const fetchVideoData = async (params: { [key: string]: string }) => {
   const response = await fetch(
-    `${YOTUBE_DATA_API_V3}/videos?` +
+    `${YOUTUBE_DATA_API_V3}/videos?` +
       new URLSearchParams({
         ...YTParams,
         ...params,

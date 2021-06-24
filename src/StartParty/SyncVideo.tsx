@@ -201,7 +201,7 @@ const SyncVideo: React.FC<SyncVideoProps> = ({
     <ViewportSection>
       <HighlightContainer
         flexDirection={`column`}
-        justifyContent="flex-start"
+        justifyContent="center"
         alignItems="center"
         padding="24px"
       >

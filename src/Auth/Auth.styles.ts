@@ -1,6 +1,10 @@
 import styled, { css } from "styled-components";
 
-import { cssScale, defaultFontSize, boxShadow } from "src/common/constants/cssScale";
+import {
+  cssScale,
+  defaultFontSize,
+  boxShadow,
+} from "src/common/constants/cssScale";
 import { colors } from "src/common/constants/colors";
 
 interface AuthContainerProp {
@@ -35,7 +39,7 @@ export const AuthenticationWrapper = styled.div`
 `;
 
 export const AuthContainer = styled.div<AuthContainerProp>`
-  background-color: #fff;
+  background-color: ${colors.white};
   border-radius: ${c3};
   box-shadow: ${boxShadow};
   position: relative;
@@ -122,7 +126,7 @@ const AuthFormContainer = styled.div`
   transition: all 0.6s ease-in-out;
 
   form {
-    background-color: #ffffff;
+    background-color: ${colors.white};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -163,9 +167,9 @@ export const SignUpContainer = styled(AuthFormContainer)`
 `;
 
 export const AuthOverlay = styled.div`
-  background: #004A93;
-  background: linear-gradient(to right, #004A93, #3677C7);
-  color: #fff;
+  background: ${colors.blue1};
+  background: linear-gradient(to right, ${colors.blue1}, ${colors.blue2});
+  color: ${colors.white};
   position: relative;
   left: -100%;
   height: 100%;
