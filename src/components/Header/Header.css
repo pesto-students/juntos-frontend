@@ -1,3 +1,11 @@
+.header-wrapper {
+  background: #fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
 .landing-header {
   display: flex;
   background: white;
@@ -51,7 +59,7 @@
 }
 
 .primary-button-sleek {
-  background-color: #004A93;
+  background-color: #004a93;
   width: 138px;
   height: 25px;
   border-radius: 33px;
@@ -86,7 +94,7 @@
 .logoutIcon {
   fill-rule: evenodd;
   clip-rule: evenodd;
-  fill: #004A93;
+  fill: #004a93;
 }
 
 .logout:hover .logoutIcon {

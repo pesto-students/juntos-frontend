@@ -2,6 +2,7 @@ import React from "react";
 
 import IRoute from "src/common/interface";
 import { routes } from "src/common/constants/pageRoutes";
+import StartParty from "src/StartParty/StartParty";
 
 //Lazy routes
 const HomePage = React.lazy(() => import("src/Home/Home"));
@@ -11,7 +12,8 @@ const SelectVideoPage = React.lazy(() => import("src/SelectVideo/SelectVideo"));
 const CreateRoomPage = React.lazy(() => import("src/CreateRoom/CreateRoom"));
 const CreateLinkForLaterPage = React.lazy(() => import("src/CreateRoom/CreateLinkForLater"));
 const SelectStreamingServicePage = React.lazy(() => import("src/CreateRoom/SelectStreamingService"));
-const Auth = React.lazy(() => import("src/Auth/Auth"));
+const JoinRoomPagePage = React.lazy(() => import("src/JoinRoom/JoinRoom"));
+const AuthPage = React.lazy(() => import("src/Auth/Auth"));
 
 export const guestRoutes: IRoute[] = [
   {
@@ -21,7 +23,7 @@ export const guestRoutes: IRoute[] = [
   },
   {
     path: routes.AUTH,
-    component: Auth,
+    component: AuthPage,
     exact: false,
   },
   {
@@ -59,6 +61,16 @@ export const userRoutes: IRoute[] = [
   {
     path: routes.ABOUT,
     component: AboutPage,
+    exact: true,
+  },
+  {
+    path: routes.START_PARTY,
+    component: StartParty,
+    exact: true,
+  },
+  {
+    path: routes.JOIN_ROOM,
+    component: JoinRoomPagePage,
     exact: true,
   },
   {

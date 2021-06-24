@@ -14,4 +14,5 @@ export const colors = {
   silverChalice: "#a6a6a6",
   grey1: "#f6f5f7",
   grey2: "#eee",
+  brown1: "#3F3D56",
 };

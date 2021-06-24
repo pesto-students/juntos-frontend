@@ -1,11 +1,20 @@
 import { colors, cssScale } from "src/common/constants";
 import styled from "styled-components";
 
-export default styled.input`
+interface InputProps {
+  paddingRight?: string;
+  borderRadius?: string;
+  margin?: string;
+  outline?: string;
+}
+
+export default styled.input<InputProps>`
   background-color: ${colors.grey2};
   border: none;
   padding: ${cssScale.c3} ${cssScale.c4};
-  margin: ${cssScale.c2} ${cssScale.c0};
-  width: 100%;
-  border-radius: ${cssScale.c1};
+  margin: ${({ margin }) => margin ?? `${cssScale.c2} ${cssScale.c0}`};
+  width: ${({ width }) => width ?? '100%'};
+  border-radius: ${({ borderRadius }) => borderRadius ?? cssScale.c1};
+  padding-right: ${({ paddingRight }) => paddingRight};
+  outline: ${({ outline }) => outline};
 `;

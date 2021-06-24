@@ -18,11 +18,10 @@ export class Chat {
   }
 
   async sendMessage(message: string) {
-    const userToken: string = await this.user.getToken();
     this.channel.emit("postChatMessage", {
       message,
       roomId: this.roomId,
-      user: userToken,
+      user: this.user.getProfile(),
     });
   }
 
@@ -41,5 +40,9 @@ export class Chat {
         }
       );
     });
+  }
+
+  receiveMessages(listener: (data: { message: string; user: string }) => void) {
+    return this.channel.on("receiveChatMessage", listener);
   }
 }

@@ -1,8 +1,7 @@
 import { createGlobalStyle } from "styled-components";
+import { colors } from "./constants";
 
 export const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap');
-
   * {
     box-sizing: border-box;
     margin: 0;
@@ -10,11 +9,10 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    margin: 0;
-    font-family: Poppins, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-      sans-serif;
+    margin: 60px 0 0;
+    font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background: ${colors.grey1};
   }
 `;

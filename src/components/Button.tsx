@@ -21,6 +21,7 @@ export default styled.button<ButtonProps>`
   cursor: pointer;
   &:active {
     transform: scale(0.9);
+    box-shadow: none;
   }
   &:hover {
     background-color: ${colors.blue2};
