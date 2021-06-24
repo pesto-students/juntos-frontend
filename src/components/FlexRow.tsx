@@ -6,11 +6,12 @@ interface IFlexRow {
   alignItems?: string;
   padding?: string;
   margin?: string;
+  width?: string;
 }
 
 export default styled.div<IFlexRow>`
   display: flex;
-  width: 100%;
+  width: ${({ width }) => width || "100%"};
   height: 100%;
   flex-direction: ${({ flexDirection }) => flexDirection || "row"};
   justify-content: ${({ justifyContent }) => justifyContent || "center"};
