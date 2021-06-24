@@ -27,12 +27,18 @@ const SyncVideo: React.FC<SyncVideoProps> = ({
   const { globalState } = useAuth();
   const playerRef = useRef<YouTube>(null);
 
+  const getInitialUrl = () => {
+    let url = "";
+    if (videoUrl) {
+      url = videoUrl;
+    } else if (videoId) {
+      url = `https://www.youtube.com/watch?v=${videoId}`;
+    }
+    return url;
+  };
+
   const [currentVideoUrl, setCurrentVideoUrl] = useState<string>(
-    videoUrl
-      ? videoUrl
-      : videoId
-      ? `https://www.youtube.com/watch?v=${videoId}`
-      : ""
+    getInitialUrl()
   );
 
   /**
