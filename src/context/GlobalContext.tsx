@@ -40,6 +40,8 @@ export const GlobalProvider: React.FC = ({ children }) => {
       signIn: (payload: AuthFormData) =>
         ActionCreators.login(dispatch, payload),
       signOut: () => ActionCreators.logout(dispatch),
+      resetPassword: (email: string) =>
+        ActionCreators.resetPassword(dispatch, email),
       clearError: () => dispatch({ type: Types.CLEAR_ERROR }),
     }),
     []
