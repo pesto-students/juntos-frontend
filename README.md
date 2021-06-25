@@ -4,7 +4,9 @@ The project was setup using [Create React App](https://create-react-app.dev/)
 
 ## Important:
 
-Kindly refer to **[Contribution guideline](/CONTRIBUTING.md)** there you will find all the necessary information regarding the how to create file, write and structure code for this project feel free to contribute if you think we miss on any guideline that should be followed.
+Before proceeding further with this project kindly go through all the documentation provided at [Juntos Main Repo](https://github.com/pesto-students/juntos-ninja-2-beta.git).
+
+Also refer to **[Contribution guideline](/CONTRIBUTING.md)** there you will find all the necessary information regarding the how to create file, write and structure code for this project feel free to contribute if you think we miss on any guideline that should be followed.
 
 ---
 
