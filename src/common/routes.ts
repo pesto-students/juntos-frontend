@@ -4,7 +4,9 @@ import IRoute from "src/common/interface";
 import { routes } from "src/common/constants/pageRoutes";
 import StartParty from "src/StartParty/StartParty";
 
-//Lazy routes
+/**
+ * Lazily Loaded React Components for Faster Load time
+ */
 const HomePage = React.lazy(() => import("src/Home/Home"));
 const AboutPage = React.lazy(() => import("src/About/About"));
 const NoPagefound = React.lazy(() => import("src/Error/NoPageFound"));
@@ -25,6 +27,11 @@ export const guestRoutes: IRoute[] = [
     path: routes.AUTH,
     component: AuthPage,
     exact: false,
+  },
+  {
+    path: routes.ABOUT,
+    component: AboutPage,
+    exact: true,
   },
   {
     component: NoPagefound,

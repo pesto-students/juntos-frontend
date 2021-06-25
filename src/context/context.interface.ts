@@ -24,5 +24,6 @@ export type ContextActions = {
   signUp: (payload: AuthFormData) => Promise<void>;
   signIn: (payload: AuthFormData) => Promise<void>;
   signOut: () => Promise<void>;
+  resetPassword: (email: string) => Promise<void>;
   clearError: () => void;
 };

@@ -1,16 +1,20 @@
+/**
+ * React and packages
+ */
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { io, Socket } from "socket.io-client";
-
+/**
+ * Common components & feature specific component
+ */
 import { PartyWrapper, VideoWrapper } from "src/StartParty/StartParty.styles";
 import "src/StartParty/StartParty.css";
 import ChatBar from "src/StartParty/ChatBar";
 import SyncVideo from "src/StartParty/SyncVideo";
 import useShareLinkRedirect from "src/common/hooks/useShareLinkRedirect";
+import { JUNTOS_BACKEND_BASE_URL } from "src/common/constants/api";
 
-// TODO cleaup needed just added for development testing
-// will be removed once heroku setup for backend is done
-const socket: Socket = io("http://localhost:8080", {
+const socket: Socket = io(JUNTOS_BACKEND_BASE_URL, {
   transports: ["websocket", "polling", "flashsocket"],
 });
 
