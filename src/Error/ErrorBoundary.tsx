@@ -38,11 +38,14 @@ export class ErrorBoundary extends Component<Props, State> {
       return (
         <div>
           <h2>Something went wrong.</h2>
-          <details style={{ whiteSpace: "pre-wrap" }}>
-            {this.state.error && this.state.error.toString()}
-            <br />
-            {this.state?.errorInfo?.componentStack}
-          </details>
+          {/* Only show stack in development */}
+          {process.env.NODE_ENV === "development" && (
+            <details style={{ whiteSpace: "pre-wrap" }}>
+              {this.state.error && this.state.error.toString()}
+              <br />
+              {this.state?.errorInfo?.componentStack}
+            </details>
+          )}
         </div>
       );
     }

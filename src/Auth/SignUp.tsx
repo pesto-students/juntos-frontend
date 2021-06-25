@@ -5,6 +5,13 @@ import Input from "src/components/Input";
 import Button from "src/components/Button";
 import { SignUpContainer } from "./Auth.styles";
 import { useAuth } from "src/context/GlobalContext";
+import {
+  validateRegex,
+  nameRegex,
+  emailRegex,
+  passwordRegex,
+} from "src/common/utils";
+import { toast } from "react-toastify";
 
 const SignUp: React.FunctionComponent<RouteComponentProps> = () => {
   const [name, setName] = useState<string>("");
@@ -12,8 +19,28 @@ const SignUp: React.FunctionComponent<RouteComponentProps> = () => {
   const [password, setPassword] = useState<string>("");
   const { actions } = useAuth();
 
+  /**
+   * validate all input fields
+   */
+  const validateAllFields = () => {
+    let message = "";
+    if (!validateRegex(name, nameRegex)) {
+      message = "Name should be atleast 3 characters long";
+    } else if (!validateRegex(email, emailRegex)) {
+      message = "Please enter valid email";
+    } else if (!validateRegex(password, passwordRegex)) {
+      message = "Password should be atleast 6 characters long";
+    }
+    message && toast.error(message);
+
+    return message;
+  };
+
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    if (validateAllFields()) {
+      return;
+    }
     actions?.signUp({ name, email, password });
   };
 

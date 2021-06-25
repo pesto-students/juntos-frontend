@@ -9,6 +9,15 @@ export default styled(Link)`
   text-decoration: none;
   margin: ${cssScale.c4} ${cssScale.c0};
   &:hover {
-    color: ${colors.blue2};
+    color: ${colors.blue1};
+  }
+`;
+
+export const LinkText = styled.p`
+  color: ${({ color }) => color ?? colors.black};
+  cursor: pointer;
+  margin: ${cssScale.c4} ${cssScale.c0};
+  &:hover {
+    color: ${colors.blue1};
   }
 `;

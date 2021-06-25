@@ -34,7 +34,7 @@ const HomePage: React.FunctionComponent<RouteComponentProps> = () => {
                 className="drop-shadow create-room-button font-white"
                 to={globalState.user ? routes.CREATE_ROOM : routes.AUTH}
               >
-                Watch Party
+                Host Party
               </Link>
               <Link
                 className="drop-shadow learn-more-button font-white"
@@ -90,7 +90,7 @@ const HomePage: React.FunctionComponent<RouteComponentProps> = () => {
                 className="drop-shadow create-room-button font-white"
                 to={globalState.user ? routes.CREATE_ROOM : routes.AUTH}
               >
-                Watch Party
+                Host Party
               </Link>
             </div>
           </section>
