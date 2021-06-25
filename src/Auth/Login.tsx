@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import Input from "src/components/Input";
@@ -9,11 +9,19 @@ import { LinkText } from "src/components/Link";
 import { emailRegex, passwordRegex, validateRegex } from "src/common/utils";
 import { toast } from "react-toastify";
 
-const Login: React.FunctionComponent<RouteComponentProps> = () => {
+const Login: React.FunctionComponent<
+  RouteComponentProps & { signUpPanelActive: boolean }
+> = ({ signUpPanelActive }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [forgetPassword, setForgetPassword] = useState<boolean>(false);
   const { actions } = useAuth();
+
+  useEffect(() => {
+    if (forgetPassword && signUpPanelActive) {
+      setForgetPassword(false);
+    }
+  }, [signUpPanelActive, forgetPassword]);
 
   /**
    * validate all input fields

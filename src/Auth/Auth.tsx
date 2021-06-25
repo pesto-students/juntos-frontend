@@ -25,7 +25,7 @@ const Authentication: React.FunctionComponent<RouteComponentProps> =
       <AuthenticationWrapper>
         <AuthContainer signUpPanelActive={signUpPanelActive}>
           <SignUp />
-          <Login />
+          <Login signUpPanelActive={signUpPanelActive}/>
           <AuthOverlayContainer className="overlay-container">
             <AuthOverlay className="overlay">
               <AuthOverlayLeft className="overlay-left">
